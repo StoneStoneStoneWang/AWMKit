@@ -1,0 +1,6 @@
+framework module AWMBase {
+  umbrella header "AWMBase.h"
+
+  export *
+  module * { export * }
+}
