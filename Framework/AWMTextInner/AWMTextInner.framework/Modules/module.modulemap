@@ -1,0 +1,6 @@
+framework module AWMTextInner {
+  umbrella header "AWMTextInner.h"
+
+  export *
+  module * { export * }
+}

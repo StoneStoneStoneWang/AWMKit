@@ -1,0 +1,6 @@
+framework module AWMSign {
+  umbrella header "AWMSign.h"
+
+  export *
+  module * { export * }
+}
