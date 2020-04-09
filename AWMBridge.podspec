@@ -553,6 +553,7 @@ Pod::Spec.new do |spec|
       vm.dependency 'WLBaseViewModel'
       vm.dependency 'RxCocoa'
       vm.dependency 'RxSwift'
+      vm.dependency 'ObjectMapper'
     end
     
     welcome.subspec 'Bridge' do |bridge|
@@ -615,8 +616,9 @@ Pod::Spec.new do |spec|
       manager.dependency 'AWMApi'
       manager.dependency 'AWMRReq'
       manager.dependency 'WLBaseResult'
-      manager.dependency 'AWMYYCache'
+      manager.dependency 'AWMYY'
       manager.dependency 'AWMBean/Area'
+      manager.dependency 'AWMRReq'
     end
     area.subspec 'VM' do |vm|
       
@@ -636,6 +638,11 @@ Pod::Spec.new do |spec|
       bridge.dependency 'AWMBridge/Base'
       bridge.dependency 'AWMCocoa/SM'
     end
+  end
+  
+  spec.subspec 'AreaJson' do |areaJson|
+    
+    areaJson.source_files = "Code/AWMBridge/AreaJson/*.{swift}"
   end
   
   spec.subspec 'Address' do |address|
