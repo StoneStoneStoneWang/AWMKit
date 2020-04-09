@@ -1,0 +1,6 @@
+framework module AWMTable {
+  umbrella header "AWMTable.h"
+
+  export *
+  module * { export * }
+}

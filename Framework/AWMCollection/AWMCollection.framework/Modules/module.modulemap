@@ -1,0 +1,6 @@
+framework module AWMCollection {
+  umbrella header "AWMCollection.h"
+
+  export *
+  module * { export * }
+}

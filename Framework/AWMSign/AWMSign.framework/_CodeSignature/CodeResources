@@ -4,6 +4,10 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Headers/AWMConfigure.h</key>
+		<data>
+		r9gZ5GpntazMiQR17mHsErJ9+iM=
+		</data>
 		<key>Headers/AWMSign.h</key>
 		<data>
 		Ji8sITnc3dsxXLjrzw58swFZDXM=
@@ -19,6 +23,17 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>Headers/AWMConfigure.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			r9gZ5GpntazMiQR17mHsErJ9+iM=
+			</data>
+			<key>hash2</key>
+			<data>
+			iYkew3XLTNn7lwDump3TfYrnSUe31ysHl/G5Qr5/P3s=
+			</data>
+		</dict>
 		<key>Headers/AWMSign.h</key>
 		<dict>
 			<key>hash</key>
