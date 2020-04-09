@@ -19,7 +19,7 @@ public final class AWMUserInfoCache: NSObject {
         
         if let info = Bundle.main.infoDictionary {
             
-            AWMYYCahce.shared().createCache(info["CFBundleDisplayName"] as? String ?? "AWMUserInfoCache" )
+            AWMYY.shared().createCache(info["CFBundleDisplayName"] as? String ?? "AWMUserInfoCache" )
         }
     }
     @objc (userBean)
@@ -32,7 +32,7 @@ extension AWMUserInfoCache {
         
         if AWMAccountCache.default.uid != "" {
             
-            AWMYYCahce.shared().saveObj(data, withKey: "user_" + AWMAccountCache.default.uid)
+            AWMYY.shared().saveObj(data, withKey: "user_" + AWMAccountCache.default.uid)
             
             userBean = data
         }
@@ -44,7 +44,7 @@ extension AWMUserInfoCache {
         
         if AWMAccountCache.default.uid != "" {
             
-            if let user = AWMYYCahce.shared().fetchObj("user_" + AWMAccountCache.default.uid) {
+            if let user = AWMYY.shared().fetchObj("user_" + AWMAccountCache.default.uid) {
                 
                 userBean = user as! AWMUserBean
                 
