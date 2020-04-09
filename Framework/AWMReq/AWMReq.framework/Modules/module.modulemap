@@ -1,0 +1,6 @@
+framework module AWMReq {
+  umbrella header "AWMReq.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module AWMOSS {
+  umbrella header "AWMOSS.h"
+
+  export *
+  module * { export * }
+}
