@@ -1,0 +1,6 @@
+framework module AWMYY {
+  umbrella header "AWMYY.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module AWMWechat {
+  umbrella header "AWMWechat.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module AWMUpload {
+  umbrella header "AWMUpload.h"
+
+  export *
+  module * { export * }
+}

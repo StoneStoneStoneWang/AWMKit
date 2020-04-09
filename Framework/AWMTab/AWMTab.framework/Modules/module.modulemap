@@ -1,0 +1,6 @@
+framework module AWMTab {
+  umbrella header "AWMTab.h"
+
+  export *
+  module * { export * }
+}
