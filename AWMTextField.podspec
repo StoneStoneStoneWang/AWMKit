@@ -57,10 +57,5 @@ Pod::Spec.new do |spec|
     vcode.dependency 'AWMTextField/LeftImage'
     vcode.dependency 'AWMTextField/LeftTitle'
   end
-  spec.subspec 'Login' do |vcode|
-    vcode.source_files = "Code/AWMTextField/Login/*.{swift}"
-    vcode.dependency 'AWMTextField/LeftImage'
-    vcode.dependency 'AWMTextField/LeftTitle'
-  end
   
 end
