@@ -1,11 +1,10 @@
-
 Pod::Spec.new do |spec|
   
-  spec.name         = "AWMPlayer"
+  spec.name         = "AWMOSS"
   spec.version      = "0.0.1"
-  spec.summary      = "A Lib For 视频播放器."
+  spec.summary      = "A Lib For 阿里对象服务器."
   spec.description  = <<-DESC
-  AWMPlayer是视频播放器的封装
+  AWMOSS一个是阿里封装
   DESC
   
   spec.homepage     = "https://github.com/StoneStoneStoneWang/AWMKit.git"
@@ -24,13 +23,9 @@ Pod::Spec.new do |spec|
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/AWMKit.git", :tag => "#{spec.version}" }
   
-  spec.vendored_frameworks = 'Framework/AWMPlayer/AWMPlayer.framework'
-  
-  spec.resource_bundles    = {'AWMPlayer' => 'Framework/AWMPlayer/AWMPlayer.bundle'}
-  
-  spec.dependency 'MobileVLCKit'
-  
-  spec.dependency 'Reachability'
-  
+  spec.vendored_frameworks = 'Framework/AWMOSS/AWMOSS.framework'
+  spec.dependency 'AliyunOSSiOS'
   
 end
+
+
