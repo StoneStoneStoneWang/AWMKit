@@ -31,7 +31,7 @@ Pod::Spec.new do |spec|
   spec.subspec 'User' do |user|
     user.source_files = "Code/AWMCache/User/*.{swift}"
     user.dependency 'AWMBean/User'
-    user.dependency 'AWMYYCache'
+    user.dependency 'AWMYY'
     user.dependency 'AWMCache/Account'
   end
   
