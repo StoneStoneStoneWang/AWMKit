@@ -1,0 +1,6 @@
+framework module AWMTransition {
+  umbrella header "AWMTransition.h"
+
+  export *
+  module * { export * }
+}

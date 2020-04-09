@@ -8,6 +8,10 @@
 		<data>
 		wro5HIKzCQIoQPRy6NogXhO/B1w=
 		</data>
+		<key>Headers/AWMHudUtil.h</key>
+		<data>
+		zMxNwxTCVaG+amMPsarYDDcl/T0=
+		</data>
 		<key>Info.plist</key>
 		<data>
 		D+JaH44rkvBGse7+We3EDaz2kMA=
@@ -76,6 +80,17 @@
 			<key>hash2</key>
 			<data>
 			JTCtLa3Ncm/AE02j8KkdPkIOaz6ZRp+FoSSeldGJ+Pw=
+			</data>
+		</dict>
+		<key>Headers/AWMHudUtil.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			zMxNwxTCVaG+amMPsarYDDcl/T0=
+			</data>
+			<key>hash2</key>
+			<data>
+			buiC6m804rd2w7dijCjq+s5erNoP9jLEuBPU2Zm3CTk=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
