@@ -1,0 +1,6 @@
+framework module AWMLoading {
+  umbrella header "AWMLoading.h"
+
+  export *
+  module * { export * }
+}
