@@ -1,0 +1,6 @@
+framework module AWMNavi {
+  umbrella header "AWMNavi.h"
+
+  export *
+  module * { export * }
+}

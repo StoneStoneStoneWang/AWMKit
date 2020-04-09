@@ -1,0 +1,6 @@
+framework module AWMHud {
+  umbrella header "AWMHud.h"
+
+  export *
+  module * { export * }
+}
