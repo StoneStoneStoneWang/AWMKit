@@ -8,7 +8,7 @@
 
 import Foundation
 import AWMBean
-import AWMYYCache
+import AWMYY
 
 @objc (AWMUserInfoCache)
 public final class AWMUserInfoCache: NSObject {
