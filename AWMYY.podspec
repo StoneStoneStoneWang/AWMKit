@@ -1,10 +1,10 @@
 Pod::Spec.new do |spec|
   
-  spec.name         = "AWMYYCache"
+  spec.name         = "AWMYY"
   spec.version      = "0.0.1"
   spec.summary      = "A Lib For yycahce."
   spec.description  = <<-DESC
-  AWMYYCache是yycach的封装
+  AWMYY是yycach的封装
   DESC
   
   spec.homepage     = "https://github.com/StoneStoneStoneWang/AWMKit.git"
@@ -23,7 +23,7 @@ Pod::Spec.new do |spec|
   
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/AWMKit.git", :tag => "#{spec.version}" }
   
-  spec.vendored_frameworks = 'Framework/AWMYYCache/AWMYYCache.framework'
+  spec.vendored_frameworks = 'Framework/AWMYY/AWMYY.framework'
   
   spec.dependency 'YYCache'
   
