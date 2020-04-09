@@ -27,10 +27,6 @@ Pod::Spec.new do |spec|
     button.source_files = "Code/AWMCocoa/Button/*.{swift}"
     button.dependency 'RxCocoa'
   end
-  spec.subspec 'TextField' do |textfield|
-    textfield.source_files = "Code/AWMCocoa/TextField/*.{swift}"
-    textfield.dependency 'RxCocoa'
-  end
   
   spec.subspec 'Refresh' do |refresh|
     refresh.source_files = "Code/AWMCocoa/Refresh/*.{swift}"
