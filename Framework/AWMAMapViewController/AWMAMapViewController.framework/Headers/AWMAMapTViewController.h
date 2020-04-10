@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class AWMLocation;
 
 NS_SWIFT_NAME(AWMAMapViewController)
-@interface AWMAMapViewController : AWMTViewController <MAMapViewDelegate>
+@interface AWMAMapTViewController : AWMTViewController <MAMapViewDelegate>
 
 + (instancetype)createAMapWithLat:(CLLocationDegrees )lat andLon:(CLLocationDegrees)lon;
 

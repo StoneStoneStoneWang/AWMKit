@@ -136,9 +136,9 @@ extension AWMProfileType {
             
         case .myCircle: return "我的发布"
             
-        case .address: return "我的地址"
+        case .address: return "地址管理"
             
-        case .order: return "我的订单"
+        case .order: return "订单管理"
             
         case .characters: return "角色信息"
             

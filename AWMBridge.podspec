@@ -259,6 +259,7 @@ Pod::Spec.new do |spec|
       bridge.dependency 'AWMBridge/Base'
     end
   end
+  
   # 评论
   spec.subspec 'Comment' do |comment|
     
