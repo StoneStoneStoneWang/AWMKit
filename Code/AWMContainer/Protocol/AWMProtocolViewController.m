@@ -1,28 +1,29 @@
 //
-//  BBQProtocolViewController.m
-//  BBQContainer
+//  AWMProtocolViewController.m
+//  AWMContainer
 //
 //  Created by 王磊 on 2020/3/29.
 //  Copyright © 2020 王磊. All rights reserved.
 //
 
-#import "BBQProtocolViewController.h"
+#import "AWMProtocolViewController.h"
 @import SToolsKit;
-@interface BBQProtocolViewController ()
+@interface AWMProtocolViewController ()
 
-@property (nonatomic ,strong) BBQProtocolBridge *bridge;
-
-
-#if BBQLoginOne
+@property (nonatomic ,strong) AWMProtocolBridge *bridge;
 
 
-#elif BBQLoginTwo
+#if AWMLoginOne
 
-#elif BBQLoginThree
+@property (nonatomic ,strong) UIImageView *backgroundImageView;
+
+#elif AWMLoginTwo
+
+#elif AWMLoginThree
 
 @property (nonatomic ,strong) UIView *topLine;
 
-#elif BBQLoginFour
+#elif AWMLoginFour
 
 @property (nonatomic ,strong) UIImageView *backgroundImageView;
 
@@ -32,31 +33,24 @@
 #endif
 @end
 
-@implementation BBQProtocolViewController
+@implementation AWMProtocolViewController
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+#if AWMLoginOne
+
+- (UIImageView *)backgroundImageView {
     
-#if BBQLoginOne
-    
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@BBQColor] ];
-#elif BBQLoginTwo
-    
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor clearColor] ];
-    
-#elif BBQLoginFour
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor clearColor] ];
-#else
-    
-    
-#endif
+    if (!_backgroundImageView) {
+        
+        _backgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@AWMBackground]];
+        
+        _backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
+    }
+    return _backgroundImageView;
 }
-#if BBQLoginOne
 
+#elif AWMLoginTwo
 
-#elif BBQLoginTwo
-
-#elif BBQLoginThree
+#elif AWMLoginThree
 
 - (UIView *)topLine {
     if (!_topLine) {
@@ -66,12 +60,12 @@
     return _topLine;
 }
 
-#elif BBQLoginFour
+#elif AWMLoginFour
 - (UIImageView *)backgroundImageView {
     
     if (!_backgroundImageView) {
         
-        _backgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@BBQBackground]];
+        _backgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@AWMBackground]];
         
         _backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
     }
@@ -88,24 +82,24 @@
 
 - (void)configViewModel {
     
-    self.bridge = [BBQProtocolBridge new];
+    self.bridge = [AWMProtocolBridge new];
     
     [self.bridge createProtocol:self] ;
 }
 - (void)addOwnSubViews {
     [super addOwnSubViews];
     
-#if BBQLoginOne
-    
-    
-#elif BBQLoginTwo
-    
-#elif BBQLoginThree
-    
-    [self.view addSubview:self.topLine];
-#elif BBQLoginFour
+#if AWMLoginOne
     
     [self.view insertSubview:self.backgroundImageView atIndex:0];
+#elif AWMLoginTwo
+    
+#elif AWMLoginThree
+    
+    [self.view addSubview:self.topLine];
+#elif AWMLoginFour
+    
+    
     
 #else
     
@@ -116,19 +110,23 @@
     [super configOwnSubViews];
     
     
-#if BBQLoginOne
+#if AWMLoginOne
     
-#elif BBQLoginTwo
+    self.backgroundImageView.frame = self.view.bounds;
+    
+    self.textView.backgroundColor = [UIColor clearColor];
+    
+#elif AWMLoginTwo
     
     self.textView.textColor = [UIColor whiteColor];
     
     self.textView.editable = false;
     
-#elif BBQLoginThree
+#elif AWMLoginThree
     
-    self.topLine.backgroundColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
+    self.topLine.backgroundColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
     
-    if ([self.navigationController.viewControllers.firstObject isKindOfClass:NSClassFromString(@"BBQLoginViewController")]) {
+    if ([self.navigationController.viewControllers.firstObject isKindOfClass:NSClassFromString(@"AWMLoginViewController")]) {
         
         CGFloat h = CGRectGetHeight(self.navigationController.navigationBar.bounds);
         
@@ -146,7 +144,7 @@
     CGRect finalFrame = CGRectOffset(initFrame, 0, 8);
     
     self.textView.frame = finalFrame;
-#elif BBQLoginFour
+#elif AWMLoginFour
     
     self.backgroundImageView.frame = self.view.bounds;
     
@@ -158,17 +156,17 @@
 - (void)configOwnProperties {
     [super configOwnProperties];
     
-#if BBQLoginOne
+#if AWMLoginOne
     
-#elif BBQLoginTwo
+#elif AWMLoginTwo
     
     self.textView.backgroundColor = [UIColor whiteColor];
     
-    self.view.backgroundColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
+    self.view.backgroundColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
     
     self.textView.layer.masksToBounds = false;
     
-#elif BBQLoginThree
+#elif AWMLoginThree
     
     
 #else

@@ -1,26 +1,26 @@
 //
-//  BBQWelcomeViewController.h
-//  BBQContainer
+//  AWMWelcomeViewController.h
+//  AWMContainer
 //
 //  Created by 王磊 on 2020/3/29.
 //  Copyright © 2020 王磊. All rights reserved.
 //
 
-@import BBQCollection;
-#import "BBQConfig.h"
+@import AWMCollection;
+#import "AWMConfig.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BBQWelcomeCollectionViewCell : UICollectionViewCell
+@interface AWMWelcomeCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic ,copy) NSString *icon;
 
 @end
 
-typedef void(^BBQWelcomeBlock)(BBQBaseViewController *from);
+typedef void(^AWMWelcomeBlock)(AWMBaseViewController *from);
 
-@interface BBQWelcomeViewController : BBQCollectionNoLoadingViewController
+@interface AWMWelcomeViewController : AWMCollectionNoLoadingViewController
 
-+ (instancetype)createWelcomeWithSkipBlock:(BBQWelcomeBlock )block;
++ (instancetype)createWelcomeWithSkipBlock:(AWMWelcomeBlock )block;
 
 @end
 

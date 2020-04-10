@@ -1,23 +1,22 @@
 //
-//  BBQPrivacyViewController.m
-//  BBQContainer
+//  AWMPrivacyViewController.m
+//  AWMContainer
 //
 //  Created by 王磊 on 2020/3/29.
 //  Copyright © 2020 王磊. All rights reserved.
 //
 
-#import "BBQPrivacyViewController.h"
+#import "AWMPrivacyViewController.h"
 @import SToolsKit;
-@interface BBQPrivacyViewController ()
+@interface AWMPrivacyViewController ()
 
-@property (nonatomic ,strong) BBQProtocolBridge *bridge;
+@property (nonatomic ,strong) AWMProtocolBridge *bridge;
 
+#if AWMUserInfoOne
 
-#if BBQUserInfoOne
+#elif AWMUserInfoTwo
 
-#elif BBQUserInfoTwo
-
-#elif BBQUserInfoThree
+#elif AWMUserInfoThree
 
 @property (nonatomic ,strong) UIView *topLine;
 #else
@@ -26,30 +25,13 @@
 #endif
 @end
 
-@implementation BBQPrivacyViewController
+@implementation AWMPrivacyViewController
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-#if BBQUserInfoOne
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@BBQColor]];
-#elif BBQUserInfoTwo
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@BBQColor]];
-#elif BBQUserInfoThree
-    
-#if BBQCONTAINDRAWER
-    
-    [self.navigationController setNavigationBarHidden:false];
-#endif
-    
-#endif
-}
-#if BBQUserInfoOne
+#if AWMUserInfoOne
 
+#elif AWMUserInfoTwo
 
-#elif BBQUserInfoTwo
-
-#elif BBQUserInfoThree
+#elif AWMUserInfoThree
 
 - (UIView *)topLine {
     if (!_topLine) {
@@ -69,18 +51,18 @@
 
 - (void)configViewModel {
     
-    self.bridge = [BBQProtocolBridge new];
+    self.bridge = [AWMProtocolBridge new];
     
     [self.bridge createProtocol:self] ;
 }
 - (void)addOwnSubViews {
     [super addOwnSubViews];
-#if BBQUserInfoOne
+#if AWMUserInfoOne
     
     
-#elif BBQUserInfoTwo
+#elif AWMUserInfoTwo
     
-#elif BBQUserInfoThree
+#elif AWMUserInfoThree
     
     [self.view addSubview:self.topLine];
 #else
@@ -94,16 +76,16 @@
     [super configOwnSubViews];
     
     
-#if BBQUserInfoOne
+#if AWMUserInfoOne
     
-#elif BBQUserInfoTwo
+#elif AWMUserInfoTwo
     
     
-#elif BBQUserInfoThree
+#elif AWMUserInfoThree
     
-    self.topLine.backgroundColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
+    self.topLine.backgroundColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
     
-    if ([self.navigationController.viewControllers.firstObject isKindOfClass:NSClassFromString(@"BBQLoginViewController")]) {
+    if ([self.navigationController.viewControllers.firstObject isKindOfClass:NSClassFromString(@"AWMLoginViewController")]) {
         
         CGFloat h = CGRectGetHeight(self.navigationController.navigationBar.bounds);
         
@@ -130,17 +112,17 @@
 - (void)configOwnProperties {
     [super configOwnProperties];
     
-#if BBQUserInfoOne
+#if AWMUserInfoOne
     
-#elif BBQUserInfoTwo
+#elif AWMUserInfoTwo
     
     self.textView.backgroundColor = [UIColor whiteColor];
     
-    self.view.backgroundColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
+    self.view.backgroundColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
     
     self.textView.layer.masksToBounds = false;
     
-#elif BBQUserInfoThree
+#elif AWMUserInfoThree
     
     
 #else
@@ -157,4 +139,5 @@
 - (BOOL)canPanResponse {
     return true;
 }
+
 @end

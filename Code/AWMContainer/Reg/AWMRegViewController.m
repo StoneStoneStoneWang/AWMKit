@@ -1,21 +1,21 @@
 //
-//  BBQRegViewController.m
-//  BBQContainer
+//  AWMRegViewController.m
+//  AWMContainer
 //
 //  Created by 王磊 on 2020/3/29.
 //  Copyright © 2020 王磊. All rights reserved.
 //
 
-#import "BBQRegViewController.h"
-@import BBQTextField;
+#import "AWMRegViewController.h"
+@import AWMTextField;
 @import SToolsKit;
 @import Masonry;
-@interface BBQRegViewController ()
-@property (nonatomic ,strong) BBQRegBridge *bridge;
+@interface AWMRegViewController ()
+@property (nonatomic ,strong) AWMRegBridge *bridge;
 
-@property (nonatomic ,strong) BBQLeftImageTextField *phone;
+@property (nonatomic ,strong) AWMLeftImageTextField *phone;
 
-@property (nonatomic ,strong) BBQVCodeImageTextField *vcode;
+@property (nonatomic ,strong) AWMVCodeImageTextField *vcode;
 
 @property (nonatomic ,strong) UIButton *loginItem;
 
@@ -23,18 +23,18 @@
 
 @property (nonatomic ,strong) UIButton *backLoginItem;
 
-@property (nonatomic ,copy) BBQRegBlock block;
-#if BBQLoginOne
-
-@property (nonatomic ,strong) UIView *topView;
+@property (nonatomic ,copy) AWMRegBlock block;
+#if AWMLoginOne
 
 @property (nonatomic ,strong) UIImageView *logoImgView;
 
-#elif BBQLoginTwo
+@property (nonatomic ,strong) UIImageView *backgroundImageView;
+
+#elif AWMLoginTwo
 
 @property (nonatomic ,strong) UIImageView *logoImgView;
 
-#elif BBQLoginThree
+#elif AWMLoginThree
 
 @property (nonatomic ,strong) UIImageView *logoImgView;
 
@@ -42,7 +42,7 @@
 
 @property (nonatomic ,strong) UIView *bottomLine;
 
-#elif BBQLoginFour
+#elif AWMLoginFour
 
 @property (nonatomic ,strong) UIImageView *logoImgView;
 
@@ -53,31 +53,13 @@
 #endif
 @end
 
-@implementation BBQRegViewController
+@implementation AWMRegViewController
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-#if BBQLoginOne
-    
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor clearColor] ];
-#elif BBQLoginTwo
-    
-#elif BBQLoginThree
-    
-#elif BBQLoginFour
-    
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor clearColor]];
-#else
-    
-#endif
-}
-
-+ (instancetype)createRegWithBlock:(BBQRegBlock)block {
++ (instancetype)createRegWithBlock:(AWMRegBlock)block {
     
     return [[self alloc] initWithBlock:block];
 }
-- (instancetype)initWithBlock:(BBQRegBlock)block {
+- (instancetype)initWithBlock:(AWMRegBlock)block {
     
     if (self = [super init]) {
         
@@ -85,44 +67,46 @@
     }
     return self;
 }
-- (BBQLeftImageTextField *)phone {
+- (AWMLeftImageTextField *)phone {
     
     if (!_phone) {
         
-        _phone = [[BBQLeftImageTextField alloc] initWithFrame:CGRectZero];
+        _phone = [[AWMLeftImageTextField alloc] initWithFrame:CGRectZero];
         
         _phone.tag = 201;
         
-        _phone.leftImageName = @BBQPhoneIcon;
+        _phone.leftImageName = @AWMPhoneIcon;
         
         _phone.placeholder = @"请输入11位手机号";
         
-        [_phone set_editType:BBQTextFiledEditTypePhone];
+        [_phone awm_editType:AWMTextFiledEditTypePhone];
         
-        [_phone set_maxLength:11];
-        
-        [_phone set_bottomLineColor:[UIColor s_transformToColorByHexColorStr:@BBQColor]];
+        [_phone awm_maxLength:11];
+        #if AWMUPDATEVERSION
+                _phone.tintColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
+        #endif
     }
     return _phone;
 }
 
-- (BBQVCodeImageTextField *)vcode {
+- (AWMVCodeImageTextField *)vcode {
     
     if (!_vcode) {
         
-        _vcode = [[BBQVCodeImageTextField alloc] initWithFrame:CGRectZero];
+        _vcode = [[AWMVCodeImageTextField alloc] initWithFrame:CGRectZero];
         
         _vcode.tag = 202;
         
-        _vcode.leftImageName = @BBQVCodeIcon;
+        _vcode.leftImageName = @AWMVCodeIcon;
         
         _vcode.placeholder = @"请输入6位验证码";
         
-        [_vcode set_editType:BBQTextFiledEditTypeVcode_length6];
+        [_vcode awm_editType:AWMTextFiledEditTypeVcode_length6];
         
-        [_vcode set_maxLength:6];
-        
-        [_vcode set_bottomLineColor:[UIColor s_transformToColorByHexColorStr:@BBQColor]];
+        [_vcode awm_maxLength:6];
+        #if AWMUPDATEVERSION
+                _vcode.tintColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
+        #endif
     }
     return _vcode;
 }
@@ -135,9 +119,9 @@
         
         _loginItem.tag = 203;
         
-        [_loginItem setBackgroundImage:[UIImage s_transformFromHexColor:@BBQColor] forState:UIControlStateNormal];
+        [_loginItem setBackgroundImage:[UIImage s_transformFromHexColor:@AWMColor] forState:UIControlStateNormal];
         
-        [_loginItem setBackgroundImage:[UIImage s_transformFromAlphaHexColor:[NSString stringWithFormat:@"%@80",@BBQColor]] forState:UIControlStateHighlighted];
+        [_loginItem setBackgroundImage:[UIImage s_transformFromAlphaHexColor:[NSString stringWithFormat:@"%@80",@AWMColor]] forState:UIControlStateHighlighted];
         
         [_loginItem setTitle:@"注册/登陆" forState: UIControlStateNormal];
         
@@ -168,15 +152,15 @@
         
         [_backLoginItem setTitle:@"已有账号,返回登陆" forState: UIControlStateHighlighted];
         
-        [_backLoginItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@BBQColor] forState:UIControlStateNormal];
+        [_backLoginItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@AWMColor] forState:UIControlStateNormal];
         
-        [_backLoginItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr: [NSString stringWithFormat:@"%@80",@BBQColor]] forState:UIControlStateHighlighted];
+        [_backLoginItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr: [NSString stringWithFormat:@"%@80",@AWMColor]] forState:UIControlStateHighlighted];
         
         _backLoginItem.layer.cornerRadius = 24;
         
         _backLoginItem.layer.masksToBounds = true;
         
-        _backLoginItem.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@BBQColor].CGColor;
+        _backLoginItem.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@AWMColor].CGColor;
         
         _backLoginItem.layer.borderWidth = 1;
         
@@ -198,14 +182,14 @@
         
         [mutable setAttributedString: [[NSAttributedString alloc] initWithString:displayname ? displayname : @""
                                                                       attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12] ,
-                                                                                   NSForegroundColorAttributeName: [UIColor s_transformToColorByHexColorStr:@BBQColor]}]];
+                                                                                   NSForegroundColorAttributeName: [UIColor s_transformToColorByHexColorStr:@AWMColor]}]];
         [mutable appendAttributedString:[[NSAttributedString alloc] initWithString:@" 注册协议" attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12] ,
                                                                                                          NSForegroundColorAttributeName: [UIColor s_transformToColorByHexColorStr:@"#333333"]}] ];
         [_proItem setAttributedTitle:mutable forState:UIControlStateNormal];
         
         [mutable setAttributedString: [[NSAttributedString alloc] initWithString:displayname ? displayname : @""
                                                                       attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12] ,
-                                                                                   NSForegroundColorAttributeName: [UIColor s_transformTo_AlphaColorByHexColorStr: [NSString stringWithFormat:@"%@80",@BBQColor]] }]];
+                                                                                   NSForegroundColorAttributeName: [UIColor s_transformTo_AlphaColorByHexColorStr: [NSString stringWithFormat:@"%@80",@AWMColor]] }]];
         [mutable appendAttributedString:[[NSAttributedString alloc] initWithString:@" 注册协议" attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12] ,
                                                                                                          NSForegroundColorAttributeName: [UIColor s_transformToColorByHexColorStr:@"#333333"]}] ];
         
@@ -228,20 +212,20 @@
     
     [self.view addSubview:self.proItem];
     
-#if BBQLoginOne
-    
-    [self.view addSubview:self.topView];
+#if AWMLoginOne
     
     [self.view addSubview:self.logoImgView];
-#elif BBQLoginTwo
+    
+    [self.view insertSubview:self.backgroundImageView atIndex:0];
+#elif AWMLoginTwo
     [self.view addSubview:self.logoImgView];
-#elif BBQLoginThree
+#elif AWMLoginThree
     [self.view addSubview:self.logoImgView];
     
     [self.view addSubview:self.topLine];
     
     [self.view addSubview:self.bottomLine];
-#elif BBQLoginFour
+#elif AWMLoginFour
     
     [self.view addSubview:self.logoImgView];
     
@@ -252,66 +236,56 @@
 #endif
 }
 
-#if BBQLoginOne
-
-- (UIView *)topView {
+#if AWMLoginOne
+- (UIImageView *)backgroundImageView {
     
-    if (!_topView) {
+    if (!_backgroundImageView) {
         
-        _topView = [UIView new];
+        _backgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@AWMBackground]];
         
-        _topView.backgroundColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
+        _backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
     }
-    return _topView;
+    return _backgroundImageView;
 }
-
 - (UIImageView *)logoImgView {
     
     if (!_logoImgView) {
         
-        _logoImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@BBQLogoIcon]];
+        _logoImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@AWMLogoIcon]];
+    }
+    return _logoImgView;
+}
+
+#elif AWMLoginTwo
+- (UIImageView *)logoImgView {
+    
+    if (!_logoImgView) {
+        
+        _logoImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@AWMLogoIcon]];
         
         _logoImgView.layer.cornerRadius = 40;
         
         _logoImgView.layer.masksToBounds = true;
         
-        _logoImgView.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@BBQColor].CGColor;
+        _logoImgView.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@AWMColor].CGColor;
         
         _logoImgView.layer.borderWidth = 1;
     }
     return _logoImgView;
 }
-
-#elif BBQLoginTwo
-- (UIImageView *)logoImgView {
-    
-    if (!_logoImgView) {
-        
-        _logoImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@BBQLogoIcon]];
-        
-        _logoImgView.layer.cornerRadius = 40;
-        
-        _logoImgView.layer.masksToBounds = true;
-        
-        _logoImgView.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@BBQColor].CGColor;
-        
-        _logoImgView.layer.borderWidth = 1;
-    }
-    return _logoImgView;
-}
-#elif BBQLoginThree
+#elif AWMLoginThree
 
 - (UIImageView *)logoImgView {
     
     if (!_logoImgView) {
         
-        _logoImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@BBQLogoIcon]];
+        _logoImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@AWMLogoIcon]];
         
         _logoImgView.layer.cornerRadius = 5;
         
         _logoImgView.layer.masksToBounds = true;
         
-        _logoImgView.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@BBQColor].CGColor;
+        _logoImgView.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@AWMColor].CGColor;
         
         _logoImgView.layer.borderWidth = 1;
     }
@@ -333,12 +307,12 @@
     }
     return _bottomLine;
 }
-#elif BBQLoginFour
+#elif AWMLoginFour
 - (UIImageView *)backgroundImageView {
     
     if (!_backgroundImageView) {
         
-        _backgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@BBQBackground]];
+        _backgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@AWMBackground]];
         
         _backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
     }
@@ -348,13 +322,13 @@
     
     if (!_logoImgView) {
         
-        _logoImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@BBQLogoIcon]];
+        _logoImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@AWMLogoIcon]];
         
         _logoImgView.layer.cornerRadius = 40;
         
         _logoImgView.layer.masksToBounds = true;
         
-        _logoImgView.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@BBQColor].CGColor;
+        _logoImgView.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@AWMColor].CGColor;
         
         _logoImgView.layer.borderWidth = 1;
     }
@@ -365,19 +339,17 @@
 #endif
 - (void)configNaviItem {
     
-#if BBQLoginOne
-    
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor clearColor]];
+#if AWMLoginOne
     
     self.title = @"注册/登陆";
     
-#elif BBQLoginTwo
+#elif AWMLoginTwo
     self.title = @"注册/登陆";
-#elif BBQLoginThree
+#elif AWMLoginThree
     
     self.title = @"注册/登陆";
     
-#elif BBQLoginFour
+#elif AWMLoginFour
     
     UILabel *titleLabel = [UILabel new];
     
@@ -396,103 +368,9 @@
 }
 - (void)configOwnSubViews {
     
-#if BBQLoginOne
+#if AWMLoginOne
     
-    CGFloat w = CGRectGetWidth(self.view.bounds);
-    
-    [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.top.right.mas_equalTo(@0);
-        
-        make.height.mas_equalTo(@(w / 2));
-    }];
-    
-    [self.logoImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerX.mas_equalTo(self.topView.mas_centerX);
-        
-        make.centerY.mas_equalTo(self.topView.mas_centerY);
-        
-        make.width.height.mas_equalTo(@80);
-    }];
-    
-    [self.phone mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.mas_equalTo(self.topView.mas_bottom).offset(10);
-        
-        make.left.mas_equalTo(@15);
-        
-        make.right.mas_equalTo(@-15);
-        
-        make.height.mas_equalTo(@48);
-    }];
-    [self.phone set_bottomLineFrame:CGRectMake(0, 47, w - 30, 1)];
-    
-    [self.vcode mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.mas_equalTo(self.phone.mas_bottom).offset(10);
-        
-        make.left.mas_equalTo(self.phone.mas_left);
-        
-        make.right.mas_equalTo(self.phone.mas_right);
-        
-        make.height.mas_equalTo(self.phone.mas_height);
-    }];
-    
-    [self.vcode set_bottomLineFrame:CGRectMake(0, 47, w - 30, 1)];
-    
-    UIButton *vcodeItem = (UIButton *)self.vcode.rightView;
-    
-    [vcodeItem setTitle:@"获取验证码" forState:UIControlStateNormal];
-    
-    [vcodeItem sizeToFit];
-    
-    [vcodeItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@BBQColor] forState:UIControlStateNormal];
-    
-    [vcodeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@80",@BBQColor]] forState:UIControlStateHighlighted];
-    
-    [vcodeItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@"#999999"] forState:UIControlStateSelected];
-    
-    [self.vcode setRightView:vcodeItem];
-    
-    [self.proItem mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.mas_equalTo(self.vcode.mas_bottom).offset(10);
-        
-        make.right.mas_equalTo(self.phone.mas_right);
-        
-        make.height.mas_equalTo(self.phone.mas_height);
-    }];
-    
-    
-    
-    [self.loginItem mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.mas_equalTo(self.proItem.mas_bottom).offset(10);
-        
-        make.left.mas_equalTo(self.phone.mas_left);
-        
-        make.right.mas_equalTo(self.phone.mas_right);
-        
-        make.height.mas_equalTo(self.phone.mas_height);
-        
-    }];
-    [self.backLoginItem mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.mas_equalTo(self.loginItem.mas_bottom).offset(10);
-        
-        make.left.mas_equalTo(self.phone.mas_left);
-        
-        make.right.mas_equalTo(self.phone.mas_right);
-        
-        make.height.mas_equalTo(self.phone.mas_height);
-        
-    }];
-    
-    [_vcode setLeftImageFrame:CGRectMake(0, 0, 80, 48)];
-    
-    [_phone setLeftImageFrame:CGRectMake(0, 0, 80, 48)];
-#elif BBQLoginTwo
+    self.backgroundImageView.frame = self.view.bounds;
     
     CGFloat w = CGRectGetWidth(self.view.bounds);
     
@@ -504,6 +382,10 @@
         
         make.width.height.mas_equalTo(@80);
     }];
+    
+    self.logoImgView.layer.cornerRadius = 40;
+    
+    self.logoImgView.layer.masksToBounds = true;
     
     [self.phone mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -524,7 +406,7 @@
     
     self.phone.layer.masksToBounds = true;
     //
-    [self.phone set_bottomLineFrame:CGRectMake(0, 47, w - 30, 1)];
+    [self.phone awm_bottomLineFrame:CGRectMake(0, 47, w - 30, 1)];
     //
     [self.vcode mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -544,7 +426,7 @@
     
     self.vcode.layer.masksToBounds = true;
     
-    [self.vcode set_bottomLineFrame:CGRectMake(0, 47, w - 30, 1)];
+    [self.vcode awm_bottomLineFrame:CGRectMake(0, 47, w - 30, 1)];
     
     UIButton *vcodeItem = (UIButton *)self.vcode.rightView;
     
@@ -552,9 +434,9 @@
     
     [vcodeItem sizeToFit];
     
-    [vcodeItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@BBQColor] forState:UIControlStateNormal];
+    [vcodeItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@AWMColor] forState:UIControlStateNormal];
     
-    [vcodeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@80",@BBQColor]] forState:UIControlStateHighlighted];
+    [vcodeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@80",@AWMColor]] forState:UIControlStateHighlighted];
     
     [vcodeItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@"#999999"] forState:UIControlStateSelected];
     
@@ -605,9 +487,9 @@
     
     [self.loginItem setBackgroundImage:[UIImage s_transformFromAlphaHexColor:[NSString stringWithFormat:@"%@80",@"#ffffff"]] forState:UIControlStateHighlighted];
     
-    [self.loginItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@BBQColor] forState:UIControlStateNormal];
+    [self.loginItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@AWMColor] forState:UIControlStateNormal];
     
-    [self.loginItem setTitleColor:[UIColor s_transformToColorByHexColorStr:[NSString stringWithFormat:@"%@80",@BBQColor]] forState:UIControlStateHighlighted];
+    [self.loginItem setTitleColor:[UIColor s_transformToColorByHexColorStr:[NSString stringWithFormat:@"%@80",@AWMColor]] forState:UIControlStateHighlighted];
     
     [self.backLoginItem mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -622,9 +504,141 @@
     [self.backLoginItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@"#ffffff"] forState:UIControlStateNormal];
     
     [self.backLoginItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr: [NSString stringWithFormat:@"%@80",@"#ffffff"]] forState:UIControlStateHighlighted];
-#elif BBQLoginThree
     
-    self.topLine.backgroundColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
+    self.backLoginItem.layer.borderColor = [UIColor clearColor].CGColor;
+#elif AWMLoginTwo
+    
+    CGFloat w = CGRectGetWidth(self.view.bounds);
+    
+    [self.logoImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.mas_equalTo(self.view);
+        
+        make.top.mas_equalTo(60);
+        
+        make.width.height.mas_equalTo(@80);
+    }];
+    
+    [self.phone mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.mas_equalTo(self.logoImgView.mas_bottom).offset(60);
+        
+        make.left.mas_equalTo(@15);
+        
+        make.right.mas_equalTo(@-15);
+        
+        make.height.mas_equalTo(@48);
+    }];
+    
+    [self.phone setLeftImageFrame:CGRectMake(0, 0, 80, 48)];
+    
+    self.phone.backgroundColor = [UIColor whiteColor];
+    
+    self.phone.layer.cornerRadius = 24;
+    
+    self.phone.layer.masksToBounds = true;
+    //
+    [self.phone awm_bottomLineFrame:CGRectMake(0, 47, w - 30, 1)];
+    //
+    [self.vcode mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.mas_equalTo(self.phone.mas_bottom).offset(10);
+        
+        make.left.mas_equalTo(self.phone.mas_left);
+        
+        make.right.mas_equalTo(self.phone.mas_right);
+        
+        make.height.mas_equalTo(self.phone.mas_height);
+    }];
+    [self.vcode setLeftImageFrame:CGRectMake(0, 0, 80, 48)];
+    
+    self.vcode.backgroundColor = [UIColor whiteColor];
+    
+    self.vcode.layer.cornerRadius = 24;
+    
+    self.vcode.layer.masksToBounds = true;
+    
+    [self.vcode awm_bottomLineFrame:CGRectMake(0, 47, w - 30, 1)];
+    
+    UIButton *vcodeItem = (UIButton *)self.vcode.rightView;
+    
+    [vcodeItem setTitle:@"获取验证码" forState:UIControlStateNormal];
+    
+    [vcodeItem sizeToFit];
+    
+    [vcodeItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@AWMColor] forState:UIControlStateNormal];
+    
+    [vcodeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@80",@AWMColor]] forState:UIControlStateHighlighted];
+    
+    [vcodeItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@"#999999"] forState:UIControlStateSelected];
+    
+    [self.vcode setRightView:vcodeItem];
+    
+    [self.proItem mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.mas_equalTo(self.vcode.mas_bottom).offset(10);
+        
+        make.right.mas_equalTo(self.phone.mas_right);
+        
+        make.height.mas_equalTo(self.phone.mas_height);
+    }];
+    
+    NSMutableAttributedString *mutable = [NSMutableAttributedString new];
+    
+    NSString *displayname = [NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"];
+    
+    [mutable setAttributedString: [[NSAttributedString alloc] initWithString:displayname ? displayname : @""
+                                                                  attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12] ,
+                                                                               NSForegroundColorAttributeName: [UIColor s_transformToColorByHexColorStr:@"#ffffff"]}]];
+    [mutable appendAttributedString:[[NSAttributedString alloc] initWithString:@" 注册协议" attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12] ,
+                                                                                                     NSForegroundColorAttributeName: [UIColor s_transformToColorByHexColorStr:@"#e1e1e1"]}] ];
+    [self.proItem setAttributedTitle:mutable forState:UIControlStateNormal];
+    
+    [mutable setAttributedString: [[NSAttributedString alloc] initWithString:displayname ? displayname : @""
+                                                                  attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12] ,
+                                                                               NSForegroundColorAttributeName: [UIColor s_transformTo_AlphaColorByHexColorStr: [NSString stringWithFormat:@"%@80",@"#ffffff"]] }]];
+    [mutable appendAttributedString:[[NSAttributedString alloc] initWithString:@" 注册协议" attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12] ,
+                                                                                                     NSForegroundColorAttributeName: [UIColor s_transformToColorByHexColorStr:@"#e1e1e1"]}] ];
+    [self.proItem setAttributedTitle:mutable forState:UIControlStateHighlighted];
+    
+    [self.proItem setNeedsDisplay];
+    
+    [self.loginItem mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.mas_equalTo(self.proItem.mas_bottom).offset(10);
+        
+        make.left.mas_equalTo(self.phone.mas_left);
+        
+        make.right.mas_equalTo(self.phone.mas_right);
+        
+        make.height.mas_equalTo(self.phone.mas_height);
+        
+    }];
+    
+    [self.loginItem setBackgroundImage:[UIImage s_transformFromHexColor:@"#ffffff"] forState:UIControlStateNormal];
+    
+    [self.loginItem setBackgroundImage:[UIImage s_transformFromAlphaHexColor:[NSString stringWithFormat:@"%@80",@"#ffffff"]] forState:UIControlStateHighlighted];
+    
+    [self.loginItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@AWMColor] forState:UIControlStateNormal];
+    
+    [self.loginItem setTitleColor:[UIColor s_transformToColorByHexColorStr:[NSString stringWithFormat:@"%@80",@AWMColor]] forState:UIControlStateHighlighted];
+    
+    [self.backLoginItem mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.mas_equalTo(self.vcode.mas_bottom).offset(10);
+        
+        make.left.mas_equalTo(self.phone.mas_left);
+        
+        make.height.mas_equalTo(self.phone.mas_height);
+        
+    }];
+    
+    [self.backLoginItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@"#ffffff"] forState:UIControlStateNormal];
+    
+    [self.backLoginItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr: [NSString stringWithFormat:@"%@80",@"#ffffff"]] forState:UIControlStateHighlighted];
+#elif AWMLoginThree
+    
+    self.topLine.backgroundColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
     
     CGFloat h = CGRectGetHeight(self.navigationController.navigationBar.frame);
     
@@ -650,7 +664,7 @@
         make.width.height.mas_equalTo(@60);
     }];
     
-    self.bottomLine.backgroundColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
+    self.bottomLine.backgroundColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
     
     [self.bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -682,7 +696,7 @@
     
     self.phone.layer.borderWidth = 1;
     
-    self.phone.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@BBQColor].CGColor;
+    self.phone.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@AWMColor].CGColor;
     
     //
     [self.vcode mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -704,7 +718,7 @@
     
     self.vcode.layer.borderWidth = 1;
     
-    self.vcode.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@BBQColor].CGColor;
+    self.vcode.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@AWMColor].CGColor;
     
     UIButton *vcodeItem = (UIButton *)self.vcode.rightView;
     
@@ -712,9 +726,9 @@
     
     [vcodeItem sizeToFit];
     
-    [vcodeItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@BBQColor] forState:UIControlStateNormal];
+    [vcodeItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@AWMColor] forState:UIControlStateNormal];
     
-    [vcodeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@80",@BBQColor]] forState:UIControlStateHighlighted];
+    [vcodeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@80",@AWMColor]] forState:UIControlStateHighlighted];
     
     [vcodeItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@"#999999"] forState:UIControlStateSelected];
     
@@ -735,14 +749,14 @@
     
     [mutable setAttributedString: [[NSAttributedString alloc] initWithString:displayname ? displayname : @""
                                                                   attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12] ,
-                                                                               NSForegroundColorAttributeName: [UIColor s_transformToColorByHexColorStr:@BBQColor]}]];
+                                                                               NSForegroundColorAttributeName: [UIColor s_transformToColorByHexColorStr:@AWMColor]}]];
     [mutable appendAttributedString:[[NSAttributedString alloc] initWithString:@" 注册协议" attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12] ,
                                                                                                      NSForegroundColorAttributeName: [UIColor s_transformToColorByHexColorStr:@"#999999"]}] ];
     [self.proItem setAttributedTitle:mutable forState:UIControlStateNormal];
     
     [mutable setAttributedString: [[NSAttributedString alloc] initWithString:displayname ? displayname : @""
                                                                   attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12] ,
-                                                                               NSForegroundColorAttributeName: [UIColor s_transformTo_AlphaColorByHexColorStr: [NSString stringWithFormat:@"%@80",@BBQColor]] }]];
+                                                                               NSForegroundColorAttributeName: [UIColor s_transformTo_AlphaColorByHexColorStr: [NSString stringWithFormat:@"%@80",@AWMColor]] }]];
     [mutable appendAttributedString:[[NSAttributedString alloc] initWithString:@" 注册协议" attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12] ,
                                                                                                      NSForegroundColorAttributeName: [UIColor s_transformToColorByHexColorStr:@"#999999"]}] ];
     [self.proItem setAttributedTitle:mutable forState:UIControlStateHighlighted];
@@ -761,9 +775,9 @@
         
     }];
     
-    [self.loginItem setBackgroundImage:[UIImage s_transformFromHexColor:@BBQColor] forState:UIControlStateNormal];
+    [self.loginItem setBackgroundImage:[UIImage s_transformFromHexColor:@AWMColor] forState:UIControlStateNormal];
     
-    [self.loginItem setBackgroundImage:[UIImage s_transformFromAlphaHexColor:[NSString stringWithFormat:@"%@80",@BBQColor]] forState:UIControlStateHighlighted];
+    [self.loginItem setBackgroundImage:[UIImage s_transformFromAlphaHexColor:[NSString stringWithFormat:@"%@80",@AWMColor]] forState:UIControlStateHighlighted];
     
     [self.loginItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@"#ffffff"] forState:UIControlStateNormal];
     
@@ -779,16 +793,16 @@
         
     }];
     
-    [self.backLoginItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@BBQColor] forState:UIControlStateNormal];
+    [self.backLoginItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@AWMColor] forState:UIControlStateNormal];
     
-    [self.backLoginItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr: [NSString stringWithFormat:@"%@80",@BBQColor]] forState:UIControlStateHighlighted];
+    [self.backLoginItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr: [NSString stringWithFormat:@"%@80",@AWMColor]] forState:UIControlStateHighlighted];
     
     self.backLoginItem.layer.borderColor = [UIColor clearColor].CGColor;
     
     [_vcode setLeftImageFrame:CGRectMake(0, 0, 80, 48)];
     
     [_phone setLeftImageFrame:CGRectMake(0, 0, 80, 48)];
-#elif BBQLoginFour
+#elif AWMLoginFour
     
     self.backgroundImageView.frame = self.view.bounds;
     
@@ -822,7 +836,7 @@
     
     self.phone.layer.masksToBounds = true;
     //
-    [self.phone set_bottomLineFrame:CGRectMake(0, 47, w - 30, 1)];
+    [self.phone awm_bottomLineFrame:CGRectMake(0, 47, w - 30, 1)];
     //
     [self.vcode mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -842,7 +856,7 @@
     
     self.vcode.layer.masksToBounds = true;
     
-    [self.vcode set_bottomLineFrame:CGRectMake(0, 47, w - 30, 1)];
+    [self.vcode awm_bottomLineFrame:CGRectMake(0, 47, w - 30, 1)];
     
     UIButton *vcodeItem = (UIButton *)self.vcode.rightView;
     
@@ -850,9 +864,9 @@
     
     [vcodeItem sizeToFit];
     
-    [vcodeItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@BBQColor] forState:UIControlStateNormal];
+    [vcodeItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@AWMColor] forState:UIControlStateNormal];
     
-    [vcodeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@80",@BBQColor]] forState:UIControlStateHighlighted];
+    [vcodeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@80",@AWMColor]] forState:UIControlStateHighlighted];
     
     [vcodeItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@"#999999"] forState:UIControlStateSelected];
     
@@ -903,9 +917,9 @@
     
     [self.loginItem setBackgroundImage:[UIImage s_transformFromAlphaHexColor:[NSString stringWithFormat:@"%@80",@"#ffffff"]] forState:UIControlStateHighlighted];
     
-    [self.loginItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@BBQColor] forState:UIControlStateNormal];
+    [self.loginItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@AWMColor] forState:UIControlStateNormal];
     
-    [self.loginItem setTitleColor:[UIColor s_transformToColorByHexColorStr:[NSString stringWithFormat:@"%@80",@BBQColor]] forState:UIControlStateHighlighted];
+    [self.loginItem setTitleColor:[UIColor s_transformToColorByHexColorStr:[NSString stringWithFormat:@"%@80",@AWMColor]] forState:UIControlStateHighlighted];
     
     [self.backLoginItem mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -931,33 +945,33 @@
 - (void)configOwnProperties {
     [super configOwnProperties];
     
-#if BBQLoginOne
+#if AWMLoginOne
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-#elif BBQLoginTwo
+#elif AWMLoginTwo
     
-    self.view.backgroundColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
-#elif BBQLoginThree
+    self.view.backgroundColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
+#elif AWMLoginThree
     
     self.view.backgroundColor = [UIColor whiteColor];
-#elif BBQLoginFour
+#elif AWMLoginFour
     
 #else
     
 #endif
 }
+
 - (void)configViewModel {
     
-    self.bridge = [BBQRegBridge new];
+    self.bridge = [AWMRegBridge new];
     
     __weak typeof(self) weakSelf = self;
     
-    [self.bridge createReg:self regAction:^(enum BBQRegActionType actionType) {
+    [self.bridge createReg:self regAction:^(enum AWMRegActionType actionType) {
         
         weakSelf.block(actionType, weakSelf);
     }];
-    
 }
 
 - (BOOL)canPanResponse {

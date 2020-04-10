@@ -1,23 +1,23 @@
 //
-//  BBQWelcomeViewController.m
-//  BBQContainer
+//  AWMWelcomeViewController.m
+//  AWMContainer
 //
 //  Created by 王磊 on 2020/3/29.
 //  Copyright © 2020 王磊. All rights reserved.
 //
 
-#import "BBQWelcomeViewController.h"
+#import "AWMWelcomeViewController.h"
 @import Masonry;
 @import SToolsKit;
-@import BBQBridge;
+@import AWMBridge;
 
-@interface BBQWelcomeCollectionViewCell ()
+@interface AWMWelcomeCollectionViewCell ()
 
 @property (nonatomic ,strong) UIImageView *iconImageView;
 
 @end
 
-@implementation BBQWelcomeCollectionViewCell
+@implementation AWMWelcomeCollectionViewCell
 
 - (UIImageView *)iconImageView {
     
@@ -28,6 +28,8 @@
         _iconImageView.contentMode = UIViewContentModeScaleAspectFill;
         
         _iconImageView.backgroundColor = [UIColor clearColor];
+        
+        _iconImageView.layer.masksToBounds = true;
     }
     return _iconImageView;
 }
@@ -53,25 +55,25 @@
 
 @end
 
-@interface BBQWelcomeViewController ()
+@interface AWMWelcomeViewController ()
 
 @property (nonatomic ,strong) UIButton *skipItem;
 
 @property (nonatomic ,strong) UIPageControl *pageControl;
 
-@property (nonatomic ,strong) BBQWelcomeBridge *bridge;
+@property (nonatomic ,strong) AWMWelcomeBridge *bridge;
 
-@property (nonatomic ,copy) BBQWelcomeBlock block;
+@property (nonatomic ,copy) AWMWelcomeBlock block;
 @end
 
-@implementation BBQWelcomeViewController
+@implementation AWMWelcomeViewController
 
-+ (instancetype)createWelcomeWithSkipBlock:(BBQWelcomeBlock)block {
++ (instancetype)createWelcomeWithSkipBlock:(AWMWelcomeBlock)block {
     
     return [[self alloc] initWithSkipBlock:block];
 }
 
-- (instancetype)initWithSkipBlock:(BBQWelcomeBlock)block {
+- (instancetype)initWithSkipBlock:(AWMWelcomeBlock)block {
     
     if (self = [super init]) {
         
@@ -142,7 +144,7 @@
     
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.right.top.bottom.mas_equalTo(@0);
+        make.left.right.top.bottom.mas_equalTo(0);
     }];
     
     [self.pageControl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -156,67 +158,9 @@
         make.bottom.mas_equalTo(@-60);
     }];
     
-    [self.collectionView registerClass:[BBQWelcomeCollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+    [self.collectionView registerClass:[AWMWelcomeCollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     
-#if BBQWelcomeOne
-    
-    [self.skipItem mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.width.mas_equalTo(@80);
-        
-        make.height.mas_equalTo(@30);
-        
-        make.centerX.mas_equalTo(@0);
-        
-        make.centerY.mas_equalTo(self.pageControl.mas_centerY);
-    }];
-    
-    [self.skipItem setTitle:@"立即体验" forState:UIControlStateNormal];
-    
-    [self.skipItem setTitle:@"立即体验" forState:UIControlStateHighlighted];
-    
-    self.skipItem.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@BBQColor].CGColor;
-    
-    [self.skipItem setTitleColor: [UIColor s_transformToColorByHexColorStr:@BBQColor] forState:UIControlStateNormal];
-    
-    [self.skipItem setTitleColor: [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@BBQColor]] forState:UIControlStateHighlighted];
-    
-    self.pageControl.pageIndicatorTintColor = [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@BBQColor]];
-    
-    self.pageControl.numberOfPages = BBQWelcomeImgs.count;
-    
-    self.pageControl.currentPageIndicatorTintColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
-    
-#elif BBQWelcomeTwo
-    
-    [self.skipItem mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.width.mas_equalTo(@80);
-        
-        make.height.mas_equalTo(@30);
-        
-        make.right.mas_equalTo(@-15);
-        
-        make.top.mas_equalTo(@60);
-    }];
-    
-    [self.skipItem setTitle:@"立即体验" forState:UIControlStateNormal];
-    
-    [self.skipItem setTitle:@"立即体验" forState:UIControlStateHighlighted];
-    
-    self.skipItem.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@BBQColor].CGColor;
-    
-    [self.skipItem setTitleColor: [UIColor s_transformToColorByHexColorStr:@BBQColor] forState:UIControlStateNormal];
-    
-    [self.skipItem setTitleColor: [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@BBQColor]] forState:UIControlStateHighlighted];
-    
-    self.pageControl.pageIndicatorTintColor = [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@BBQColor]];
-    
-    self.pageControl.numberOfPages = BBQWelcomeImgs.count;
-    
-    self.pageControl.currentPageIndicatorTintColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
-    
-#elif BBQWelcomeThree
+#if AWMWelcomeOne
     
     [self.skipItem mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -233,22 +177,23 @@
     
     [self.skipItem setTitle:@"立即体验" forState:UIControlStateHighlighted];
     
-    self.skipItem.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@BBQColor].CGColor;
-    
-    [self.skipItem setTitleColor: [UIColor s_transformToColorByHexColorStr:@BBQColor] forState:UIControlStateNormal];
-    
-    [self.skipItem setTitleColor: [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@BBQColor]] forState:UIControlStateHighlighted];
+    self.skipItem.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@AWMColor].CGColor;
     
     [self.skipItem setBackgroundImage:[UIImage s_transformFromHexColor:@"#ffffff"] forState:UIControlStateNormal];
     
     [self.skipItem setBackgroundImage:[UIImage s_transformFromHexColor:@"#ffffff"] forState:UIControlStateHighlighted];
     
-    self.pageControl.pageIndicatorTintColor = [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@BBQColor]];
+    [self.skipItem setTitleColor: [UIColor s_transformToColorByHexColorStr:@AWMColor] forState:UIControlStateNormal];
     
-    self.pageControl.numberOfPages = BBQWelcomeImgs.count;
+    [self.skipItem setTitleColor: [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@AWMColor]] forState:UIControlStateHighlighted];
     
-    self.pageControl.currentPageIndicatorTintColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
-#elif BBQWelcomeFour
+    self.pageControl.pageIndicatorTintColor = [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@AWMColor]];
+    
+    self.pageControl.numberOfPages = AWMWelcomeImgs.count;
+    
+    self.pageControl.currentPageIndicatorTintColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
+    
+#elif AWMWelcomeTwo
     
     [self.skipItem mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -265,22 +210,83 @@
     
     [self.skipItem setTitle:@"立即体验" forState:UIControlStateHighlighted];
     
-    self.skipItem.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@BBQColor].CGColor;
+    self.skipItem.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@AWMColor].CGColor;
     
-    [self.skipItem setTitleColor: [UIColor s_transformToColorByHexColorStr:@BBQColor] forState:UIControlStateNormal];
+    [self.skipItem setTitleColor: [UIColor s_transformToColorByHexColorStr:@AWMColor] forState:UIControlStateNormal];
+    
+    [self.skipItem setTitleColor: [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@AWMColor]] forState:UIControlStateHighlighted];
+    
+    self.pageControl.pageIndicatorTintColor = [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@AWMColor]];
+    
+    self.pageControl.numberOfPages = AWMWelcomeImgs.count;
+    
+    self.pageControl.currentPageIndicatorTintColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
+    
+#elif AWMWelcomeThree
+    
+    [self.skipItem mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.width.mas_equalTo(@80);
+        
+        make.height.mas_equalTo(@30);
+        
+        make.centerX.mas_equalTo(@0);
+        
+        make.centerY.mas_equalTo(self.pageControl.mas_centerY);
+    }];
+    
+    [self.skipItem setTitle:@"立即体验" forState:UIControlStateNormal];
+    
+    [self.skipItem setTitle:@"立即体验" forState:UIControlStateHighlighted];
+    
+    self.skipItem.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@AWMColor].CGColor;
+    
+    [self.skipItem setTitleColor: [UIColor s_transformToColorByHexColorStr:@AWMColor] forState:UIControlStateNormal];
+    
+    [self.skipItem setTitleColor: [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@AWMColor]] forState:UIControlStateHighlighted];
     
     [self.skipItem setBackgroundImage:[UIImage s_transformFromHexColor:@"#ffffff"] forState:UIControlStateNormal];
     
     [self.skipItem setBackgroundImage:[UIImage s_transformFromHexColor:@"#ffffff"] forState:UIControlStateHighlighted];
     
-    [self.skipItem setTitleColor: [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@BBQColor]] forState:UIControlStateHighlighted];
+    self.pageControl.pageIndicatorTintColor = [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@AWMColor]];
     
-    self.pageControl.pageIndicatorTintColor = [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@BBQColor]];
+    self.pageControl.numberOfPages = AWMWelcomeImgs.count;
     
-    self.pageControl.numberOfPages = BBQWelcomeImgs.count;
+    self.pageControl.currentPageIndicatorTintColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
+#elif AWMWelcomeFour
     
-    self.pageControl.currentPageIndicatorTintColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
-#elif BBQWelcomeFive
+    [self.skipItem mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.width.mas_equalTo(@80);
+        
+        make.height.mas_equalTo(@30);
+        
+        make.right.mas_equalTo(@-15);
+        
+        make.top.mas_equalTo(@60);
+    }];
+    
+    [self.skipItem setTitle:@"立即体验" forState:UIControlStateNormal];
+    
+    [self.skipItem setTitle:@"立即体验" forState:UIControlStateHighlighted];
+    
+    self.skipItem.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@AWMColor].CGColor;
+    
+    [self.skipItem setTitleColor: [UIColor s_transformToColorByHexColorStr:@AWMColor] forState:UIControlStateNormal];
+    
+    [self.skipItem setBackgroundImage:[UIImage s_transformFromHexColor:@"#ffffff"] forState:UIControlStateNormal];
+    
+    [self.skipItem setBackgroundImage:[UIImage s_transformFromHexColor:@"#ffffff"] forState:UIControlStateHighlighted];
+    
+    [self.skipItem setTitleColor: [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@AWMColor]] forState:UIControlStateHighlighted];
+    
+    self.pageControl.pageIndicatorTintColor = [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@AWMColor]];
+    
+    self.pageControl.numberOfPages = AWMWelcomeImgs.count;
+    
+    self.pageControl.currentPageIndicatorTintColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
+#elif AWMWelcomeFive
     
     [self.skipItem mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -303,16 +309,16 @@
     
     [self.skipItem setTitleColor: [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@"#ffffff"]] forState:UIControlStateHighlighted];
     
-    [self.skipItem setBackgroundImage:[UIImage s_transformFromHexColor:@BBQColor] forState:UIControlStateNormal];
+    [self.skipItem setBackgroundImage:[UIImage s_transformFromHexColor:@AWMColor] forState:UIControlStateNormal];
     
-    [self.skipItem setBackgroundImage:[UIImage s_transformFromHexColor:@BBQColor] forState:UIControlStateHighlighted];
+    [self.skipItem setBackgroundImage:[UIImage s_transformFromHexColor:@AWMColor] forState:UIControlStateHighlighted];
     
-    self.pageControl.pageIndicatorTintColor = [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@BBQColor]];
+    self.pageControl.pageIndicatorTintColor = [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@AWMColor]];
     
-    self.pageControl.numberOfPages = BBQWelcomeImgs.count;
+    self.pageControl.numberOfPages = AWMWelcomeImgs.count;
     
-    self.pageControl.currentPageIndicatorTintColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
-#elif BBQWelcomeSix
+    self.pageControl.currentPageIndicatorTintColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
+#elif AWMWelcomeSix
     
     [self.skipItem mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -329,21 +335,21 @@
     
     [self.skipItem setTitle:@"立即体验" forState:UIControlStateHighlighted];
     
-    self.skipItem.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@BBQColor].CGColor;
+    self.skipItem.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@AWMColor].CGColor;
     
     [self.skipItem setTitleColor: [UIColor s_transformToColorByHexColorStr:@"#ffffff"] forState:UIControlStateNormal];
     
-    [self.skipItem setBackgroundImage:[UIImage s_transformFromHexColor:@BBQColor] forState:UIControlStateNormal];
+    [self.skipItem setBackgroundImage:[UIImage s_transformFromHexColor:@AWMColor] forState:UIControlStateNormal];
     
-    [self.skipItem setBackgroundImage:[UIImage s_transformFromHexColor:@BBQColor] forState:UIControlStateHighlighted];
+    [self.skipItem setBackgroundImage:[UIImage s_transformFromHexColor:@AWMColor] forState:UIControlStateHighlighted];
     
     [self.skipItem setTitleColor: [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@"#ffffff"]] forState:UIControlStateHighlighted];
     
-    self.pageControl.pageIndicatorTintColor = [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@BBQColor]];
+    self.pageControl.pageIndicatorTintColor = [UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@AWMColor]];
     
-    self.pageControl.numberOfPages = BBQWelcomeImgs.count;
+    self.pageControl.numberOfPages = AWMWelcomeImgs.count;
     
-    self.pageControl.currentPageIndicatorTintColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
+    self.pageControl.currentPageIndicatorTintColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
 #endif //
     
 }
@@ -354,22 +360,22 @@
 }
 - (void)configViewModel {
     
-    BBQWelcomeBridge *bridge = [BBQWelcomeBridge new];
+    AWMWelcomeBridge *bridge = [AWMWelcomeBridge new];
     
     self.bridge = bridge;
     
-#if BBQWelcomeOne || BBQWelcomeThree || BBQWelcomeFive
+#if AWMWelcomeOne || AWMWelcomeThree || AWMWelcomeFive
     __weak typeof(self) weakSelf = self;
     
-    [bridge createWelcome:self welcomeImgs:BBQWelcomeImgs canPageHidden:true welcomeAction:^{
+    [bridge createWelcome:self welcomeImgs:AWMWelcomeImgs canPageHidden:true welcomeAction:^{
         
         weakSelf.block(weakSelf);
     }];
     
-#elif BBQWelcomeTwo || BBQWelcomeFour || BBQWelcomeSix
+#elif AWMWelcomeTwo || AWMWelcomeFour || AWMWelcomeSix
     __weak typeof(self) weakSelf = self;
     
-    [bridge createWelcome:self welcomeImgs:BBQWelcomeImgs canPageHidden:false welcomeAction:^{
+    [bridge createWelcome:self welcomeImgs:AWMWelcomeImgs canPageHidden:false welcomeAction:^{
         
         weakSelf.block(weakSelf);
     }];
@@ -379,7 +385,7 @@
 }
 - (UICollectionViewCell *)configCollectionViewCell:(id)data forIndexPath:(NSIndexPath *)ip {
     
-    BBQWelcomeCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:ip];
+    AWMWelcomeCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:ip];
     
     cell.icon = data;
     

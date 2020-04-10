@@ -1,6 +1,6 @@
 //
-//  BBQFocusViewModel.swift
-//  BBQBridge
+//  AWMBlackViewModel.swift
+//  AWMBridge
 //
 //  Created by three stone 王 on 2019/8/26.
 //  Copyright © 2019 three stone 王. All rights reserved.
@@ -12,11 +12,11 @@ import RxCocoa
 import RxSwift
 import WLReqKit
 import WLBaseResult
-import BBQRReq
-import BBQBean
-import BBQApi
+import AWMRReq
+import AWMBean
+import AWMApi
 
-public struct BBQFocusViewModel: WLBaseViewModel {
+public struct AWMBlackViewModel: WLBaseViewModel {
     
     public var input: WLInput
     
@@ -24,7 +24,7 @@ public struct BBQFocusViewModel: WLBaseViewModel {
     
     public struct WLInput {
         
-        let modelSelect: ControlEvent<BBQFocusBean>
+        let modelSelect: ControlEvent<AWMBlackBean>
         
         let itemSelect: ControlEvent<IndexPath>
         
@@ -33,9 +33,9 @@ public struct BBQFocusViewModel: WLBaseViewModel {
     
     public struct WLOutput {
         
-        let zip: Observable<(BBQFocusBean,IndexPath)>
+        let zip: Observable<(AWMBlackBean,IndexPath)>
         
-        let tableData: BehaviorRelay<[BBQFocusBean]> = BehaviorRelay<[BBQFocusBean]>(value: [])
+        let tableData: BehaviorRelay<[AWMBlackBean]> = BehaviorRelay<[AWMBlackBean]>(value: [])
         
         let endHeaderRefreshing: Driver<WLBaseResult>
     }
@@ -50,8 +50,8 @@ public struct BBQFocusViewModel: WLBaseViewModel {
             .startWith(())
             .flatMapLatest({_ in
 
-                return bbqArrayResp(BBQApi.fetchBlackList)
-                    .mapArray(type: BBQFocusBean.self)
+                return awmArrayResp(AWMApi.fetchBlackList)
+                    .mapArray(type: AWMBlackBean.self)
                     .map({ return $0.count > 0 ? WLBaseResult.fetchList($0) : WLBaseResult.empty })
                     .asDriver(onErrorRecover: { return Driver.just(WLBaseResult.failed(($0 as! WLBaseError).description.0)) })
             })
@@ -66,7 +66,7 @@ public struct BBQFocusViewModel: WLBaseViewModel {
                 switch result {
                 case let .fetchList(items):
                     
-                    output.tableData.accept(items as! [BBQFocusBean])
+                    output.tableData.accept(items as! [AWMBlackBean])
                     
                 default: break
                 }
@@ -76,11 +76,11 @@ public struct BBQFocusViewModel: WLBaseViewModel {
         self.output = output
     }
 }
-extension BBQFocusViewModel {
+extension AWMBlackViewModel {
     
-    static func removeFocus(_ encode: String) -> Driver<WLBaseResult> {
+    static func removeBlack(_ encode: String) -> Driver<WLBaseResult> {
         
-        return bbqVoidResp(BBQApi.removeBlack(encode))
+        return awmVoidResp(AWMApi.removeBlack(encode))
             .flatMapLatest({ return Driver.just(WLBaseResult.ok("移除成功")) })
             .asDriver(onErrorRecover: { return Driver.just(WLBaseResult.failed(($0 as! WLBaseError).description.0)) })
     }

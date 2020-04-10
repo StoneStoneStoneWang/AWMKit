@@ -1,36 +1,36 @@
 //
-//  BBQBlackBridge.swift
-//  BBQBridge
+//  AWMBlackBridge.swift
+//  AWMBridge
 //
 //  Created by three stone 王 on 2019/8/26.
 //  Copyright © 2019 three stone 王. All rights reserved.
 //
 
 import Foundation
-import BBQTable
+import AWMTable
 import RxDataSources
-import BBQCocoa
-import BBQBean
-import BBQHud
+import AWMCocoa
+import AWMBean
+import AWMHud
 
-public typealias BBQBlackAction = (_ blackBean: BBQBlackBean ,_ ip: IndexPath) -> ()
+public typealias AWMBlackAction = (_ blackBean: AWMBlackBean ,_ ip: IndexPath) -> ()
 
-@objc (BBQBlackBridge)
-public final class BBQBlackBridge: BBQBaseBridge {
+@objc (AWMBlackBridge)
+public final class AWMBlackBridge: AWMBaseBridge {
     
-    typealias Section = BBQAnimationSetionModel<BBQBlackBean>
+    typealias Section = AWMAnimationSetionModel<AWMBlackBean>
     
     var dataSource: RxTableViewSectionedAnimatedDataSource<Section>!
     
-    public var viewModel: BBQBlackViewModel!
+    public var viewModel: AWMBlackViewModel!
     
-    weak var vc: BBQTableLoadingViewController!
+    weak var vc: AWMTableLoadingViewController!
     
-    var blackAction: BBQBlackAction!
+    var blackAction: AWMBlackAction!
 }
-extension BBQBlackBridge {
+extension AWMBlackBridge {
     
-    @objc public func createBlack(_ vc: BBQTableLoadingViewController ,_ blackAction:@escaping BBQBlackAction) {
+    @objc public func createBlack(_ vc: AWMTableLoadingViewController ,_ blackAction:@escaping AWMBlackAction) {
         
         self.blackAction = blackAction
         
@@ -38,11 +38,11 @@ extension BBQBlackBridge {
         
         vc.tableView.mj_footer?.isHidden = true
         
-        let input = BBQBlackViewModel.WLInput(modelSelect: vc.tableView.rx.modelSelected(BBQBlackBean.self),
+        let input = AWMBlackViewModel.WLInput(modelSelect: vc.tableView.rx.modelSelected(AWMBlackBean.self),
                                               itemSelect: vc.tableView.rx.itemSelected,
-                                              headerRefresh: vc.tableView.mj_header!.rx.refreshing.asDriver())
+                                              headerRefresh: vc.tableView.mj_header!.rx.awmRefreshing.asDriver())
         
-        viewModel = BBQBlackViewModel(input, disposed: disposed)
+        viewModel = AWMBlackViewModel(input, disposed: disposed)
         
         let dataSource = RxTableViewSectionedAnimatedDataSource<Section>(
             animationConfiguration: AnimationConfiguration(insertAnimation: .top, reloadAnimation: .fade, deleteAnimation: .left),
@@ -64,7 +64,7 @@ extension BBQBlackBridge {
         
         endHeaderRefreshing
             .map({ _ in return true })
-            .drive(vc.tableView.mj_header!.rx.endRefreshing)
+            .drive(vc.tableView.mj_header!.rx.awmEndRefreshing)
             .disposed(by: disposed)
         
         endHeaderRefreshing
@@ -73,7 +73,7 @@ extension BBQBlackBridge {
                 case .fetchList:
                     vc.loadingStatus = .succ
                 case let .failed(msg):
-                    BBQHud.showInfo(msg)
+                    AWMHud.showInfo(msg)
                     vc.loadingStatus = .fail
                     
                 case .empty:
@@ -99,7 +99,7 @@ extension BBQBlackBridge {
             .disposed(by: disposed)
     }
 }
-extension BBQBlackBridge: UITableViewDelegate {
+extension AWMBlackBridge: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
@@ -125,11 +125,11 @@ extension BBQBlackBridge: UITableViewDelegate {
         return [cancel,delete]
     }
     
-    @objc public func removeBlack(_ blackBean: BBQBlackBean ,_ ip: IndexPath ,_ blackAction: @escaping () -> ()) {
+    @objc public func removeBlack(_ blackBean: AWMBlackBean ,_ ip: IndexPath ,_ blackAction: @escaping () -> ()) {
         
-        BBQHud.show(withStatus: "移除\(blackBean.users.nickname)中...")
+        AWMHud.show(withStatus: "移除\(blackBean.users.nickname)中...")
         
-        BBQBlackViewModel
+        AWMBlackViewModel
             .removeBlack(blackBean.identity)
             .drive(onNext: { [weak self] (result) in
                 
@@ -138,9 +138,9 @@ extension BBQBlackBridge: UITableViewDelegate {
                 switch result {
                 case .ok:
                     
-                    BBQHud.pop()
+                    AWMHud.pop()
                     
-                    BBQHud.showInfo("移除\(blackBean.users.nickname)成功")
+                    AWMHud.showInfo("移除\(blackBean.users.nickname)成功")
                     
                     var value = self.viewModel.output.tableData.value
                     
@@ -157,9 +157,9 @@ extension BBQBlackBridge: UITableViewDelegate {
                     
                 case .failed:
                     
-                    BBQHud.pop()
+                    AWMHud.pop()
                     
-                    BBQHud.showInfo("移除\(blackBean.users.nickname)失败")
+                    AWMHud.showInfo("移除\(blackBean.users.nickname)失败")
                     
                 default: break
                     

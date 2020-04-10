@@ -1,36 +1,36 @@
 //
-//  BBQFocusBridge.swift
-//  BBQBridge
+//  AWMFocusBridge.swift
+//  AWMBridge
 //
 //  Created by three stone 王 on 2019/8/26.
 //  Copyright © 2019 three stone 王. All rights reserved.
 //
 
 import Foundation
-import BBQTable
+import AWMTable
 import RxDataSources
-import BBQCocoa
-import BBQBean
-import BBQHud
+import AWMCocoa
+import AWMBean
+import AWMHud
 
-public typealias BBQFocusAction = (_ blackBean: BBQFocusBean ,_ ip: IndexPath) -> ()
+public typealias AWMFocusAction = (_ blackBean: AWMFocusBean ,_ ip: IndexPath) -> ()
 
-@objc (BBQFocusBridge)
-public final class BBQFocusBridge: BBQBaseBridge {
+@objc (AWMFocusBridge)
+public final class AWMFocusBridge: AWMBaseBridge {
     
-    typealias Section = BBQAnimationSetionModel<BBQFocusBean>
+    typealias Section = AWMAnimationSetionModel<AWMFocusBean>
     
     var dataSource: RxTableViewSectionedAnimatedDataSource<Section>!
     
-    public var viewModel: BBQFocusViewModel!
+    public var viewModel: AWMFocusViewModel!
     
-    weak var vc: BBQTableLoadingViewController!
+    weak var vc: AWMTableLoadingViewController!
     
-    var focusAction: BBQFocusAction!
+    var focusAction: AWMFocusAction!
 }
-extension BBQFocusBridge {
+extension AWMFocusBridge {
     
-    @objc public func createFocus(_ vc: BBQTableLoadingViewController ,_ focusAction:@escaping BBQFocusAction) {
+    @objc public func createFocus(_ vc: AWMTableLoadingViewController ,_ focusAction:@escaping AWMFocusAction) {
         
         self.focusAction = focusAction
         
@@ -38,11 +38,11 @@ extension BBQFocusBridge {
         
         vc.tableView.mj_footer?.isHidden = true
         
-        let input = BBQFocusViewModel.WLInput(modelSelect: vc.tableView.rx.modelSelected(BBQFocusBean.self),
+        let input = AWMFocusViewModel.WLInput(modelSelect: vc.tableView.rx.modelSelected(AWMFocusBean.self),
                                               itemSelect: vc.tableView.rx.itemSelected,
-                                              headerRefresh: vc.tableView.mj_header!.rx.refreshing.asDriver())
+                                              headerRefresh: vc.tableView.mj_header!.rx.awmRefreshing.asDriver())
         
-        viewModel = BBQFocusViewModel(input, disposed: disposed)
+        viewModel = AWMFocusViewModel(input, disposed: disposed)
         
         let dataSource = RxTableViewSectionedAnimatedDataSource<Section>(
             animationConfiguration: AnimationConfiguration(insertAnimation: .top, reloadAnimation: .fade, deleteAnimation: .left),
@@ -64,7 +64,7 @@ extension BBQFocusBridge {
         
         endHeaderRefreshing
             .map({ _ in return true })
-            .drive(vc.tableView.mj_header!.rx.endRefreshing)
+            .drive(vc.tableView.mj_header!.rx.awmEndRefreshing)
             .disposed(by: disposed)
         
         endHeaderRefreshing
@@ -73,7 +73,7 @@ extension BBQFocusBridge {
                 case .fetchList:
                     vc.loadingStatus = .succ
                 case let .failed(msg):
-                    BBQHud.showInfo(msg)
+                    AWMHud.showInfo(msg)
                     vc.loadingStatus = .fail
                     
                 case .empty:
@@ -99,7 +99,7 @@ extension BBQFocusBridge {
             .disposed(by: disposed)
     }
 }
-extension BBQFocusBridge: UITableViewDelegate {
+extension AWMFocusBridge: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
@@ -125,11 +125,11 @@ extension BBQFocusBridge: UITableViewDelegate {
         return [cancel,delete]
     }
     
-    @objc public func removeFocus(_ blackBean: BBQFocusBean ,_ ip: IndexPath ,_ focusAction: @escaping () -> ()) {
+    @objc public func removeFocus(_ blackBean: AWMFocusBean ,_ ip: IndexPath ,_ focusAction: @escaping () -> ()) {
         
-        BBQHud.show(withStatus: "移除\(blackBean.users.nickname)中...")
+        AWMHud.show(withStatus: "移除\(blackBean.users.nickname)中...")
         
-        BBQFocusViewModel
+        AWMFocusViewModel
             .removeFocus(blackBean.identity)
             .drive(onNext: { [weak self] (result) in
                 
@@ -138,9 +138,9 @@ extension BBQFocusBridge: UITableViewDelegate {
                 switch result {
                 case .ok:
                     
-                    BBQHud.pop()
+                    AWMHud.pop()
                     
-                    BBQHud.showInfo("移除\(blackBean.users.nickname)成功")
+                    AWMHud.showInfo("移除\(blackBean.users.nickname)成功")
                     
                     var value = self.viewModel.output.tableData.value
                     
@@ -157,9 +157,9 @@ extension BBQFocusBridge: UITableViewDelegate {
                     
                 case .failed:
                     
-                    BBQHud.pop()
+                    AWMHud.pop()
                     
-                    BBQHud.showInfo("移除\(blackBean.users.nickname)失败")
+                    AWMHud.showInfo("移除\(blackBean.users.nickname)失败")
                     
                 default: break
                     

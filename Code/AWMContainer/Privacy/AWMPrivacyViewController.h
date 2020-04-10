@@ -1,18 +1,18 @@
 //
-//  BBQPrivacyViewController.h
-//  BBQContainer
+//  AWMPrivacyViewController.h
+//  AWMContainer
 //
 //  Created by 王磊 on 2020/3/29.
 //  Copyright © 2020 王磊. All rights reserved.
 //
 
-#import "BBQConfig.h"
-@import BBQBridge;
-@import BBQTextInner;
+#import "AWMConfig.h"
+@import AWMBridge;
+@import AWMTextInner;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BBQPrivacyViewController : BBQTextInnerViewController
+@interface AWMPrivacyViewController : AWMTextInnerViewController
 
 + (instancetype)createPrivacy;
 

@@ -37,58 +37,60 @@ extension AWMFeedBackBridge {
                 completeItem = complete
             }
             
-            let inputs = AWMFeedBackViewModel.WLInput(feedBack: feedBack.rx.text.orEmpty.asDriver(),
-                                                      phone: phone.rx.text.orEmpty.asDriver(),
-                                                      completTaps: completeItem.rx.tap.asSignal())
-            
-            viewModel = AWMFeedBackViewModel(inputs)
-            
-            viewModel
-                .output
-                .completeEnabled
-                .drive(completeItem.rx.isEnabled)
-                .disposed(by: disposed)
-            
-            viewModel
-                .output
-                .completing
-                .drive(onNext: { (_) in
-                    
-                    AWMHud.show(withStatus: "意见建议提交中...")
-                    
-                    vc.view.endEditing(true)
-                })
-                .disposed(by: disposed)
-            
-            viewModel
-                .output
-                .completed
-                .drive(onNext: { (result) in
-                    
-                    AWMHud.pop()
-                    
-                    switch result {
-                    case let .ok(msg):
+            if (completeItem != nil) {
+                
+                let inputs = AWMFeedBackViewModel.WLInput(feedBack: feedBack.rx.text.orEmpty.asDriver(),
+                                                          phone: phone.rx.text.orEmpty.asDriver(),
+                                                          completTaps: completeItem.rx.tap.asSignal())
+                
+                viewModel = AWMFeedBackViewModel(inputs)
+                
+                viewModel
+                    .output
+                    .completeEnabled
+                    .drive(completeItem.rx.isEnabled)
+                    .disposed(by: disposed)
+                
+                viewModel
+                    .output
+                    .completing
+                    .drive(onNext: { (_) in
                         
-                        AWMHud.showInfo(msg)
+                        AWMHud.show(withStatus: "意见建议提交中...")
                         
-                        feedBackAction()
+                        vc.view.endEditing(true)
+                    })
+                    .disposed(by: disposed)
+                
+                viewModel
+                    .output
+                    .completed
+                    .drive(onNext: { (result) in
                         
-                    case let .failed(msg):
+                        AWMHud.pop()
                         
-                        AWMHud.showInfo(msg)
-                    default: break
-                        
-                    }
-                })
-                .disposed(by: disposed)
-            
-            viewModel
-                .output
-                .placeholderHidden
-                .drive(placeholder.rx.isHidden)
-                .disposed(by: disposed)
+                        switch result {
+                        case let .ok(msg):
+                            
+                            AWMHud.showInfo(msg)
+                            
+                            feedBackAction()
+                            
+                        case let .failed(msg):
+                            
+                            AWMHud.showInfo(msg)
+                        default: break
+                            
+                        }
+                    })
+                    .disposed(by: disposed)
+                
+                viewModel
+                    .output
+                    .placeholderHidden
+                    .drive(placeholder.rx.isHidden)
+                    .disposed(by: disposed)
+            }
         }
     }
-    
 }
