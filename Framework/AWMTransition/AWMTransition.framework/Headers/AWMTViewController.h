@@ -10,9 +10,9 @@
 @import AWMBase;
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AWMTViewController : AWMBaseViewController <UIGestureRecognizerDelegate>
+@interface AWMTViewController : AWMBaseViewController 
 
-@property(nonatomic,strong,readonly) UIPercentDrivenInteractiveTransition *interactivePopTransition;
+@property(nonatomic,strong,readonly) UIPercentDrivenInteractiveTransition *awmInteractivePopTransition;
 
 @property (nonatomic ,assign) BOOL canPanResponse;
 
