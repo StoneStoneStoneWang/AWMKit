@@ -12,245 +12,245 @@
 
 #else
 
-#define AWMLoginedBlock AWMLoginedBlock111
+#define AWMLoginedBlock KYeCZRB8IT
 
-#define AWMWelcomeCollectionViewCell uOvruKuUico
+#define AWMWelcomeCollectionViewCell AyJmZE9VTE
 
-#define AWMWelcomeViewController fQ3dtNqgqxpn
+#define AWMWelcomeViewController b7PvI4dSX8
 
-#define createWelcomeWithSkipBlock createWelcomeWithSkipBlock111
+#define createWelcomeWithSkipBlock VjuOT32PftN1
 
-#define AppDelegate jrV9aCM7ao
+#define AppDelegate MiueHjSMfns7
 
-#define AWMMethod j6Y0O5kvdW
+#define AWMMethod sNum6axvRw0
 
-#define AWMShared j6Y0O5kvdW111
+#define AWMShared FdM_t814gP7
 
-#define awmWelcomeSkip ozr0QZwmHYq
+#define awmWelcomeSkip FwnRbXTOqtk
 
-#define awmUnLogin Q6svrrobfsVX
+#define awmUnLogin VKrXSPpoIe4K
 
-#define awmPresentLogin GUlkFIiejpxi
+#define awmPresentLogin G4IDRP6QXaS
 
-#define awmRootViewController xrqsg44aCW
+#define awmRootViewController o36pIyj_AhDa
 
-#define awmCheckLoginAndPresentLogin iAzukq65IThV
+#define awmCheckLoginAndPresentLogin KBADaary_o
 
-#define awmLoginSucc awmLoginSucc111
+#define awmLoginSucc LOL8ZmpKHfC1
 
-#define awmPushSwiftLogin awmPushSwiftLogin111
+#define awmPushSwiftLogin p7fs4l6B5R
 
-#define awmSwiftLoginSucc awmSwiftLoginSucc111
+#define awmSwiftLoginSucc JMX8YXcIf7j
 
-#define awmPushProtocol tIaDC1jkJ7
+#define awmPushProtocol EdJeu2YELDt
 
-#define awmPushFindPassword Slk8CVZEcXMH
+#define awmPushFindPassword rKkhzCVstt
 
-#define awmPushModifyPassword RQETC4jjBNp
+#define awmPushModifyPassword Rz5s2OEMrTOe
 
-#define awmPushSetting g13QhXBkTvW
+#define awmPushSetting K70hovxnD_
 
-#define awmPushUserInfo n_sF2BGBSP3
+#define awmPushUserInfo Ob3Mkjt1xR
 
-#define awmPushName mnr59IPGqO
+#define awmPushName snF0qK0iiHtA
 
-#define awmPushSignature KcF7b981LY2r
+#define awmPushSignature I9RtjOg04c7q
 
-#define awmLogout _AHgrn8Hzv
+#define awmLogout lfOJdrkIKY
 
-#define awmDismiss zrAzQu1ZW3zE
+#define awmDismiss YG8wes7erNsl
 
-#define awmPop FJMlE2D4ea
+#define awmPop tWkzMpFF1N
 
-#define awmTokenInvalid j7gUgKJdszel
+#define awmTokenInvalid ECV9VmnEpsme
 
-#define awmCheckLogin rf6W03glIsVh
+#define awmCheckLogin JsZbaSF3V8ep
 
-#define awmCreateProfile UlDQkrJGm3
+#define awmCreateProfile BlcV5a2MQP2g
 
-#define awmPushPrivacy aozYFdvsg_T6
+#define awmPushPrivacy oZwikL9SVeQ
 
-#define awmPushAbout eKWJZyXZQ8NY
+#define awmPushAbout p9McMcP1MwOH
 
-#define awmPushFeedBack P8XwqSSOZsE_
+#define awmPushFeedBack Pr0pnjXAHvx
 
-#define awmCreateCarousel fFtlVAzCzAs
+#define awmCreateCarousel h3UI65F9hI04
 
-#define awmPushReport NjCyk_iyObI
+#define awmPushReport kx0VWWoPzaR
 
-#define AWMLoginBlock _BdpD_5sMx
+#define AWMLoginBlock acxifgUvje5
 
-#define createLoginWithBlock nStoaGlBhx
+#define createLoginWithBlock _Th1Rb8dnMx
 
-#define AWMLoginViewController Q1MjLkI9CZ
+#define AWMLoginViewController rRw3TWLB2Ay7
 
-#define AWMRegBlock IC3L09SGjRz
+#define AWMRegBlock dUU8lFxfbM1
 
-#define AWMRegViewController piNyelKh6m9Y
+#define AWMRegViewController hjBIz5levKF
 
-#define createRegWithBlock N7VDaDWK_qsz
+#define createRegWithBlock sfV7dbLAJC
 
-#define AWMProtocolViewController ztcWK9TPEok
+#define AWMProtocolViewController jrQhcNtq7I
 
-#define AWMFindPassworBlock iMwSc3Vu0hK
+#define AWMFindPassworBlock wmO5W0D19ku
 
-#define AWMFindPasswordViewController fH5_JQ5jIH
+#define AWMFindPasswordViewController Y9odvEjdU0A_
 
-#define createPasswordWithBlock RFIT8TVBAN
+#define createPasswordWithBlock s6vpN6B2zGgY
 
-#define AWMModifyPasswordBlock qgjK7iQkno
+#define AWMModifyPasswordBlock naU8857eYa
 
-#define AWMModifyPasswordViewController ofXT1Pe_zpN
+#define AWMModifyPasswordViewController atHSlMaKJDn
 
-#define AWMSettingTableViewCell SETG4dR3U_pk
+#define AWMSettingTableViewCell RL7OgCQEI5Z
 
-#define AWMSettingBlock pk7pnDPJ39i
+#define AWMSettingBlock znTTjtQ2SN
 
-#define AWMSettingViewController IncIYaZdn7A7
+#define AWMSettingViewController JGwMZ41wjcK
 
-#define createSettingWithBlock xjmN4ioDsdZ
+#define createSettingWithBlock CrWRmCpsrMF
 
-#define AWMUserInfoActionType DlidWqgDpkfO
+#define AWMUserInfoActionType jdulDjOC904O
 
-#define AWMUserInfoBlock K6h683PcX_0
+#define AWMUserInfoBlock yMfYxxUgJ01
 
-#define AWMUserInfoViewController uOkJ5hUo_9
+#define AWMUserInfoViewController FPC0XSch2k
 
-#define AWMUserInfoTableViewCell JMN5ggVRfX7
+#define AWMUserInfoTableViewCell UBEKmIX9L_
 
-#define createUserInfoWithBlock gAto451MvP
+#define createUserInfoWithBlock krafphwoOy2
 
-#define AWMFeedBackViewController xXS9Y9F6P6Pc
+#define AWMFeedBackViewController Rsd8lJmVMG
 
-#define AWMAboutViewController byOWOSxPUW6
+#define AWMAboutViewController Ul03ilPGe2KL
 
-#define AWMAboutTableHeaderView Zjp6yBx7Kv3
+#define AWMAboutTableHeaderView Ls5D2C86JF
 
-#define AWMAboutTableViewCell YXTYcodkRT
+#define AWMAboutTableViewCell HgcEooeT2Xjl
 
-#define AWMReportViewController XdCQhsOJmNu7
+#define AWMReportViewController ttP1VSBCzK
 
-#define AWMReportTableViewCell tsLGoLUbK5E0
+#define AWMReportTableViewCell XaX63zT3r0Z
 
-#define AWMReportBlock dw8ORJKGZ0ut
+#define AWMReportBlock N3wztUtx9Kg
 
-#define AWMCarouselViewController vGRUVj2RYPtz
+#define AWMCarouselViewController vtyUYSmnV3
 
-#define AWMCarouselFormTwoLayout MGUh2EF3c_
+#define AWMCarouselFormTwoLayout S1tAI65w55
 
-#define AWMCarouselFormOneLayout d4LkUL80ODVr
+#define AWMCarouselFormOneLayout uQZWUfT4Se
 
-#define AWMCarouselCollectionViewCell Tr8QaMUxZ83c
+#define AWMCarouselCollectionViewCell eNbBLE_WsKU
 
-#define AWMUserCenterCollectionViewCell O4O1YydiU6L
+#define AWMUserCenterCollectionViewCell cM6NSUQpNY2
 
-#define AWMUserCentereBlock DNdmopXnUd
+#define AWMUserCentereBlock zk_Rjw7eC5YS
 
-#define AWMUserCenterViewController QStg1_q2c1B7
+#define AWMUserCenterViewController jouVDobenegB
 
-#define createUserCenterWithBlock Wblg38vK9zAh
+#define createUserCenterWithBlock wPRoAdgCd5Wa
 
-#define awmPresentNickName awmPresentNickName111
+#define awmPresentNickName JPAp3sc9_Tkx
 
-#define awmPresentSignature awmPresentSignature111
+#define awmPresentSignature iAsQcJ66CQSS
 
-#define AWMPrivacyViewController AWMPrivacyViewController111
+#define AWMPrivacyViewController mKHZELRf_Hw
 
-#define createPrivacy createPrivacy111
+#define createPrivacy bi0PnK0bvxp
 
-#define AWMBannerViewController AWMBannerViewController111
+#define AWMBannerViewController C549aKRiIQ
 
-#define createBannerWithBanners createBannerWithBanners111
+#define createBannerWithBanners tUqqqCoXUDqt
 
-#define createFeedBackWithBlock createFeedBackWithBlock11
+#define createFeedBackWithBlock ZSR0OVyFGWT6
 
-#define AWMNameViewController AWMNameViewController111
+#define AWMNameViewController UnBSQyRKV6
 
-#define createNickNameWithBlock createNickNameWithBlock111
+#define createNickNameWithBlock zzu4Hy3034Uc
 
-#define AWMSignatureViewController AWMSignatureViewController111
+#define AWMSignatureViewController EVp9yzP60cpV
 
-#define createSignatureWithBlock createSignatureWithBlock111
+#define createSignatureWithBlock slr2EXUPk5E
 
-#define AWMAreaHeaderViewController AWMAreaHeaderViewController111
+#define AWMAreaHeaderViewController zVKolHviUEv
 
-#define AWMAreaHeaderBlock AWMAreaHeaderBlock111
+#define AWMAreaHeaderBlock ERwJp1aDAjJp
 
-#define createAreaHeaderWithPid createAreaHeaderWithPid111
+#define createAreaHeaderWithPid iAKBCd5vxioT
 
 #if AWMCONFIGURETYPEFLOWER
 
-#define awmPushOrder Iwt5DChopU0h
+#define awmPushOrder quMbVDHcqr9
 
-#define awmPushAddress P8oljlwPI4Ur
+#define awmPushAddress YrJCSppXmZ
 
-#define awmPushAddressSelected vceyxX36gLW9
+#define awmPushAddressSelected pW3f3OqFpJNH
 
-#define awmPushAddressEdit cVwgp1QZcd9D
+#define awmPushAddressEdit UGLaq3_jITv
 
-#define awmPushAddressEditAdd eYZaw4SU0WLp
+#define awmPushAddressEditAdd VDTkQGO1rF1W
 
-#define AWMAddressEditTableViewCell AWMAddressEditTableViewCell111
+#define AWMAddressEditTableViewCell FEn37RKPUAO
 
-#define awmPushArea xY4aoQmfFu
+#define awmPushArea BHkjvZw7wOwV
 
-#define AWMAddressViewController xGVKhgrlVi1
+#define AWMAddressViewController eK7QSXzi5f
 
-#define createAddressWithBlock bodtE4c9n6Tx
+#define createAddressWithBlock M08P6tkyz5ry
 
-#define AWMAddressBlock mCGoqUNNSUEp
+#define AWMAddressBlock NX8kzzb5u7q
 
-#define AWMAddressSelectedViewController b5RBykUDCQ
+#define AWMAddressSelectedViewController eg5Krrmemb
 
-#define AWMAddressSelectedBlock htLNRAGYHxn
+#define AWMAddressSelectedBlock jBIVCMEy_Ylu
 
-#define createAddressSelectedWithBlock g4fTWuVNwyK
+#define createAddressSelectedWithBlock PibPLW8aZO
 
-#define AWMAddressTableViewCell LrcUQh5MhdmR
+#define AWMAddressTableViewCell YrW4icHRBcc_
 
-#define AWMAddressSelectedTableViewCell FZwqPnhs5E
+#define AWMAddressSelectedTableViewCell iQpYfHZhlH8
 
-#define AWMAddressEditBlock lxjyg4TrqF
+#define AWMAddressEditBlock FOEVS8PllhEe
 
-#define AWMAddressEditActionType JzAvDH72L5e
+#define AWMAddressEditActionType OH6jb0w8SR
 
-#define AWMAddressEditViewController tixJXJl7To
+#define AWMAddressEditViewController BBKvQkUPDB
 
-#define creatAddressEditWithAddressBean MItX0XFLb8oK
+#define creatAddressEditWithAddressBean ca1jxa5BlOo
 
-#define updateAddressEditArea CFfbBJrFpXKg
+#define updateAddressEditArea VUTmqKe3VlW
 
-#define AWMOrderViewController OhpooHxh1u
+#define AWMOrderViewController z02sD7lEVIHN
 
-#define AWMJoinUsViewController KmjXqClnht
+#define AWMJoinUsViewController OPKiXBFN6U
 
-#define AWMNewsViewController fJ4xed1K3pO4
+#define AWMNewsViewController PZzKAvZObHep
 
-#define AWMEpidemicViewController VGjPIcnlLY
+#define AWMEpidemicViewController TTWLagIpHs
 
-#define AWMEpidemicContentViewController ItoSdcSgYt2U
+#define AWMEpidemicContentViewController nSxiIdKpHWvZ
 
-#define AWMOfficialViewController ZGLR8fUYKw
+#define AWMOfficialViewController Cp_TZLlTals
 
-#define AWMOfficialContentViewController mySbtLg3qnM0
+#define AWMOfficialContentViewController Uxicda4fNI
 
-#define AWMTrashViewController vVq7xN7CBO
+#define AWMTrashViewController gi84x95_zdo2
 
-#define AWMKindViewController UE1E3Xq2NLW
+#define AWMKindViewController KmRSsOqREcu
 
-#define AWMSubCatagoryViewController N1rcIMJ7Yj
+#define AWMSubCatagoryViewController P94oD8xbwMK
 
-#define AWMJoinersViewController WOr_UwAqqQi
+#define AWMJoinersViewController ZpNw08UQnCzq
 
-#define AWMHomeItemViewController f0Z3c9NMuaU
+#define AWMHomeItemViewController qr7HLCENA_KY
 
-#define AWMHomeItemHeaderView wtQkzh35VUJK
+#define AWMHomeItemHeaderView Xg4W46wuMb
 
-#define AWMHomeItemCell ZDyQQzjY9r
+#define AWMHomeItemCell uQc2xXIxsFQ
 
-#define AWMTradeViewController T0uNnK3JtWq
+#define AWMTradeViewController YXLzyK8GJEQy
 
-#define AWMHomeViewController J7EH3Zdhi8l
+#define AWMHomeViewController RSfvr1WUb7n
 
 
 #endif
