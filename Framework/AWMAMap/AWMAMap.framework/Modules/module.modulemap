@@ -1,0 +1,6 @@
+framework module AWMAMap {
+  umbrella header "AWMAMap.h"
+
+  export *
+  module * { export * }
+}
