@@ -666,7 +666,7 @@ Pod::Spec.new do |spec|
     address.subspec 'Bridge' do |bridge|
       bridge.source_files = "Code/AWMBridge/Address/Bridge/*.{swift}"
       bridge.dependency 'AWMBridge/Address/VM'
-      bridge.dependency 'ZTable'
+      bridge.dependency 'BBQTable'
       bridge.dependency 'AWMBridge/Base'
       bridge.dependency 'AWMHud'
       bridge.dependency 'AWMCocoa/ASM'
