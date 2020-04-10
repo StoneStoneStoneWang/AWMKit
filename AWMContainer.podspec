@@ -244,7 +244,7 @@ Pod::Spec.new do |spec|
   end
   
   # 地址 area
-  spec.subspec 'AMapViewOntroller' do |amap|
+  spec.subspec 'AMapViewController' do |amap|
     amap.vendored_frameworks = 'Framework/AWMAMapViewController/AWMAMapViewController.framework'
     amap.dependency 'AWMTransition'
     amap.dependency 'AWMAMap'
