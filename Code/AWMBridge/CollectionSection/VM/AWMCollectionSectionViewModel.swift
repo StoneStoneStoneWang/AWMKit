@@ -52,6 +52,10 @@ public final class AWMCollectionItemBean: NSObject {
     
     @objc public static func createItem(_ iTag: Int,title: String ,icon: String) -> AWMCollectionItemBean {
         
+        return AWMCollectionItemBean .createItem(iTag, title: title, icon: icon, isSelected: false, placeholder: "")
+    }
+    @objc public static func createItem(_ iTag: Int,title: String ,icon: String,isSelected: Bool ,placeholder: String) -> AWMCollectionItemBean {
+        
         let item = AWMCollectionItemBean()
         
         item.iTag = iTag
@@ -59,6 +63,10 @@ public final class AWMCollectionItemBean: NSObject {
         item.title = title
         
         item.icon = icon
+        
+        item.placeholder = placeholder
+        
+        item.isSelected = isSelected
         
         return item
     }
