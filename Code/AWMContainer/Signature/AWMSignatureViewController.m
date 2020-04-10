@@ -1,51 +1,51 @@
 //
-//  BBQSignatureViewController.m
-//  BBQContainer
+//  AWMSignatureViewController.m
+//  AWMContainer
 //
 //  Created by 王磊 on 2020/3/29.
 //  Copyright © 2020 王磊. All rights reserved.
 //
 
-#import "BBQSignatureViewController.h"
+#import "AWMSignatureViewController.h"
 @import Masonry;
 @import SToolsKit;
 
-@interface BBQSignatureViewController ()
+@interface AWMSignatureViewController ()
 
 @property (nonatomic ,strong) UITextView *signaturetv;
 
 @property (nonatomic ,strong) UIButton *completeItem;
 
-@property (nonatomic ,strong) BBQSignatureBridge *bridge;
+@property (nonatomic ,strong) AWMSignatureBridge *bridge;
 
 @property (nonatomic ,strong) UIButton *backItem;
 
-@property (nonatomic ,strong) BBQSignatureBlock block;
+@property (nonatomic ,strong) AWMSignatureBlock block;
 
 @property (nonatomic ,strong) UITextView *placeholder;
 
 @property (nonatomic ,strong) UIView *whiteView;
 
-#if BBQNameOne
+#if AWMNameOne
 
 
-#elif BBQNameTwo
+#elif AWMNameTwo
 
-//    self.view.backgroundColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
+//    self.view.backgroundColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
 
-#elif BBQNameThree
+#elif AWMNameThree
 @property (nonatomic ,strong) UIView *topLine;
 #endif
 @end
 
-@implementation BBQSignatureViewController
+@implementation AWMSignatureViewController
 
-+ (instancetype)createSignature:(BBQSignatureBlock)block {
++ (instancetype)createSignatureWithBlock:(AWMSignatureBlock)block {
     
     return [[self alloc] initWithBlock:block];
     
 }
-- (instancetype)initWithBlock:(BBQSignatureBlock)block {
+- (instancetype)initWithBlock:(AWMSignatureBlock)block {
     
     if (self = [super init]) {
         
@@ -101,13 +101,13 @@
     }
     return _placeholder;
 }
-#if BBQNameOne
+#if AWMNameOne
 
 
-#elif BBQNameTwo
+#elif AWMNameTwo
 
 
-#elif BBQNameThree
+#elif AWMNameThree
 
 - (UIView *)topLine {
     
@@ -132,23 +132,6 @@
         [_completeItem setTitle:@"完成" forState:UIControlStateSelected];
         
         _completeItem.titleLabel.font = [UIFont systemFontOfSize:15];
-        
-        if ([@BBQColor isEqualToString:@"#ffffff"]) {
-            
-            [_completeItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@"#666666"] forState:UIControlStateNormal];
-            
-            [_completeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:@"#66666680"] forState:UIControlStateHighlighted];
-            
-            [_completeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:@"#66666650"] forState:UIControlStateDisabled];
-            
-        } else {
-            
-            [_completeItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@"#ffffff"] forState:UIControlStateNormal];
-            
-            [_completeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:@"#ffffff80"] forState:UIControlStateHighlighted];
-            
-            [_completeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:@"#ffffff50"] forState:UIControlStateDisabled];
-        }
     }
     return _completeItem;
 }
@@ -170,13 +153,18 @@
     
     [self.view addSubview:self.signaturetv];
     
-#if BBQNameOne
+#if AWMNameOne
+    
+    [self.completeItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@AWMColor] forState:UIControlStateNormal];
+    
+    [self.completeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@80",@AWMColor]] forState:UIControlStateHighlighted];
+    
+    [self.completeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@AWMColor]] forState:UIControlStateDisabled];
+    
+#elif AWMNameTwo
     
     
-#elif BBQNameTwo
-    
-    
-#elif BBQNameThree
+#elif AWMNameThree
     
     [self.view addSubview:self.topLine];
 #endif
@@ -184,7 +172,37 @@
 - (void)configOwnSubViews {
     
     
-#if BBQNameOne
+#if AWMNameOne
+    
+    CGFloat h = CGRectGetHeight(self.navigationController.navigationBar.frame);
+    
+    [self.whiteView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.right.mas_equalTo(0);
+        
+        make.top.mas_equalTo(h + 1);
+        
+        make.height.mas_equalTo(120);
+    }];
+    
+    [self.placeholder mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.right.mas_equalTo(0);
+        
+        make.top.mas_equalTo(h);
+        
+        make.height.mas_equalTo(120);
+    }];
+    
+    [self.signaturetv mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.right.mas_equalTo(0);
+        
+        make.top.mas_equalTo(h);
+        
+        make.height.mas_equalTo(120);
+    }];
+#elif AWMNameTwo
     
     CGFloat h = CGRectGetHeight(self.navigationController.navigationBar.frame);
     
@@ -214,39 +232,9 @@
         
         make.height.mas_equalTo(200);
     }];
-#elif BBQNameTwo
+#elif AWMNameThree
     
-    CGFloat h = CGRectGetHeight(self.navigationController.navigationBar.frame);
-    
-    [self.whiteView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.right.mas_equalTo(0);
-        
-        make.top.mas_equalTo(h);
-        
-        make.height.mas_equalTo(200);
-    }];
-    
-    [self.placeholder mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.right.mas_equalTo(0);
-        
-        make.top.mas_equalTo(h);
-        
-        make.height.mas_equalTo(200);
-    }];
-    
-    [self.signaturetv mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.right.mas_equalTo(0);
-        
-        make.top.mas_equalTo(h);
-        
-        make.height.mas_equalTo(200);
-    }];
-#elif BBQNameThree
-    
-    self.topLine.backgroundColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
+    self.topLine.backgroundColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
     
     CGFloat h = CGRectGetHeight(self.navigationController.navigationBar.frame);
     
@@ -286,11 +274,11 @@
         make.height.mas_equalTo(200);
     }];
     
-    [self.completeItem setTitleColor:[UIColor s_transformToColorByHexColorStr: @BBQColor] forState:UIControlStateNormal];
+    [self.completeItem setTitleColor:[UIColor s_transformToColorByHexColorStr: @AWMColor] forState:UIControlStateNormal];
        
-       [self.completeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@80",@BBQColor]] forState:UIControlStateHighlighted];
+       [self.completeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@80",@AWMColor]] forState:UIControlStateHighlighted];
        
-       [self.completeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@BBQColor]] forState:UIControlStateDisabled];
+       [self.completeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@AWMColor]] forState:UIControlStateDisabled];
 #endif
 }
 
@@ -302,7 +290,7 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.completeItem];
     
-    [self.backItem setImage:[UIImage imageNamed:@BBQBackIcon] forState:UIControlStateNormal];
+    [self.backItem setImage:[UIImage imageNamed:@AWMBackIcon] forState:UIControlStateNormal];
     
     [self.backItem sizeToFit];
     
@@ -311,11 +299,11 @@
 
 - (void)configViewModel {
     
-    self.bridge = [BBQSignatureBridge new];
+    self.bridge = [AWMSignatureBridge new];
     
     __weak typeof(self) weakSelf = self;
     
-    [self.bridge createSignature:self signatureAction:^(enum BBQSignatureActionType actionType) {
+    [self.bridge createSignature:self signatureAction:^(enum AWMSignatureActionType actionType) {
         
         weakSelf.block(actionType, weakSelf);
     }];
@@ -323,12 +311,12 @@
 - (void)configOwnProperties {
     
     
-#if BBQNameOne
+#if AWMNameOne
     [super configOwnProperties];
     
-#elif BBQNameTwo
+#elif AWMNameTwo
     [super configOwnProperties];
-#elif BBQNameThree
+#elif AWMNameThree
     [super configOwnProperties];
 #endif
 }

@@ -1,17 +1,17 @@
 //
-//  BBQSettingViewController.m
-//  BBQContainer
+//  AWMSettingViewController.m
+//  AWMContainer
 //
 //  Created by 王磊 on 2020/3/29.
 //  Copyright © 2020 王磊. All rights reserved.
 //
 
-#import "BBQSettingViewController.h"
+#import "AWMSettingViewController.h"
 @import SToolsKit;
 @import Masonry;
 @import SDWebImage;
 
-@interface BBQSettingTableViewCell()
+@interface AWMSettingTableViewCell()
 
 @property (nonatomic ,strong) UILabel *titleLabel;
 
@@ -21,7 +21,7 @@
 
 @end
 
-@implementation BBQSettingTableViewCell
+@implementation AWMSettingTableViewCell
 
 - (UILabel *)titleLabel {
     
@@ -56,12 +56,12 @@
         
         _swiItem = [[UISwitch alloc] initWithFrame:CGRectZero];
         
-        _swiItem.onTintColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
+        _swiItem.onTintColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
         
     }
     return _swiItem;
 }
-- (void)setSetting:(BBQSettingBean *)setting {
+- (void)setSetting:(AWMSettingBean *)setting {
     //    _setting = setting;
     
     self.swiItem.hidden = true;
@@ -74,7 +74,7 @@
     
     self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-    self.bottomLineType = BBQBottomLineTypeNormal;
+    self.bottomLineType = AWMBottomLineTypeNormal;
     
     self.subTitleLabel.hidden = true;
     
@@ -83,24 +83,24 @@
     self.backgroundColor = [UIColor whiteColor];
     
     switch (setting.type) {
-        case BBQSettingTypeLogout:
+        case AWMSettingTypeLogout:
             
             self.titleLabel.textAlignment = NSTextAlignmentCenter;
             
-            self.titleLabel.textColor =  [UIColor s_transformToColorByHexColorStr:@BBQColor];
+            self.titleLabel.textColor =  [UIColor s_transformToColorByHexColorStr:@AWMColor];
             break;
-        case BBQSettingTypeSpace:
+        case AWMSettingTypeSpace:
             
             self.selectionStyle = UITableViewCellSelectionStyleNone;
             
-            self.bottomLineType = BBQBottomLineTypeNone;
+            self.bottomLineType = AWMBottomLineTypeNone;
             
             self.backgroundColor = [UIColor clearColor];
             
             self.accessoryType = UITableViewCellAccessoryNone;
             
             break;
-        case BBQSettingTypePush:
+        case AWMSettingTypePush:
             
             self.swiItem.hidden = false;
             
@@ -108,7 +108,7 @@
             
             self.accessoryType = UITableViewCellAccessoryNone;
             
-        case BBQSettingTypeClear:
+        case AWMSettingTypeClear:
             
             self.subTitleLabel.hidden = false;
             
@@ -118,22 +118,22 @@
     
     self.titleLabel.text = setting.title;
     
-#if BBQUserInfoOne
+#if AWMUserInfoOne
     
-#elif BBQUserInfoTwo
+#elif AWMUserInfoTwo
     
-#elif BBQUserInfoThree
+#elif AWMUserInfoThree
     
-    if (setting.type == BBQSettingTypeSpace) {
+    if (setting.type == AWMSettingTypeSpace) {
         
-        self.backgroundColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
+        self.backgroundColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
     } else {
         
         self.backgroundColor = [UIColor whiteColor];
     }
     
 #endif
-
+    
 }
 
 
@@ -177,21 +177,30 @@
     }];
 }
 @end
-@interface BBQSettingViewController ()
+@interface AWMSettingViewController ()
 
-@property (nonatomic ,strong) BBQSettingBridge *bridge;
+@property (nonatomic ,strong) AWMSettingBridge *bridge;
 
-@property (nonatomic ,copy) BBQSettingBlock block;
+@property (nonatomic ,copy) AWMSettingBlock block;
 
 @end
 
-@implementation BBQSettingViewController
+@implementation AWMSettingViewController
 
-+ (instancetype)createSettingWithBlock:(BBQSettingBlock)block {
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+#if AWMPROFILEALPHA
+    
+    [self.navigationController setNavigationBarHidden:false];
+#endif
+}
+
++ (instancetype)createSettingWithBlock:(AWMSettingBlock)block {
     
     return [[self alloc] initWithBlock:block];
 }
-- (instancetype)initWithBlock:(BBQSettingBlock)block {
+- (instancetype)initWithBlock:(AWMSettingBlock)block {
     
     if (self = [super init]) {
         
@@ -199,32 +208,16 @@
     }
     return self;
 }
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-#if BBQUserInfoOne
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@BBQColor]];
-#elif BBQUserInfoTwo
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@BBQColor]];
-#elif BBQUserInfoThree
-    
-#if BBQCONTAINDRAWER
-    
-    [self.navigationController setNavigationBarHidden:false];
-#endif
-    
-#endif
-}
 
 - (void)configOwnSubViews {
     [super configOwnSubViews];
     
-    [self.tableView registerClass:[BBQSettingTableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[AWMSettingTableViewCell class] forCellReuseIdentifier:@"cell"];
 }
 
 - (UITableViewCell *)configTableViewCell:(id)data forIndexPath:(NSIndexPath *)ip {
     
-    BBQSettingTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
+    AWMSettingTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
     
     cell.setting = data;
     
@@ -233,23 +226,25 @@
 
 - (void)configViewModel {
     
-    self.bridge = [BBQSettingBridge new];
+    self.bridge = [AWMSettingBridge new];
     
     __weak typeof(self) weakSelf = self;
     
-#if BBQUserInfoOne
-    [self.bridge createSetting:self hasPlace:true settingAction:^(enum BBQSettingActionType actionType) {
-        
-        weakSelf.block(actionType, weakSelf);
-    }];
-#elif BBQUserInfoTwo
-    [self.bridge createSetting:self hasPlace:false settingAction:^(enum BBQSettingActionType actionType) {
-        
-        weakSelf.block(actionType, weakSelf);
-    }];
-#elif BBQUserInfoThree
+#if AWMUserInfoOne
     
-    [self.bridge createSetting:self hasPlace:true settingAction:^(enum BBQSettingActionType actionType) {
+    [self.bridge createSetting:self hasSpace:true settingAction:^(enum AWMSettingActionType actionType) {
+        
+        weakSelf.block(actionType, weakSelf);
+    }];
+    
+#elif AWMUserInfoTwo
+    [self.bridge createSetting:self hasPlace:false settingAction:^(enum AWMSettingActionType actionType) {
+        
+        weakSelf.block(actionType, weakSelf);
+    }];
+#elif AWMUserInfoThree
+    
+    [self.bridge createSetting:self hasPlace:true settingAction:^(enum AWMSettingActionType actionType) {
         
         weakSelf.block(actionType, weakSelf);
     }];
@@ -266,11 +261,11 @@
 }
 - (void)configOwnProperties {
     
-#if BBQUserInfoOne
+#if AWMUserInfoOne
     [super configOwnProperties];
-#elif BBQUserInfoTwo
+#elif AWMUserInfoTwo
     [super configOwnProperties];
-#elif BBQUserInfoThree
+#elif AWMUserInfoThree
     [super configOwnProperties];
 #endif
     

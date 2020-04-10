@@ -44,6 +44,16 @@
 
 
 #endif
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+#if AWMPROFILEALPHA
+    
+    [self.navigationController setNavigationBarHidden:false];
+#endif
+}
+
+
 + (instancetype)createPrivacy {
     
     return [self new];

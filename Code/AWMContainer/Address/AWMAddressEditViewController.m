@@ -1,41 +1,41 @@
 //
-//  BBQAddressEditViewController.m
+//  AWMAddressEditViewController.m
 //  ZFragment
 //
 //  Created by three stone 王 on 2020/3/21.
 //  Copyright © 2020 three stone 王. All rights reserved.
 //
 
-#import "BBQAddressEditViewController.h"
+#import "AWMAddressEditViewController.h"
 @import SToolsKit;
-@import BBQBridge;
+@import AWMBridge;
 @import Masonry;
 @import JXTAlertManager;
-@import BBQTextField;
+@import AWMTextField;
 
-@protocol BBQAddressEditTableViewCellDelegate <NSObject>
+@protocol AWMAddressEditTableViewCellDelegate <NSObject>
 
 - (void)onSwitchTap:(BOOL)value;
 
-- (void)onTextChanged:(NSString *)changed andType:(BBQAddressEditType )type;
+- (void)onTextChanged:(NSString *)changed andType:(AWMAddressEditType )type;
 
 @end
 
-@interface BBQAddressEditTableViewCell ()
+@interface AWMAddressEditTableViewCell ()
 
 @property (nonatomic ,strong) UILabel *titleLabel;
 
-@property (nonatomic ,strong) BBQBaseTextField *subTitleLabel;
+@property (nonatomic ,strong) AWMBaseTextField *subTitleLabel;
 
-@property (nonatomic ,strong) BBQAddressEditBean *addressEdit;
+@property (nonatomic ,strong) AWMAddressEditBean *addressEdit;
 
 @property (nonatomic ,strong) UISwitch *swi;
 
-@property (nonatomic ,weak) id<BBQAddressEditTableViewCellDelegate> mDelegate;
+@property (nonatomic ,weak) id<AWMAddressEditTableViewCellDelegate> mDelegate;
 
 @end
 
-@implementation BBQAddressEditTableViewCell
+@implementation AWMAddressEditTableViewCell
 
 - (UILabel *)titleLabel {
     
@@ -52,11 +52,11 @@
     return _titleLabel;
 }
 
-- (BBQBaseTextField *)subTitleLabel {
+- (AWMBaseTextField *)subTitleLabel {
     
     if (!_subTitleLabel) {
         
-        _subTitleLabel = [[BBQBaseTextField alloc] initWithFrame:CGRectZero];
+        _subTitleLabel = [[AWMBaseTextField alloc] initWithFrame:CGRectZero];
         
         _subTitleLabel.font = [UIFont systemFontOfSize:15];
         
@@ -76,11 +76,11 @@
     }
     return _swi;
 }
-- (void)setAddressEdit:(BBQAddressEditBean *)addressEdit {
+- (void)setAddressEdit:(AWMAddressEditBean *)addressEdit {
     _addressEdit = addressEdit;
     self.titleLabel.text = addressEdit.title;
     
-    self.bottomLineType = BBQBottomLineTypeNormal;
+    self.bottomLineType = AWMBottomLineTypeNormal;
     
     self.subTitleLabel.placeholder = addressEdit.placeholder;
     
@@ -92,23 +92,23 @@
     
     self.swi.hidden = true;
     
-    [self.subTitleLabel set_editType:BBQTextFiledEditTypeDefault];
+    [self.subTitleLabel awm_editType:AWMTextFiledEditTypeDefault];
     
-    [self.subTitleLabel set_maxLength:999];
+    [self.subTitleLabel awm_maxLength:999];
     
     switch (addressEdit.type) {
-        case BBQAddressEditTypeName:
+        case AWMAddressEditTypeName:
             
             
             break;
-        case BBQAddressEditTypeDef:
+        case AWMAddressEditTypeDef:
             
             self.subTitleLabel.userInteractionEnabled = false;
             
             self.swi.hidden = false;
             
             break;
-        case BBQAddressEditTypeArea:
+        case AWMAddressEditTypeArea:
             
             self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             
@@ -126,11 +126,11 @@
                 
             }
             break;
-        case BBQAddressEditTypePhone:
+        case AWMAddressEditTypePhone:
             
-            [self.subTitleLabel set_editType:BBQTextFiledEditTypePhone];
+            [self.subTitleLabel awm_editType:AWMTextFiledEditTypePhone];
             
-            [self.subTitleLabel set_maxLength:11];
+            [self.subTitleLabel awm_maxLength:11];
             break;
         default:
             break;
@@ -154,7 +154,7 @@
     
     __weak typeof(self) weakSelf = self;
     
-    [self.subTitleLabel set_textChanged:^(BBQBaseTextField * _Nonnull tf) {
+    [self.subTitleLabel awm_textChanged:^(AWMBaseTextField * _Nonnull tf) {
         
         [weakSelf.mDelegate onTextChanged:tf.text andType:weakSelf.addressEdit.type];
     }];
@@ -200,19 +200,19 @@
 
 @end
 
-@interface BBQAddressEditViewController() <BBQAddressEditTableViewCellDelegate>
+@interface AWMAddressEditViewController() <AWMAddressEditTableViewCellDelegate>
 
-@property (nonatomic ,strong) BBQAddressEditBridge *bridge;
+@property (nonatomic ,strong) AWMAddressEditBridge *bridge;
 
 @property (nonatomic ,strong) UIButton *completeItem;
 
-@property (nonatomic ,strong) BBQAddressBean *addressBean;
+@property (nonatomic ,strong) AWMAddressBean *addressBean;
 
-@property (nonatomic ,copy) BBQAddressEditBlock block;
+@property (nonatomic ,copy) AWMAddressEditBlock block;
 
 @end
 
-@implementation BBQAddressEditViewController
+@implementation AWMAddressEditViewController
 
 - (UIButton *)completeItem {
     
@@ -228,7 +228,7 @@
         
         _completeItem.titleLabel.font = [UIFont systemFontOfSize:15];
         
-        if ([@BBQColor isEqualToString:@"#ffffff"]) {
+        if ([@AWMColor isEqualToString:@"#ffffff"]) {
             
             [_completeItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@"#666666"] forState:UIControlStateNormal];
             
@@ -247,11 +247,11 @@
     }
     return _completeItem;
 }
-+ (instancetype)creatAddressEditWithAddressBean:(BBQAddressBean *)addressBean andAddressEditBlock:(BBQAddressEditBlock)block {
++ (instancetype)creatAddressEditWithAddressBean:(AWMAddressBean *)addressBean andAddressEditBlock:(AWMAddressEditBlock)block {
     
     return [[self alloc] initWithAddressBean:addressBean andAddressEditBlock:block];
 }
-- (instancetype)initWithAddressBean:(BBQAddressBean *)addressBean andAddressEditBlock:(BBQAddressEditBlock)block {
+- (instancetype)initWithAddressBean:(AWMAddressBean *)addressBean andAddressEditBlock:(AWMAddressEditBlock)block {
     
     if (self = [super init]) {
         
@@ -264,16 +264,16 @@
 
 - (void)configOwnSubViews {
     
-    [self.tableView registerClass:[BBQAddressEditTableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[AWMAddressEditTableViewCell class] forCellReuseIdentifier:@"cell"];
 }
 
 - (UITableViewCell *)configTableViewCell:(id)data forIndexPath:(NSIndexPath *)ip {
     
-    BBQAddressEditTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
+    AWMAddressEditTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
     
     if (!cell) {
         
-        cell = [[BBQAddressEditTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        cell = [[AWMAddressEditTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
     
     cell.addressEdit = data;
@@ -287,19 +287,19 @@
     
     [self.bridge updateAddressEditDefWithIsDef:value];
 }
-- (void)onTextChanged:(NSString *)changed andType:(BBQAddressEditType)type {
+- (void)onTextChanged:(NSString *)changed andType:(AWMAddressEditType)type {
     
     [self.bridge updateAddressEditWithType:type value:changed];
 }
 
 - (void)tableViewSelectData:(id)data forIndexPath:(NSIndexPath *)ip {
     
-    BBQAddressEditBean *edit = (BBQAddressEditBean *)data;
+    AWMAddressEditBean *edit = (AWMAddressEditBean *)data;
     
     switch (edit.type) {
-        case BBQAddressEditTypeArea:
+        case AWMAddressEditTypeArea:
         {
-            self.block(self, BBQAddressEditActionTypeArea,self.addressBean, edit);
+            self.block(self, AWMAddressEditActionTypeArea,self.addressBean, edit);
         }
             break;
             
@@ -307,11 +307,11 @@
             break;
     }
 }
-- (void)updateAddressEditArea:(BBQAddressEditBean *)addressEditBean {
+- (void)updateAddressEditArea:(AWMAddressEditBean *)addressEditBean {
     
     [self updatePArea:addressEditBean.pArea andCArea:addressEditBean.cArea andRArea:addressEditBean.rArea];
 }
-- (void)updatePArea:(BBQAreaBean *)pArea andCArea:(BBQAreaBean *)cArea andRArea:(BBQAreaBean *)rArea {
+- (void)updatePArea:(AWMAreaBean *)pArea andCArea:(AWMAreaBean *)cArea andRArea:(AWMAreaBean *)rArea {
     
     [self.bridge updateAddressEditAreaWithPid:pArea.areaId pName:pArea.name cid:cArea.areaId cName:cArea.name rid:rArea.areaId rName:rArea.name];
 }
@@ -326,24 +326,24 @@
 }
 - (void)configViewModel {
     
-    self.bridge = [BBQAddressEditBridge new];
+    self.bridge = [AWMAddressEditBridge new];
     
     __weak typeof(self) weakSelf = self;
     
-    [self.bridge createAddressEdit:self temp:self.addressBean editAction:^(BBQAddressBean * _Nullable addressBean) {
+    [self.bridge createAddressEdit:self temp:self.addressBean editAction:^(AWMAddressBean * _Nullable addressBean) {
         
-        weakSelf.block(weakSelf,BBQAddressEditActionTypeCompleted, addressBean, nil);
+        weakSelf.block(weakSelf,AWMAddressEditActionTypeCompleted, addressBean, nil);
     }];
     
     if (self.addressBean) {
         
         [self.bridge updateAddressEditDefWithIsDef:self.addressBean.isdel];
         
-        [self.bridge updateAddressEditWithType:BBQAddressEditTypeName value:self.addressBean.name];
+        [self.bridge updateAddressEditWithType:AWMAddressEditTypeName value:self.addressBean.name];
         
-        [self.bridge updateAddressEditWithType:BBQAddressEditTypePhone value:self.addressBean.phone];
+        [self.bridge updateAddressEditWithType:AWMAddressEditTypePhone value:self.addressBean.phone];
         
-        [self.bridge updateAddressEditWithType:BBQAddressEditTypeDetail value:self.addressBean.addr];
+        [self.bridge updateAddressEditWithType:AWMAddressEditTypeDetail value:self.addressBean.addr];
         
         [self.bridge updateAddressEditAreaWithPid:self.addressBean.plcl pName:self.addressBean.plclne cid:self.addressBean.city cName:self.addressBean.cityne rid:self.addressBean.region rName:self.addressBean.regionne];
         

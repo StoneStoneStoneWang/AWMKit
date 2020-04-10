@@ -12,21 +12,21 @@
 
 #else
 
+#define AWMLoginedBlock AWMLoginedBlock111
+
 #define AWMWelcomeCollectionViewCell uOvruKuUico
 
 #define AWMWelcomeViewController fQ3dtNqgqxpn
 
-#define AWMRootManager jrV9aCM7ao
+#define createWelcomeWithSkipBlock createWelcomeWithSkipBlock111
 
-#define AWMNavigationConfigImpl wT4tWNoK3P
+#define AppDelegate jrV9aCM7ao
 
-#define RootManager j6Y0O5kvdW
+#define AWMMethod j6Y0O5kvdW
 
-#define makeRoot nWzbB9zH1ovr
+#define AWMShared j6Y0O5kvdW111
 
-#define awmSkipTap ozr0QZwmHYq
-
-#define rootShared Iyilj43MhPlz
+#define awmWelcomeSkip ozr0QZwmHYq
 
 #define awmUnLogin Q6svrrobfsVX
 
@@ -34,7 +34,13 @@
 
 #define awmRootViewController xrqsg44aCW
 
-#define awmPushReg iAzukq65IThV
+#define awmCheckLoginAndPresentLogin iAzukq65IThV
+
+#define awmLoginSucc awmLoginSucc111
+
+#define awmPushSwiftLogin awmPushSwiftLogin111
+
+#define awmSwiftLoginSucc awmSwiftLoginSucc111
 
 #define awmPushProtocol tIaDC1jkJ7
 
@@ -144,7 +150,33 @@
 
 #define createUserCenterWithBlock Wblg38vK9zAh
 
+#define awmPresentNickName awmPresentNickName111
 
+#define awmPresentSignature awmPresentSignature111
+
+#define AWMPrivacyViewController AWMPrivacyViewController111
+
+#define createPrivacy createPrivacy111
+
+#define AWMBannerViewController AWMBannerViewController111
+
+#define createBannerWithBanners createBannerWithBanners111
+
+#define createFeedBackWithBlock createFeedBackWithBlock11
+
+#define AWMNameViewController AWMNameViewController111
+
+#define createNickNameWithBlock createNickNameWithBlock111
+
+#define AWMSignatureViewController AWMSignatureViewController111
+
+#define createSignatureWithBlock createSignatureWithBlock111
+
+#define AWMAreaHeaderViewController AWMAreaHeaderViewController111
+
+#define AWMAreaHeaderBlock AWMAreaHeaderBlock111
+
+#define createAreaHeaderWithPid createAreaHeaderWithPid111
 
 #if AWMCONFIGURETYPEFLOWER
 
@@ -157,6 +189,8 @@
 #define awmPushAddressEdit cVwgp1QZcd9D
 
 #define awmPushAddressEditAdd eYZaw4SU0WLp
+
+#define AWMAddressEditTableViewCell AWMAddressEditTableViewCell111
 
 #define awmPushArea xY4aoQmfFu
 

@@ -1,25 +1,25 @@
 //
-//  BBQAreaViewController.m
+//  AWMAreaViewController.m
 //  ZFragment
 //
 //  Created by three stone 王 on 2020/3/21.
 //  Copyright © 2020 three stone 王. All rights reserved.
 //
 
-#import "BBQAreaViewController.h"
+#import "AWMAreaViewController.h"
 @import Masonry;
 @import SToolsKit;
-@import BBQBean;
+@import AWMBean;
 
-@interface BBQAreaTableViewCell : BBQBaseTableViewCell
+@interface AWMAreaTableViewCell : AWMBaseTableViewCell
 
-@property (nonatomic ,strong) BBQAreaBean *areaBean;
+@property (nonatomic ,strong) AWMAreaBean *areaBean;
 
 @property (nonatomic ,strong) UILabel *titleLabel;
 
 @end
 
-@implementation BBQAreaTableViewCell
+@implementation AWMAreaTableViewCell
 
 - (UILabel *)titleLabel {
     
@@ -38,7 +38,7 @@
     return _titleLabel;
     
 }
-- (void)setAreaBean:(BBQAreaBean *)areaBean {
+- (void)setAreaBean:(AWMAreaBean *)areaBean {
     _areaBean = areaBean;
     
     self.titleLabel.text = areaBean.name;
@@ -47,7 +47,7 @@
     
     if (areaBean.isSelected) {
         
-        self.titleLabel.textColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
+        self.titleLabel.textColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
         
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else {
@@ -75,22 +75,22 @@
 }
 @end
 
-@interface BBQAreaViewController()
+@interface AWMAreaViewController()
 
-@property (nonatomic ,assign) BBQAreaType type;
+@property (nonatomic ,assign) AWMAreaType type;
 
-@property (nonatomic ,copy) BBQAreaBlock block;
+@property (nonatomic ,copy) AWMAreaBlock block;
 
-@property (nonatomic ,strong) BBQAreaBridge *bridge;
+@property (nonatomic ,strong) AWMAreaBridge *bridge;
 @end
 
-@implementation BBQAreaViewController
+@implementation AWMAreaViewController
 
-+ (instancetype)createAreaWithType:(BBQAreaType)type andAreaBlock:(BBQAreaBlock)block {
++ (instancetype)createAreaWithType:(AWMAreaType)type andAreaBlock:(AWMAreaBlock)block {
     
     return [[self alloc] initWithType:type andAreaBlock:block];
 }
-- (instancetype)initWithType:(BBQAreaType)type andAreaBlock:(BBQAreaBlock)block {
+- (instancetype)initWithType:(AWMAreaType)type andAreaBlock:(AWMAreaBlock)block {
     
     if (self = [super init]) {
         
@@ -103,7 +103,7 @@
 
 - (void)configOwnSubViews {
     
-    [self.tableView registerClass:[BBQAreaTableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[AWMAreaTableViewCell class] forCellReuseIdentifier:@"cell"];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -114,11 +114,11 @@
 }
 - (UITableViewCell *)configTableViewCell:(id)data forIndexPath:(NSIndexPath *)ip {
     
-    BBQAreaTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
+    AWMAreaTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
     
     if (!cell) {
         
-        cell = [[BBQAreaTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        cell = [[AWMAreaTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
     
     cell.areaBean = data;
@@ -126,14 +126,14 @@
     return cell;
 }
 
-- (void)selectedArea:(NSInteger )sid andBlock:(BBQAreaBlock)block {
+- (void)selectedArea:(NSInteger )sid andBlock:(AWMAreaBlock)block {
     
     switch (self.type) {
-        case BBQAreaTypeProvince:
+        case AWMAreaTypeProvince:
             
             block(self, [self.bridge fetchAreaWithId:sid], self.type, [self.bridge fetchCitys:sid].count);
             break;
-        case BBQAreaTypeCity:
+        case AWMAreaTypeCity:
             block(self, [self.bridge fetchAreaWithId:sid], self.type, [self.bridge fetchRegions:sid].count);
             break;
         default:
@@ -146,18 +146,18 @@
 }
 - (void)configViewModel {
     
-    self.bridge = [BBQAreaBridge new];
+    self.bridge = [AWMAreaBridge new];
     
     __weak typeof(self) weakSelf = self;
     
-    [self.bridge createArea:self type:self.type areaAction:^(BBQAreaBean * _Nonnull areaBean, enum BBQAreaType areaType, BOOL hasNext) {
+    [self.bridge createArea:self type:self.type areaAction:^(AWMAreaBean * _Nonnull areaBean, enum AWMAreaType areaType, BOOL hasNext) {
        
         weakSelf.block(weakSelf, areaBean, areaType, hasNext);
     }];
 
 }
 
-- (BBQAreaBean *)fetchAreaWithId:(NSInteger)sid {
+- (AWMAreaBean *)fetchAreaWithId:(NSInteger)sid {
     
     return [self.bridge fetchAreaWithId:sid];
 }

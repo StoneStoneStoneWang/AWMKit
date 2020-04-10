@@ -38,6 +38,8 @@ extension AWMCarouselBridge {
         
         if let pageControl = vc.view.viewWithTag(102) as? UIPageControl {
             
+            pageControl.numberOfPages = carousels.count
+            
             self.vc = vc
             
             self.style = style
@@ -60,8 +62,6 @@ extension AWMCarouselBridge {
                 result += [c]
                 
             }
-            
-//            viewModel.output.tableData.accept(result)
             
             let dataSource = RxCollectionViewSectionedReloadDataSource<Section>(
                 configureCell: { ds, cv, ip, item in return vc.configCollectionViewCell(item, for: ip)})
@@ -97,16 +97,29 @@ extension AWMCarouselBridge {
                 })
                 .disposed(by: disposed)
             
-            viewModel.output.currentPage.bind(to: pageControl.rx.currentPage).disposed(by: disposed)
+            viewModel
+                .output
+                .currentPage
+                .bind(to: pageControl.rx.currentPage)
+                .disposed(by: disposed)
             
-            for _ in 0..<9999 {
+            var mutable: [AWMCarouselBean] = []
+            
+            for _ in 0..<999 {
                 
-                result += result
+                mutable += result
             }
             
-            viewModel.output.tableData.accept(result)
+            viewModel
+                .output
+                .tableData
+                .accept(mutable)
             
-            vc.collectionView.rx.setDelegate(self).disposed(by: disposed)
+            vc
+                .collectionView
+                .rx
+                .setDelegate(self)
+                .disposed(by: disposed)
         }
     }
 }

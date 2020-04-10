@@ -1,22 +1,22 @@
 //
-//  BBQAreaHeaderViewController.m
+//  AWMAreaHeaderViewController.m
 //  ZFragment
 //
 //  Created by three stone 王 on 2020/3/21.
 //  Copyright © 2020 three stone 王. All rights reserved.
 //
 
-#import "BBQAreaHeaderViewController.h"
-#import "BBQAreaViewController.h"
+#import "AWMAreaHeaderViewController.h"
+#import "AWMAreaViewController.h"
 @import SToolsKit;
 
-@interface BBQAreaHeaderLayout: UICollectionViewFlowLayout
+@interface AWMAreaHeaderLayout: UICollectionViewFlowLayout
 
 @end
-#define BBQArea_Width 80
+#define AWMArea_Width 80
 
-#define BBQArea_Height 44
-@implementation BBQAreaHeaderLayout
+#define AWMArea_Height 44
+@implementation AWMAreaHeaderLayout
 
 - (void)prepareLayout {
     [super prepareLayout];
@@ -27,19 +27,19 @@
     
     self.sectionInset = UIEdgeInsetsMake(0, 15, 0, 0);
     
-    self.itemSize = CGSizeMake(BBQArea_Width, BBQArea_Height);
+    self.itemSize = CGSizeMake(AWMArea_Width, AWMArea_Height);
 }
 
 @end
 
-@interface BBQAreaHeaderCollectionViewCell : UICollectionViewCell
+@interface AWMAreaHeaderCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic ,strong) BBQAreaHeaderBean *headerBean;
+@property (nonatomic ,strong) AWMAreaHeaderBean *headerBean;
 
 @property (nonatomic ,strong) UILabel *titleLabel;
 @end
 
-@implementation BBQAreaHeaderCollectionViewCell
+@implementation AWMAreaHeaderCollectionViewCell
 
 - (instancetype)initWithFrame:(CGRect)frame {
     
@@ -72,7 +72,7 @@
     
     [self.contentView addSubview:self.titleLabel];
 }
-- (void)setHeaderBean:(BBQAreaHeaderBean *)headerBean {
+- (void)setHeaderBean:(AWMAreaHeaderBean *)headerBean {
     
     if (headerBean.areaBean) {
         
@@ -86,7 +86,7 @@
     
     if (headerBean.isSelected) {
         
-        self.titleLabel.textColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
+        self.titleLabel.textColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
     } else {
         
         self.titleLabel.textColor = [UIColor s_transformToColorByHexColorStr:@"#666666"];
@@ -101,7 +101,7 @@
 
 @end
 
-@interface BBQAreaHeaderViewController () <UIPageViewControllerDelegate,UIPageViewControllerDataSource ,UIViewControllerTransitioningDelegate>
+@interface AWMAreaHeaderViewController () <UIPageViewControllerDelegate,UIPageViewControllerDataSource ,UIViewControllerTransitioningDelegate>
 
 @property (nonatomic ,assign) NSInteger pid;
 
@@ -109,37 +109,37 @@
 
 @property (nonatomic ,assign) NSInteger rid;
 
-@property (nonatomic ,copy) BBQAreaHeaderBlock block;
+@property (nonatomic ,copy) AWMAreaHeaderBlock block;
 
 @property (nonatomic ,strong) UIPageViewController *pageViewController;
 
-@property (nonatomic ,strong) BBQAreaViewController *province;
+@property (nonatomic ,strong) AWMAreaViewController *province;
 
-@property (nonatomic ,strong) BBQAreaViewController *city;
+@property (nonatomic ,strong) AWMAreaViewController *city;
 
-@property (nonatomic ,strong) BBQAreaViewController *region;
+@property (nonatomic ,strong) AWMAreaViewController *region;
 
-@property (nonatomic ,strong) BBQAreaHeaderBean *provinceHeader;
+@property (nonatomic ,strong) AWMAreaHeaderBean *provinceHeader;
 
-@property (nonatomic ,strong) BBQAreaHeaderBean *cityHeader;
+@property (nonatomic ,strong) AWMAreaHeaderBean *cityHeader;
 
-@property (nonatomic ,strong) BBQAreaHeaderBean *regionHeader;
+@property (nonatomic ,strong) AWMAreaHeaderBean *regionHeader;
 
-@property (nonatomic ,strong) BBQAreaHeaderBridge *bridge;
+@property (nonatomic ,strong) AWMAreaHeaderBridge *bridge;
 
 @property (nonatomic ,assign) NSInteger currentIdx;
 
 @property (nonatomic ,strong) NSMutableArray *viewControllers;
 
-@property (nonatomic ,strong) BBQAreaPresentAnimation *presentAnimation;
+@property (nonatomic ,strong) AWMAreaPresentAnimation *presentAnimation;
 
-@property (nonatomic ,strong) BBQAreaDismissAnimation *dismissAnimation;
+@property (nonatomic ,strong) AWMAreaDismissAnimation *dismissAnimation;
 
 @property (nonatomic ,strong) UIButton *cancleItem;
 
 @end
 
-@implementation BBQAreaHeaderViewController
+@implementation AWMAreaHeaderViewController
 
 - (UIButton *)cancleItem {
     
@@ -153,17 +153,17 @@
         
         _cancleItem.titleLabel.font = [UIFont systemFontOfSize:15];
         
-        [_cancleItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@BBQColor] forState:UIControlStateNormal];
+        [_cancleItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@AWMColor] forState:UIControlStateNormal];
         
-        [_cancleItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:@BBQColor] forState:UIControlStateHighlighted];
+        [_cancleItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:@AWMColor] forState:UIControlStateHighlighted];
     }
     return _cancleItem;
 }
-+ (instancetype)createAreaHeaderWithPid:(NSInteger)pid andCid:(NSInteger)cid andRid:(NSInteger)rid andAreaHeaderBlock:( BBQAreaHeaderBlock)block{
++ (instancetype)createAreaHeaderWithPid:(NSInteger)pid andCid:(NSInteger)cid andRid:(NSInteger)rid andAreaHeaderBlock:( AWMAreaHeaderBlock)block{
     
     return [[self alloc] initWithPid:pid andCid:cid andRid:rid andAreaHeaderBlock:block];
 }
-- (instancetype)initWithPid:(NSInteger)pid andCid:(NSInteger)cid andRid:(NSInteger)rid andAreaHeaderBlock:( BBQAreaHeaderBlock)block{
+- (instancetype)initWithPid:(NSInteger)pid andCid:(NSInteger)cid andRid:(NSInteger)rid andAreaHeaderBlock:( AWMAreaHeaderBlock)block{
     
     if (self = [super init]) {
         
@@ -177,45 +177,45 @@
     }
     return self;
 }
-- (BBQAreaPresentAnimation *)presentAnimation {
+- (AWMAreaPresentAnimation *)presentAnimation {
     
     if (!_presentAnimation) {
         
-        _presentAnimation = [BBQAreaPresentAnimation new];
+        _presentAnimation = [AWMAreaPresentAnimation new];
         
     }
     return _presentAnimation;
 }
-- (BBQAreaDismissAnimation *)dismissAnimation {
+- (AWMAreaDismissAnimation *)dismissAnimation {
     
     if (!_dismissAnimation) {
         
-        _dismissAnimation = [BBQAreaDismissAnimation new];
+        _dismissAnimation = [AWMAreaDismissAnimation new];
     }
     return _dismissAnimation;
 }
-- (BBQAreaHeaderBean *)provinceHeader {
+- (AWMAreaHeaderBean *)provinceHeader {
     
     if (!_provinceHeader) {
         
-        _provinceHeader = [BBQAreaHeaderBean new];
+        _provinceHeader = [AWMAreaHeaderBean new];
     }
     return _provinceHeader;
 }
 
-- (BBQAreaHeaderBean *)cityHeader {
+- (AWMAreaHeaderBean *)cityHeader {
     
     if (!_cityHeader) {
         
-        _cityHeader = [BBQAreaHeaderBean new];
+        _cityHeader = [AWMAreaHeaderBean new];
     }
     return _cityHeader;
 }
-- (BBQAreaHeaderBean *)regionHeader {
+- (AWMAreaHeaderBean *)regionHeader {
     
     if (!_regionHeader) {
         
-        _regionHeader = [BBQAreaHeaderBean new];
+        _regionHeader = [AWMAreaHeaderBean new];
     }
     return _regionHeader;
 }
@@ -238,25 +238,25 @@
 
 - (void)addOwnSubViews {
     
-    self.pageViewController.view.frame = CGRectMake(0, BBQArea_Height + 1, self.view.bounds.size.width, self.view.bounds.size.height - BBQArea_Height);
+    self.pageViewController.view.frame = CGRectMake(0, AWMArea_Height + 1, self.view.bounds.size.width, self.view.bounds.size.height - AWMArea_Height);
     
     [self addChildViewController:self.pageViewController];
     
     [self.view addSubview:self.pageViewController.view];
     
-    BBQAreaHeaderLayout *layout = [BBQAreaHeaderLayout new];
+    AWMAreaHeaderLayout *layout = [AWMAreaHeaderLayout new];
     
     UICollectionView *collectionView = [self createCollectionWithLayout:layout];
     
     [self.view addSubview:collectionView];
     
-    collectionView.frame = CGRectMake(0, 0, self.view.bounds.size.width, BBQArea_Height);
+    collectionView.frame = CGRectMake(0, 0, self.view.bounds.size.width, AWMArea_Height);
     
     collectionView.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:self.cancleItem];
     
-    self.cancleItem.frame = CGRectMake(self.view.bounds.size.width - 40, 0, 40, BBQArea_Height);
+    self.cancleItem.frame = CGRectMake(self.view.bounds.size.width - 40, 0, 40, AWMArea_Height);
 
 }
 - (void)onCancleItemTap {
@@ -265,7 +265,7 @@
 }
 - (UICollectionViewCell *)configCollectionViewCell:(id)data forIndexPath:(NSIndexPath *)ip {
     
-    BBQAreaHeaderCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:ip];
+    AWMAreaHeaderCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:ip];
     
     cell.headerBean = data;
     
@@ -284,24 +284,24 @@
 }
 - (void)configOwnSubViews {
     
-    [self.collectionView registerClass:[BBQAreaHeaderCollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+    [self.collectionView registerClass:[AWMAreaHeaderCollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
     
     self.pageViewController.dataSource = self;
     
     self.pageViewController.delegate = self;
     
-    self.bridge = [BBQAreaHeaderBridge new];
+    self.bridge = [AWMAreaHeaderBridge new];
     
     __weak typeof(self) weakSelf = self;
     
-    self.province = [BBQAreaViewController createAreaWithType:BBQAreaTypeProvince andAreaBlock:^(BBQBaseViewController * _Nonnull from, BBQAreaBean * _Nonnull selectedArea, BBQAreaType type, BOOL hasNext) {
+    self.province = [AWMAreaViewController createAreaWithType:AWMAreaTypeProvince andAreaBlock:^(AWMBaseViewController * _Nonnull from, AWMAreaBean * _Nonnull selectedArea, AWMAreaType type, BOOL hasNext) {
         
         if (weakSelf.viewControllers.count == 1) {
             
             [weakSelf.viewControllers addObject:weakSelf.city];
         }
         
-        BBQAreaViewController *city = weakSelf.viewControllers[1];
+        AWMAreaViewController *city = weakSelf.viewControllers[1];
         
         [weakSelf.pageViewController setViewControllers:@[city] direction:(UIPageViewControllerNavigationDirectionForward) animated:true completion:nil];
         
@@ -332,7 +332,7 @@
     
     [self.viewControllers addObject:self.province];
     
-    self.city = [BBQAreaViewController createAreaWithType:BBQAreaTypeCity andAreaBlock:^(BBQBaseViewController * _Nonnull from, BBQAreaBean * _Nonnull selectedArea, BBQAreaType type, BOOL hasNext) {
+    self.city = [AWMAreaViewController createAreaWithType:AWMAreaTypeCity andAreaBlock:^(AWMBaseViewController * _Nonnull from, AWMAreaBean * _Nonnull selectedArea, AWMAreaType type, BOOL hasNext) {
         
         if (hasNext) {
             
@@ -341,7 +341,7 @@
                 [weakSelf.viewControllers addObject:weakSelf.region];
             }
             
-            BBQAreaViewController *region = weakSelf.viewControllers.lastObject;
+            AWMAreaViewController *region = weakSelf.viewControllers.lastObject;
             
             [weakSelf.pageViewController setViewControllers:@[region] direction:(UIPageViewControllerNavigationDirectionForward) animated:true completion:nil];
             
@@ -376,7 +376,7 @@
     
     [self.viewControllers addObject:self.city];
     
-    self.region = [BBQAreaViewController createAreaWithType:BBQAreaTypeRegion andAreaBlock:^(BBQBaseViewController * _Nonnull from, BBQAreaBean * _Nonnull selectedArea, BBQAreaType type, BOOL hasNext) {
+    self.region = [AWMAreaViewController createAreaWithType:AWMAreaTypeRegion andAreaBlock:^(AWMBaseViewController * _Nonnull from, AWMAreaBean * _Nonnull selectedArea, AWMAreaType type, BOOL hasNext) {
         
         weakSelf.regionHeader.isSelected = true;
         
@@ -410,7 +410,7 @@
                 
                 [self.pageViewController setViewControllers:@[self.city] direction:(UIPageViewControllerNavigationDirectionForward) animated:false completion:nil];
                 
-                [self.city selectedArea:self.cid andBlock:^(BBQBaseViewController * _Nonnull from, BBQAreaBean * _Nonnull selectedArea, BBQAreaType type, BOOL hasNext) {
+                [self.city selectedArea:self.cid andBlock:^(AWMBaseViewController * _Nonnull from, AWMAreaBean * _Nonnull selectedArea, AWMAreaType type, BOOL hasNext) {
                     
                     if (hasNext) {
                         
@@ -447,11 +447,11 @@
                 
                 [self.pageViewController setViewControllers:@[self.province] direction:(UIPageViewControllerNavigationDirectionForward) animated:false completion:nil];
                 
-                [self.province selectedArea:self.pid andBlock:^(BBQBaseViewController * _Nonnull from, BBQAreaBean * _Nonnull selectedArea, BBQAreaType type, BOOL hasNext) {
+                [self.province selectedArea:self.pid andBlock:^(AWMBaseViewController * _Nonnull from, AWMAreaBean * _Nonnull selectedArea, AWMAreaType type, BOOL hasNext) {
                     
-                    BBQAreaViewController *province = weakSelf.viewControllers[0];
+                    AWMAreaViewController *province = weakSelf.viewControllers[0];
                     
-                    BBQAreaViewController *city = weakSelf.viewControllers[1];
+                    AWMAreaViewController *city = weakSelf.viewControllers[1];
                     
                     [weakSelf.pageViewController setViewControllers:@[city] direction:(UIPageViewControllerNavigationDirectionForward) animated:true completion:nil];
                     
@@ -545,7 +545,7 @@
 @end
 
 
-@implementation BBQAreaPresentAnimation
+@implementation AWMAreaPresentAnimation
 
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
     
@@ -604,7 +604,7 @@
 
 @end
 
-@implementation BBQAreaDismissAnimation
+@implementation AWMAreaDismissAnimation
 
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
     

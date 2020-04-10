@@ -82,9 +82,9 @@
         [_phone awm_editType:AWMTextFiledEditTypePhone];
         
         [_phone awm_maxLength:11];
-        #if AWMUPDATEVERSION
-                _phone.tintColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
-        #endif
+#if AWMUPDATEVERSION
+        _phone.tintColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
+#endif
     }
     return _phone;
 }
@@ -104,9 +104,9 @@
         [_vcode awm_editType:AWMTextFiledEditTypeVcode_length6];
         
         [_vcode awm_maxLength:6];
-        #if AWMUPDATEVERSION
-                _vcode.tintColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
-        #endif
+#if AWMUPDATEVERSION
+        _vcode.tintColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
+#endif
     }
     return _vcode;
 }

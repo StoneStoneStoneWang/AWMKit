@@ -9,13 +9,17 @@
 
 #define AWMColor "#a21362"
 
+#pragma mark --- 是否更新时启用
+
+#define AWMUPDATEVERSION 0
+
 #pragma mark ---
 
 #define AWMCONTAINDRAWER 0
 
 #define AWMCONTAINERTAB 1
 
-// MARK: 个人中心 登陆透明色
+// MARK: 登陆 导航透明色
 #define AWMLOGINNAVALPHA 1
 
 // MARK: 个人中心 导航透明色
@@ -32,7 +36,6 @@
 #pragma mark ---个人中心 1- 4 profile 5- 8 usercenter
 
 #define AWMMeOne 1
-
 
 #pragma mark ---bannerType
 

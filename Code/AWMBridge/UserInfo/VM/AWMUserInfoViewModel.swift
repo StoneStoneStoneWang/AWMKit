@@ -202,7 +202,7 @@ public struct AWMUserInfoViewModel: WLBaseViewModel {
                         
                         output.tableData.value[birthIdx].subtitle = user.birthday
                     }
-                    if let signtureIdx = values.firstIndex(where: { $0.type == .header}) {
+                    if let signtureIdx = values.firstIndex(where: { $0.type == .signature}) {
                         
                         output.tableData.value[signtureIdx].subtitle = user.signature
                     }

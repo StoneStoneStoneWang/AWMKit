@@ -1,12 +1,12 @@
 //
-//  BBQUserInfoViewController.m
-//  BBQContainer
+//  AWMUserInfoViewController.m
+//  AWMContainer
 //
 //  Created by 王磊 on 2020/3/29.
 //  Copyright © 2020 王磊. All rights reserved.
 //
 
-#import "BBQUserInfoViewController.h"
+#import "AWMUserInfoViewController.h"
 @import SToolsKit;
 @import Masonry;
 @import CoreServices;
@@ -15,7 +15,7 @@
 @import SDWebImage;
 @import ZDatePicker;
 
-@interface BBQUserInfoTableViewCell()
+@interface AWMUserInfoTableViewCell()
 
 @property (nonatomic ,strong) UILabel *titleLabel;
 
@@ -24,13 +24,13 @@
 @property (nonatomic ,strong) UILabel *subTitleLabel;
 
 @end
-@implementation BBQUserInfoTableViewCell
+@implementation AWMUserInfoTableViewCell
 
 - (UIImageView *)iconImageView {
     
     if (!_iconImageView) {
         
-        _iconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed: @BBQLogoIcon]];
+        _iconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed: @AWMLogoIcon]];
         
         _iconImageView.layer.cornerRadius = 5;
         
@@ -38,7 +38,7 @@
         
         _iconImageView.layer.borderWidth = 1;
         
-        _iconImageView.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@BBQColor].CGColor;
+        _iconImageView.layer.borderColor = [UIColor s_transformToColorByHexColorStr:@AWMColor].CGColor;
     }
     return _iconImageView;
 }
@@ -82,7 +82,7 @@
     [self.contentView addSubview:self.iconImageView];
 }
 
-- (void)setUserInfo:(BBQUserInfoBean *)userInfo {
+- (void)setUserInfo:(AWMUserInfoBean *)userInfo {
     
     self.titleLabel.text = userInfo.title;
     
@@ -92,7 +92,7 @@
     
     self.selectionStyle = UITableViewCellSelectionStyleDefault;
     
-    self.bottomLineType = BBQBottomLineTypeNormal;
+    self.bottomLineType = AWMBottomLineTypeNormal;
     
     self.iconImageView.hidden = true;
     
@@ -101,11 +101,11 @@
     self.subTitleLabel.hidden = false;
     
     switch (userInfo.type) {
-        case BBQUserInfoTypeSex:
+        case AWMUserInfoTypeSex:
             
             
             break;
-        case BBQUserInfoTypeSpace:
+        case AWMUserInfoTypeSpace:
             
             self.backgroundColor = [UIColor clearColor];
             
@@ -116,7 +116,7 @@
             self.subTitleLabel.hidden = true;
             
             break;
-        case BBQUserInfoTypeHeader:
+        case AWMUserInfoTypeHeader:
             
             self.accessoryType = UITableViewCellAccessoryNone;
             
@@ -124,13 +124,13 @@
             
             self.iconImageView.hidden = false;
             
-            [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?x-oss-process=image/resize,w_200,h_200",userInfo.subtitle]] placeholderImage:[UIImage imageNamed:@BBQLogoIcon] options:SDWebImageRefreshCached];
+            [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?x-oss-process=image/resize,w_200,h_200",userInfo.subtitle]] placeholderImage:[UIImage imageNamed:@AWMLogoIcon] options:SDWebImageRefreshCached];
             
             self.subTitleLabel.hidden = true;
             
             break;
-        case BBQUserInfoTypePhone:
-        case BBQUserInfoTypeName:
+        case AWMUserInfoTypePhone:
+        case AWMUserInfoTypeName:
             
             if ([NSString s_validPhone:userInfo.subtitle]) {
                 
@@ -139,7 +139,7 @@
                 self.subTitleLabel.text = result;
             }
             break;
-        case BBQUserInfoTypeBirth:
+        case AWMUserInfoTypeBirth:
             
             self.subTitleLabel.text = [userInfo.subtitle componentsSeparatedByString:@" "].firstObject;
             
@@ -148,15 +148,15 @@
             break;
     }
     
-#if BBQUserInfoOne
+#if AWMUserInfoOne
     
-#elif BBQUserInfoTwo
+#elif AWMUserInfoTwo
     
-#elif BBQUserInfoThree
+#elif AWMUserInfoThree
     
-    if (userInfo.type == BBQUserInfoTypeSpace) {
+    if (userInfo.type == AWMUserInfoTypeSpace) {
         
-        self.backgroundColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
+        self.backgroundColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
     } else {
         
         self.backgroundColor = [UIColor whiteColor];
@@ -198,40 +198,33 @@
 }
 @end
 
-@interface BBQUserInfoViewController ()<UIImagePickerControllerDelegate ,UINavigationControllerDelegate>
+@interface AWMUserInfoViewController ()<UIImagePickerControllerDelegate ,UINavigationControllerDelegate>
 
-@property (nonatomic ,strong) BBQUserInfoBridge *bridge;
+@property (nonatomic ,strong) AWMUserInfoBridge *bridge;
 
 @property (nonatomic ,strong) ZDatePicker *picker;
 
 @property (nonatomic ,strong) UIImagePickerController *imagePicker;
 
-@property (nonatomic ,copy) BBQUserInfoBlock block;
+@property (nonatomic ,copy) AWMUserInfoBlock block;
 @end
 
-@implementation BBQUserInfoViewController
+@implementation AWMUserInfoViewController
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-#if BBQUserInfoOne
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@BBQColor]];
-#elif BBQUserInfoTwo
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@BBQColor]];
-#elif BBQUserInfoThree
-    
-#if BBQCONTAINDRAWER
+#if AWMPROFILEALPHA
     
     [self.navigationController setNavigationBarHidden:false];
 #endif
-    
-#endif
 }
-+ (instancetype)createUserInfoWithBlock:(BBQUserInfoBlock )block {
+
++ (instancetype)createUserInfoWithBlock:(AWMUserInfoBlock )block {
     
     return [[self alloc] initWithUserInfoBlock:block];
 }
-- (instancetype)initWithUserInfoBlock:(BBQUserInfoBlock )block {
+- (instancetype)initWithUserInfoBlock:(AWMUserInfoBlock )block {
     
     if (self = [super init]) {
         
@@ -255,11 +248,11 @@
 }
 - (void)configOwnProperties {
     
-#if BBQUserInfoOne
+#if AWMUserInfoOne
     [super configOwnProperties];
-#elif BBQUserInfoTwo
+#elif AWMUserInfoTwo
     [super configOwnProperties];
-#elif BBQUserInfoThree
+#elif AWMUserInfoThree
     [super configOwnProperties];
 #endif
     
@@ -267,12 +260,12 @@
 - (void)configOwnSubViews {
     [super configOwnSubViews];
     
-    [self.tableView registerClass:[BBQUserInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[AWMUserInfoTableViewCell class] forCellReuseIdentifier:@"cell"];
 }
 
 - (UITableViewCell *)configTableViewCell:(id)data forIndexPath:(NSIndexPath *)ip {
     
-    BBQUserInfoTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
+    AWMUserInfoTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
     
     cell.userInfo = data;
     
@@ -281,13 +274,14 @@
 
 - (void)configViewModel {
     
-    self.bridge = [BBQUserInfoBridge new];
+    self.bridge = [AWMUserInfoBridge new];
     
-#if BBQUserInfoOne
-    [self.bridge createUserInfo:self hasPlace:true];
-#elif BBQUserInfoTwo
+#if AWMUserInfoOne
+    
+    [self.bridge createUserInfo:self hasSpace:true];
+#elif AWMUserInfoTwo
     [self.bridge createUserInfo:self hasPlace:false];
-#elif BBQUserInfoThree
+#elif AWMUserInfoThree
     [self.bridge createUserInfo:self hasPlace:true];
 #endif
     
@@ -295,26 +289,26 @@
 
 - (void)configNaviItem {
     
-    self.title = @"我的资料";
+    self.title = @"用户资料";
 }
 - (void)tableViewSelectData:(id)data forIndexPath:(NSIndexPath *)ip {
     
-    BBQUserInfoBean *userInfo = (BBQUserInfoBean *)data;
+    AWMUserInfoBean *userInfo = (AWMUserInfoBean *)data;
     
     switch (userInfo.type) {
-        case BBQUserInfoTypeName:
+        case AWMUserInfoTypeName:
         {
-            self.block(BBQUserInfoActionTypeName, self);
+            self.block(AWMUserInfoActionTypeName, self);
             
         }
             break;
-        case BBQUserInfoTypeSignature:
+        case AWMUserInfoTypeSignature:
         {
             
-            self.block(BBQUserInfoActionTypeSignature, self);
+            self.block(AWMUserInfoActionTypeSignature, self);
         }
             break;
-        case BBQUserInfoTypeSex:
+        case AWMUserInfoTypeSex:
         {
             __weak typeof(self) weakSelf = self;
             
@@ -331,27 +325,27 @@
                 }
                 else if ([action.title isEqualToString:@"男"]) {
                     
-                    [weakSelf.bridge updateUserInfoWithType:BBQUserInfoTypeSex value:@"1" action:^{
+                    [weakSelf.bridge updateUserInfoWithType:AWMUserInfoTypeSex value:@"1" action:^{
                         
-                        [weakSelf.bridge updateUserInfo:BBQUserInfoTypeSex value:@"1"];
+                        [weakSelf.bridge updateUserInfo:AWMUserInfoTypeSex value:@"1"];
                     }];
                     
                 } else if ([action.title isEqualToString:@"女"]) {
                     
-                    [weakSelf.bridge updateUserInfoWithType:BBQUserInfoTypeSex value:@"2" action:^{
+                    [weakSelf.bridge updateUserInfoWithType:AWMUserInfoTypeSex value:@"2" action:^{
                         
-                        [weakSelf.bridge updateUserInfo:BBQUserInfoTypeSex value:@"2"];
+                        [weakSelf.bridge updateUserInfo:AWMUserInfoTypeSex value:@"2"];
                         
                     }];
                 }
             }];
         }
             break;
-        case BBQUserInfoTypeBirth:
+        case AWMUserInfoTypeBirth:
         {
             if (!self.picker) {
                 
-                self.picker = [[ZDatePicker alloc] initWithTextColor:[UIColor s_transformToColorByHexColorStr:@"#666666"] buttonColor:[UIColor s_transformToColorByHexColorStr:@BBQColor] font:[UIFont systemFontOfSize:15] locale:[NSLocale localeWithLocaleIdentifier:@"zh-Hans"] showCancelButton:true];
+                self.picker = [[ZDatePicker alloc] initWithTextColor:[UIColor s_transformToColorByHexColorStr:@"#666666"] buttonColor:[UIColor s_transformToColorByHexColorStr:@AWMColor] font:[UIFont systemFontOfSize:15] locale:[NSLocale localeWithLocaleIdentifier:@"zh-Hans"] showCancelButton:true];
             }
             
             __weak typeof(self) weakSelf = self;
@@ -360,15 +354,15 @@
                 
                 if (date) {
                     
-                    [weakSelf.bridge updateUserInfoWithType:BBQUserInfoTypeBirth value:[NSString stringWithFormat:@"%ld",(NSInteger)date.timeIntervalSince1970] action:^{
+                    [weakSelf.bridge updateUserInfoWithType:AWMUserInfoTypeBirth value:[NSString stringWithFormat:@"%ld",(NSInteger)date.timeIntervalSince1970] action:^{
                         
-                        [weakSelf.bridge updateUserInfo:BBQUserInfoTypeBirth value:[NSString stringWithFormat:@"%ld",(NSInteger)date.timeIntervalSince1970]];
+                        [weakSelf.bridge updateUserInfo:AWMUserInfoTypeBirth value:[NSString stringWithFormat:@"%ld",(NSInteger)date.timeIntervalSince1970]];
                     }];
                 }
             }];
         }
             break;
-        case BBQUserInfoTypeHeader:
+        case AWMUserInfoTypeHeader:
         {
             
             __weak typeof(self) weakSelf = self;
@@ -434,11 +428,11 @@
 
 - (void)updateName:(NSString *)name {
     
-    [self.bridge updateUserInfo:BBQUserInfoTypeName value:name ];
+    [self.bridge updateUserInfo:AWMUserInfoTypeName value:name ];
 }
 - (void)updateSignature:(NSString *)signature {
     
-    [self.bridge updateUserInfo:BBQUserInfoTypeSignature value:signature];
+    [self.bridge updateUserInfo:AWMUserInfoTypeSignature value:signature];
 }
 
 @end

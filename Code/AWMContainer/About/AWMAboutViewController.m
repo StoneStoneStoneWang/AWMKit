@@ -1,24 +1,24 @@
 //
-//  BBQAboutViewController.m
-//  BBQContainer
+//  AWMAboutViewController.m
+//  AWMContainer
 //
 //  Created by 王磊 on 2020/3/30.
 //  Copyright © 2020 王磊. All rights reserved.
 //
 
-#import "BBQAboutViewController.h"
+#import "AWMAboutViewController.h"
 @import SToolsKit;
 @import Masonry;
-@interface BBQAboutTableHeaderView()
+@interface AWMAboutTableHeaderView()
 
 @property (nonatomic ,strong) UIImageView *iconImageView;
 
 @property (nonatomic ,strong) UILabel *titleLabel;
-#if BBQUserInfoOne
+#if AWMUserInfoOne
 
-#elif BBQUserInfoTwo
+#elif AWMUserInfoTwo
 
-#elif BBQUserInfoThree
+#elif AWMUserInfoThree
 
 @property (nonatomic ,strong) UIView *topLine;
 
@@ -28,13 +28,13 @@
 
 @end
 
-@implementation BBQAboutTableHeaderView
+@implementation AWMAboutTableHeaderView
 
-#if BBQUserInfoOne
+#if AWMUserInfoOne
 
-#elif BBQUserInfoTwo
+#elif AWMUserInfoTwo
 
-#elif BBQUserInfoThree
+#elif AWMUserInfoThree
 
 - (UIView *)topLine {
     
@@ -59,7 +59,7 @@
     
     if (!_iconImageView) {
         
-        _iconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed: @BBQLogoIcon]];
+        _iconImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed: @AWMLogoIcon]];
         
         _iconImageView.layer.cornerRadius = 30;
         
@@ -77,7 +77,7 @@
         
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         
-        _titleLabel.textColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
+        _titleLabel.textColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
         
         _titleLabel.text = [NSString stringWithFormat:@"%@: %@", [NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"],[NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"]];
         
@@ -91,27 +91,43 @@
     [self addSubview:self.titleLabel];
     
     
-#if BBQUserInfoOne
+#if AWMUserInfoOne
     self.backgroundColor = [UIColor whiteColor];
-#elif BBQUserInfoTwo
+#elif AWMUserInfoTwo
     self.backgroundColor = [UIColor whiteColor];
-#elif BBQUserInfoThree
+#elif AWMUserInfoThree
     self.backgroundColor = [UIColor whiteColor];
     
     [self addSubview:self.topLine];
     
     [self addSubview:self.bottomLine];
     
-    self.topLine.backgroundColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
+    self.topLine.backgroundColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
     
-    self.bottomLine.backgroundColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
+    self.bottomLine.backgroundColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
 #endif
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-#if BBQUserInfoOne
+#if AWMUserInfoOne
+    [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerY.equalTo(self);
+        
+        make.width.height.mas_equalTo(60);
+        
+        make.left.mas_equalTo(15);
+    }];
+    
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerY.equalTo(self);
+        
+        make.left.equalTo(self.iconImageView.mas_right).offset(15);
+    }];
+#elif AWMUserInfoTwo
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.centerX.centerY.equalTo(self);
@@ -126,22 +142,7 @@
         
         make.top.equalTo(self.iconImageView.mas_bottom).offset(5);
     }];
-#elif BBQUserInfoTwo
-    [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerX.centerY.equalTo(self);
-        
-        make.width.height.mas_equalTo(60);
-        
-    }];
-    
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerX.equalTo(self);
-        
-        make.top.equalTo(self.iconImageView.mas_bottom).offset(5);
-    }];
-#elif BBQUserInfoThree
+#elif AWMUserInfoThree
     
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -186,7 +187,7 @@
 }
 
 @end
-@interface BBQAboutTableViewCell()
+@interface AWMAboutTableViewCell()
 
 @property (nonatomic ,strong) UILabel *titleLabel;
 
@@ -195,7 +196,7 @@
 @end
 
 
-@implementation BBQAboutTableViewCell
+@implementation AWMAboutTableViewCell
 
 - (UILabel *)titleLabel {
     
@@ -237,32 +238,32 @@
     self.selectionStyle = UITableViewCellSelectionStyleDefault;
     
 }
-- (void)setAbout:(BBQAboutBean *)about {
+- (void)setAbout:(AWMAboutBean *)about {
     
     self.titleLabel.text = about.title;
     
     self.subTitleLabel.text = about.subTitle;
     
-    self.bottomLineType = BBQBottomLineTypeNormal;
+    self.bottomLineType = AWMBottomLineTypeNormal;
     
     self.backgroundColor = [UIColor whiteColor];
     
     self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
-    if (about.type == BBQAboutTypeSpace) {
+    if (about.type == AWMAboutTypeSpace) {
         
-        self.bottomLineType = BBQBottomLineTypeNone;
+        self.bottomLineType = AWMBottomLineTypeNone;
         
         self.backgroundColor = [UIColor clearColor];
         
         self.accessoryType = UITableViewCellAccessoryNone;
     }
     
-#if BBQUserInfoOne
+#if AWMUserInfoOne
     
-#elif BBQUserInfoTwo
+#elif AWMUserInfoTwo
     
-#elif BBQUserInfoThree
+#elif AWMUserInfoThree
     
     
 #endif
@@ -292,13 +293,13 @@
 }
 @end
 
-@interface BBQAboutViewController ()
+@interface AWMAboutViewController ()
 
-@property (nonatomic ,strong) BBQAboutBridge *bridge;
+@property (nonatomic ,strong) AWMAboutBridge *bridge;
 
 @end
 
-@implementation BBQAboutViewController
+@implementation AWMAboutViewController
 
 + (instancetype)createAbout {
     
@@ -307,30 +308,23 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-#if BBQUserInfoOne
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@BBQColor]];
-#elif BBQUserInfoTwo
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@BBQColor]];
-#elif BBQUserInfoThree
-    
-#if BBQCONTAINDRAWER
+#if AWMPROFILEALPHA
     
     [self.navigationController setNavigationBarHidden:false];
 #endif
-    
-#endif
 }
+
 - (void)configOwnSubViews {
     [super configOwnSubViews];
     
-    [self.tableView registerClass:[BBQAboutTableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[AWMAboutTableViewCell class] forCellReuseIdentifier:@"cell"];
     
-#if BBQUserInfoOne
-    self.headerView = [[BBQAboutTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 120)];
-#elif BBQUserInfoTwo
-    self.headerView = [[BBQAboutTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 120)];
-#elif BBQUserInfoThree
-    self.headerView = [[BBQAboutTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 120)];
+#if AWMUserInfoOne
+    self.headerView = [[AWMAboutTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 100)];
+#elif AWMUserInfoTwo
+    self.headerView = [[AWMAboutTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 120)];
+#elif AWMUserInfoThree
+    self.headerView = [[AWMAboutTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 120)];
 #endif
     
     self.tableView.tableHeaderView = self.headerView;
@@ -339,23 +333,23 @@
 
 - (UITableViewCell *)configTableViewCell:(id)data forIndexPath:(NSIndexPath *)ip {
     
-    BBQAboutTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
+    AWMAboutTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
     
     cell.about = data;
     
-    cell.bottomLineType = BBQBottomLineTypeNormal;
+    cell.bottomLineType = AWMBottomLineTypeNormal;
     
     return cell;
 }
 
 - (void)configViewModel {
     
-    self.bridge = [BBQAboutBridge new];
-#if BBQUserInfoOne
+    self.bridge = [AWMAboutBridge new];
+#if AWMUserInfoOne
+    [self.bridge createAbout:self hasSpace:true];
+#elif AWMUserInfoTwo
     [self.bridge createAbout:self hasPlace:true];
-#elif BBQUserInfoTwo
-    [self.bridge createAbout:self hasPlace:true];
-#elif BBQUserInfoThree
+#elif AWMUserInfoThree
     [self.bridge createAbout:self hasPlace:false];
 #endif
     
@@ -372,11 +366,11 @@
 }
 - (void)configOwnProperties {
     
-#if BBQUserInfoOne
+#if AWMUserInfoOne
     [super configOwnProperties];
-#elif BBQUserInfoTwo
+#elif AWMUserInfoTwo
     [super configOwnProperties];
-#elif BBQUserInfoThree
+#elif AWMUserInfoThree
     [super configOwnProperties];
 #endif
     

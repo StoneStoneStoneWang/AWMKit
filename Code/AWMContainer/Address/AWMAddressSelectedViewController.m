@@ -1,19 +1,20 @@
 //
-//  BBQAddressViewController.m
+//  AWMAddressSelectedViewController.m
 //  ZFragment
 //
 //  Created by three stone 王 on 2020/3/21.
 //  Copyright © 2020 three stone 王. All rights reserved.
 //
 
-#import "BBQAddressViewController.h"
+#import "AWMAddressSelectedViewController.h"
+
 @import Masonry;
 @import SToolsKit;
 @import JXTAlertManager;
 
-@interface BBQAddressTableViewCell : BBQBaseTableViewCell
+@interface AWMAddressSelectedTableViewCell : AWMBaseTableViewCell
 
-@property (nonatomic ,strong) BBQAddressBean *address;
+@property (nonatomic ,strong) AWMAddressBean *address;
 
 @property (nonatomic ,strong) UILabel *titleLabel;
 
@@ -21,7 +22,7 @@
 
 @property (nonatomic ,strong) UILabel *phoneLabel;
 @end
-@implementation BBQAddressTableViewCell
+@implementation AWMAddressSelectedTableViewCell
 
 - (UILabel *)titleLabel {
     
@@ -80,10 +81,11 @@
     
     self.backgroundColor = [UIColor whiteColor];
     
-    self.bottomLineType = BBQBottomLineTypeNormal;
+    self.bottomLineType = AWMBottomLineTypeNormal;
+    
 }
 
-- (void)setAddress:(BBQAddressBean *)address {
+- (void)setAddress:(AWMAddressBean *)address {
     
     self.titleLabel.text = address.name;
     
@@ -137,22 +139,24 @@
     }];
 }
 @end
-@interface BBQAddressViewController ()
 
-@property (nonatomic ,strong) BBQAddressBridge *bridge;
+@interface AWMAddressSelectedViewController ()
+
+@property (nonatomic ,strong) AWMAddressBridge *bridge;
 
 @property (nonatomic ,strong) UIButton *completeItem;
 
-@property (nonatomic ,copy ) BBQAddressBlock addressBlock;
+@property (nonatomic ,copy) AWMAddressSelectedBlock addressBlock;
+
 @end
 
-@implementation BBQAddressViewController
+@implementation AWMAddressSelectedViewController
 
-+ (instancetype)createAddressWithBlock:(BBQAddressBlock) addressBlock {
++ (instancetype)createAddressSelectedWithBlock:(AWMAddressSelectedBlock) addressBlock {
     
-    return [[BBQAddressViewController alloc] initWithBlock:addressBlock];
+    return [[AWMAddressSelectedViewController alloc] initWithBlock:addressBlock];
 }
-- (instancetype)initWithBlock:(BBQAddressBlock) addressBlock {
+- (instancetype)initWithBlock:(AWMAddressSelectedBlock) addressBlock {
     
     if (self = [super init]) {
         
@@ -169,9 +173,9 @@
         
         _completeItem.tag = 301;
         
-        [_completeItem setBackgroundImage:[UIImage s_transformFromHexColor:@BBQColor] forState:UIControlStateNormal];
+        [_completeItem setBackgroundImage:[UIImage s_transformFromHexColor:@AWMColor] forState:UIControlStateNormal];
         
-        [_completeItem setBackgroundImage:[UIImage s_transformFromAlphaHexColor:[NSString stringWithFormat:@"%@80",@BBQColor]] forState:UIControlStateHighlighted];
+        [_completeItem setBackgroundImage:[UIImage s_transformFromAlphaHexColor:[NSString stringWithFormat:@"%@80",@AWMColor]] forState:UIControlStateHighlighted];
         
         [_completeItem setTitle:@"+ 新增地址" forState: UIControlStateNormal];
         
@@ -193,11 +197,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-#if BBQUserInfoOne
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@BBQColor]];
-#elif BBQUserInfoTwo
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@BBQColor]];
-#elif BBQUserInfoThree
+#if AWMUserInfoOne
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@AWMColor]];
+#elif AWMUserInfoTwo
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@AWMColor]];
+#elif AWMUserInfoThree
     
     
     
@@ -209,16 +213,15 @@
     
     [self.navigationController setNavigationBarHidden:false];
 }
-
 - (void)addOwnSubViews {
     [super addOwnSubViews];
     
     [self.view addSubview:self.completeItem];
-
+    
 }
 - (void)configOwnSubViews {
     
-    [self.tableView registerClass:[BBQAddressTableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[AWMAddressSelectedTableViewCell class] forCellReuseIdentifier:@"cell"];
     
     self.tableView.mj_footer.hidden = true;
     
@@ -227,11 +230,11 @@
 
 - (UITableViewCell *)configTableViewCell:(id)data forIndexPath:(NSIndexPath *)ip {
     
-    BBQAddressTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
+    AWMAddressSelectedTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"cell"];
     
     if (!cell) {
         
-        cell = [[BBQAddressTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        cell = [[AWMAddressSelectedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
     
     cell.address = data;
@@ -240,7 +243,7 @@
 }
 - (void)tableViewSelectData:(id)data forIndexPath:(NSIndexPath *)ip  {
     
-    self.addressBlock(BBQAddressActionTypeEdit, data, ip,self);
+    self.addressBlock(AWMAddressActionTypeEdit, data, ip,self);
 }
 
 - (CGFloat)caculateForCell:(id)data forIndexPath:(NSIndexPath *)ip {
@@ -262,7 +265,7 @@
 
 - (void)configViewModel {
     
-    self.bridge = [BBQAddressBridge new];
+    self.bridge = [AWMAddressBridge new];
     // -1 失败  0 成功  1空
     
     __weak typeof(self) weakSelf = self;
@@ -315,10 +318,10 @@
                 make.height.mas_equalTo(48);
             }];
         }
-    } addressAction:^(enum BBQAddressActionType actionType, NSIndexPath * _Nullable ip, BBQAddressBean * _Nullable addressBean) {
+    } addressAction:^(enum AWMAddressActionType actionType, NSIndexPath * _Nullable ip, AWMAddressBean * _Nullable addressBean) {
         
         switch (actionType) {
-            case BBQAddressActionTypeDelete:
+            case AWMAddressActionTypeDelete:
             {
                 
                 [weakSelf alertShow:addressBean andIp:ip];
@@ -333,8 +336,7 @@
     
     [self.tableView.mj_header beginRefreshing];
 }
-
-- (void)alertShow:(BBQAddressBean *)address andIp:(NSIndexPath *)ip {
+- (void)alertShow:(AWMAddressBean *)address andIp:(NSIndexPath *)ip {
     
     __weak typeof(self) weakSelf = self;
     
@@ -351,18 +353,18 @@
         }
     }];
 }
-- (void)updateAddress:(BBQAddressBean *)addressBean andIp:(NSIndexPath *)ip {
+- (void)updateAddress:(AWMAddressBean *)addressBean andIp:(NSIndexPath *)ip {
     
     [self.bridge updateAddress:addressBean ip:ip];
 }
-- (void)insertAddress:(BBQAddressBean *)addressBean {
+
+- (void)insertAddress:(AWMAddressBean *)addressBean {
     
-    [self.bridge insertAddress:addressBean addressAction:^(enum BBQAddressActionType actionType, NSIndexPath * _Nullable ip, BBQAddressBean * _Nullable address) {
+    [self.bridge insertAddress:addressBean addressAction:^(enum AWMAddressActionType actionType, NSIndexPath * _Nullable ip, AWMAddressBean * _Nullable address) {
        
         
     }];
 }
-
 - (void)onReloadItemClick {
     [super onReloadItemClick];
     
@@ -373,7 +375,7 @@
 
 - (void)configNaviItem {
     
-    self.title = @"我的地址";
+    self.title = @"选择地址";
 }
 
 - (BOOL)prefersStatusBarHidden {

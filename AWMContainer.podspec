@@ -85,39 +85,27 @@ Pod::Spec.new do |spec|
     password.dependency 'AWMTransition'
   end
   
-  # 昵称 Name
-  spec.subspec 'Name' do |name|
+  # 轮播 carousel
+  spec.subspec 'Carousel' do |carousel|
     
-    name.source_files = "Code/AWMContainer/Name/*.{h,m}"
-    name.dependency 'AWMConfig'
-    name.dependency 'AWMBridge/Name/Bridge'
-    name.dependency 'Masonry'
-    name.dependency 'AWMTextField'
-    name.dependency 'AWMTransition'
-  end
-  # 个性签名 signature
-  spec.subspec 'Signature' do |signature|
-    
-    signature.source_files = "Code/AWMContainer/Signature/*.{h,m}"
-    signature.dependency 'AWMConfig'
-    signature.dependency 'AWMBridge/Signature/Bridge'
-    signature.dependency 'Masonry'
-    signature.dependency 'AWMTransition'
+    carousel.source_files = "Code/AWMContainer/Carousel/*.{h,m}"
+    carousel.dependency 'AWMConfig'
+    carousel.dependency 'AWMBridge/Carousel/Bridge'
+    carousel.dependency 'Masonry'
+    carousel.dependency 'AWMCollection'
   end
   
-  # 个人中心 userinfo
-  spec.subspec 'UserInfo' do |userInfo|
-    userInfo.frameworks = 'UIKit', 'Foundation','CoreServices'
-    userInfo.source_files = "Code/AWMContainer/UserInfo/*.{h,m}"
-    userInfo.dependency 'AWMConfig'
-    userInfo.dependency 'AWMBridge/UserInfo/Bridge'
-    userInfo.dependency 'Masonry'
-    userInfo.dependency 'AWMTable'
-    userInfo.dependency 'ZDatePicker'
-    userInfo.dependency 'SDWebImage'
-    userInfo.dependency 'JXTAlertManager'
-    userInfo.dependency 'WLToolsKit/Image'
+  # 轮播 banner
+  spec.subspec 'Banner' do |banner|
+    
+    banner.source_files = "Code/AWMContainer/Banner/*.{h,m}"
+    banner.dependency 'AWMConfig'
+    banner.dependency 'AWMBridge/Carousel/Bridge'
+    banner.dependency 'Masonry'
+    banner.dependency 'AWMCollection'
+    banner.dependency 'SDWebImage'
   end
+  
   # 设置 setting
   spec.subspec 'Setting' do |setting|
     
@@ -151,49 +139,88 @@ Pod::Spec.new do |spec|
     feedBack.dependency 'AWMTextField'
   end
   
-  # 黑名单 black
-  spec.subspec 'Black' do |black|
+  # 昵称 Name
+  spec.subspec 'Name' do |name|
     
-    black.source_files = "Code/AWMContainer/Black/*.{h,m}"
-    black.dependency 'AWMConfig'
-    black.dependency 'AWMBridge/Black/Bridge'
-    black.dependency 'Masonry'
-    black.dependency 'AWMTable'
-    black.dependency 'SDWebImage'
-    black.dependency 'JXTAlertManager'
-  end
-  # 关注 focus
-  spec.subspec 'Focus' do |focus|
-    
-    focus.source_files = "Code/AWMContainer/Focus/*.{h,m}"
-    focus.dependency 'AWMConfig'
-    focus.dependency 'AWMBridge/Focus/Bridge'
-    focus.dependency 'Masonry'
-    focus.dependency 'AWMTable'
-    focus.dependency 'SDWebImage'
-    focus.dependency 'JXTAlertManager'
+    name.source_files = "Code/AWMContainer/Name/*.{h,m}"
+    name.dependency 'AWMConfig'
+    name.dependency 'AWMBridge/Name/Bridge'
+    name.dependency 'Masonry'
+    name.dependency 'AWMTextField'
+    name.dependency 'AWMTransition'
   end
   
-  # 举报 举报
-  spec.subspec 'Report' do |report|
+  # 个性签名 signature
+  spec.subspec 'Signature' do |signature|
     
-    report.source_files = "Code/AWMContainer/Report/*.{h,m}"
-    report.dependency 'AWMConfig'
-    report.dependency 'AWMBridge/Report/Bridge'
-    report.dependency 'Masonry'
-    report.dependency 'AWMTable'
-    report.dependency 'JXTAlertManager'
+    signature.source_files = "Code/AWMContainer/Signature/*.{h,m}"
+    signature.dependency 'AWMConfig'
+    signature.dependency 'AWMBridge/Signature/Bridge'
+    signature.dependency 'Masonry'
+    signature.dependency 'AWMTransition'
   end
   
-  # 轮播 carousel
-  spec.subspec 'Carousel' do |carousel|
-    
-    carousel.source_files = "Code/AWMContainer/Carousel/*.{h,m}"
-    carousel.dependency 'AWMConfig'
-    carousel.dependency 'AWMBridge/Carousel/Bridge'
-    carousel.dependency 'Masonry'
-    carousel.dependency 'AWMCollection'
+  # 个人中心 userinfo
+  spec.subspec 'UserInfo' do |userInfo|
+    userInfo.frameworks = 'UIKit', 'Foundation','CoreServices'
+    userInfo.source_files = "Code/AWMContainer/UserInfo/*.{h,m}"
+    userInfo.dependency 'AWMConfig'
+    userInfo.dependency 'AWMBridge/UserInfo/Bridge'
+    userInfo.dependency 'Masonry'
+    userInfo.dependency 'AWMTable'
+    userInfo.dependency 'ZDatePicker'
+    userInfo.dependency 'SDWebImage'
+    userInfo.dependency 'JXTAlertManager'
+    userInfo.dependency 'WLToolsKit/Image'
   end
+  
+  # 意见建议 feedBack
+  spec.subspec 'FeedBack' do |feedBack|
+    
+    feedBack.source_files = "Code/AWMContainer/FeedBack/*.{h,m}"
+    feedBack.dependency 'AWMConfig'
+    feedBack.dependency 'AWMBridge/FeedBack/Bridge'
+    feedBack.dependency 'Masonry'
+    feedBack.dependency 'AWMTransition'
+    feedBack.dependency 'JXTAlertManager'
+    feedBack.dependency 'AWMTextField'
+  end
+  
+  #  # 黑名单 black
+  #  spec.subspec 'Black' do |black|
+  #
+  #    black.source_files = "Code/AWMContainer/Black/*.{h,m}"
+  #    black.dependency 'AWMConfig'
+  #    black.dependency 'AWMBridge/Black/Bridge'
+  #    black.dependency 'Masonry'
+  #    black.dependency 'AWMTable'
+  #    black.dependency 'SDWebImage'
+  #    black.dependency 'JXTAlertManager'
+  #  end
+  #  # 关注 focus
+  #  spec.subspec 'Focus' do |focus|
+  #
+  #    focus.source_files = "Code/AWMContainer/Focus/*.{h,m}"
+  #    focus.dependency 'AWMConfig'
+  #    focus.dependency 'AWMBridge/Focus/Bridge'
+  #    focus.dependency 'Masonry'
+  #    focus.dependency 'AWMTable'
+  #    focus.dependency 'SDWebImage'
+  #    focus.dependency 'JXTAlertManager'
+  #  end
+  
+  #  # 举报 举报
+  #  spec.subspec 'Report' do |report|
+  #
+  #    report.source_files = "Code/AWMContainer/Report/*.{h,m}"
+  #    report.dependency 'AWMConfig'
+  #    report.dependency 'AWMBridge/Report/Bridge'
+  #    report.dependency 'Masonry'
+  #    report.dependency 'AWMTable'
+  #    report.dependency 'JXTAlertManager'
+  #  end
+  
+  
   # 地址 address
   spec.subspec 'Address' do |address|
     
@@ -221,5 +248,5 @@ Pod::Spec.new do |spec|
     amap.vendored_frameworks = 'Framework/AWMAMapViewController/AWMAMapViewController.framework'
     amap.dependency 'AWMTransition'
   end
-
+  
 end

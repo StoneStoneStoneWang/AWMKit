@@ -1,24 +1,24 @@
 //
-//  BBQFeedBackViewController.m
-//  BBQContainer
+//  AWMFeedBackViewController.m
+//  AWMContainer
 //
 //  Created by 王磊 on 2020/3/30.
 //  Copyright © 2020 王磊. All rights reserved.
 //
 
-#import "BBQFeedBackViewController.h"
+#import "AWMFeedBackViewController.h"
 @import Masonry;
 @import SToolsKit;
-@import BBQTextField;
+@import AWMTextField;
 @import JXTAlertManager;
 
-@interface BBQFeedBackViewController ()
+@interface AWMFeedBackViewController ()
 
 @property (nonatomic ,strong) UITextView *signaturetv;
 
 @property (nonatomic ,strong) UIButton *completeItem;
 
-@property (nonatomic ,strong) BBQFeedBackBridge *bridge;
+@property (nonatomic ,strong) AWMFeedBackBridge *bridge;
 
 @property (nonatomic ,strong) UIButton *backItem;
 
@@ -26,54 +26,54 @@
 
 @property (nonatomic ,strong) UIView *whiteView;
 
-@property (nonatomic ,strong) BBQNickNameTextField *textField;
+@property (nonatomic ,strong) AWMNickNameTextField *textField;
 
-#if BBQNameOne
+@property (nonatomic ,copy) AWMFeedBackBlock block;
+#if AWMNameOne
 
 
-#elif BBQNameTwo
+#elif AWMNameTwo
 
-//    self.view.backgroundColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
+//    self.view.backgroundColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
 
-#elif BBQNameThree
+#elif AWMNameThree
 @property (nonatomic ,strong) UIView *topLine;
 #endif
 
 @end
 
-@implementation BBQFeedBackViewController
+@implementation AWMFeedBackViewController
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-#if BBQUserInfoOne
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@BBQColor]];
-#elif BBQUserInfoTwo
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@BBQColor]];
-#elif BBQUserInfoThree
-    
-#if BBQCONTAINDRAWER
+#if AWMPROFILEALPHA
     
     [self.navigationController setNavigationBarHidden:false];
 #endif
-    
-#endif
 }
 
-+ (instancetype)createFeedBack{
++ (instancetype)createFeedBackWithBlock:(AWMFeedBackBlock)block {
     
-    return [self new];
+    return [[self alloc] initWithFeedBackBlock:block];
 }
-
-- (BBQNickNameTextField *)textField {
+- (instancetype)initWithFeedBackBlock:(AWMFeedBackBlock)block {
+    
+    if (self = [super init]) {
+        
+        self.block = block;
+    }
+    return self;
+}
+- (AWMNickNameTextField *)textField {
     
     if (!_textField) {
         
-        _textField = [[BBQNickNameTextField alloc] initWithFrame:CGRectZero];
+        _textField = [[AWMNickNameTextField alloc] initWithFrame:CGRectZero];
         
-        [_textField bbq_clearButtonMode:UITextFieldViewModeWhileEditing];
+        [_textField awm_clearButtonMode:UITextFieldViewModeWhileEditing];
         
-        [_textField bbq_returnKeyType:UIReturnKeyDone];
+        [_textField awm_returnKeyType:UIReturnKeyDone];
         
         _textField.tag = 203;
         
@@ -81,7 +81,12 @@
         
         _textField.placeholder = @"请输入手机号";
         
-        [_textField set_editType:BBQTextFiledEditTypePhone];
+        [_textField awm_editType:AWMTextFiledEditTypePhone];
+        
+        [_textField awm_maxLength:11];
+#if AWMUPDATEVERSION
+        _textField.tintColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
+#endif
     }
     return _textField;
 }
@@ -109,6 +114,9 @@
         _signaturetv.tag = 201;
         
         _signaturetv.backgroundColor = [UIColor clearColor];
+#if AWMUPDATEVERSION
+        _signaturetv.tintColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
+#endif
     }
     return _signaturetv;
 }
@@ -144,36 +152,20 @@
         
         [_completeItem setTitle:@"完成" forState:UIControlStateHighlighted];
         
-        [_completeItem setTitle:@"完成" forState:UIControlStateSelected];
-        
         _completeItem.titleLabel.font = [UIFont systemFontOfSize:15];
         
-        if ([@BBQColor isEqualToString:@"#ffffff"]) {
-            
-            [_completeItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@"#666666"] forState:UIControlStateNormal];
-            
-            [_completeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:@"#66666680"] forState:UIControlStateHighlighted];
-            
-            [_completeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:@"#66666650"] forState:UIControlStateDisabled];
-            
-        } else {
-            
-            [_completeItem setTitleColor:[UIColor s_transformToColorByHexColorStr:@"#ffffff"] forState:UIControlStateNormal];
-            
-            [_completeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:@"#ffffff80"] forState:UIControlStateHighlighted];
-            
-            [_completeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:@"#ffffff50"] forState:UIControlStateDisabled];
-        }
+        _completeItem.tag = 204;
     }
     return _completeItem;
 }
-#if BBQNameOne
+
+#if AWMNameOne
 
 
-#elif BBQNameTwo
+#elif AWMNameTwo
 
 
-#elif BBQNameThree
+#elif AWMNameThree
 
 - (UIView *)topLine {
     
@@ -203,20 +195,81 @@
     [self.view addSubview:self.signaturetv];
     
     [self.view addSubview:self.textField];
-#if BBQNameOne
+#if AWMNameOne
+    
+    [self.view addSubview:self.completeItem];
+    
+#elif AWMNameTwo
     
     
-#elif BBQNameTwo
-    
-    
-#elif BBQNameThree
+#elif AWMNameThree
     
     [self.view addSubview:self.topLine];
 #endif
 }
 - (void)configOwnSubViews {
-#if BBQNameOne
+#if AWMNameOne
     
+    [self.whiteView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.right.mas_equalTo(0);
+        
+        make.top.mas_equalTo(KTOPLAYOUTGUARD + 1);
+        
+        make.height.mas_equalTo(120);
+    }];
+    
+    [self.placeholder mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.right.mas_equalTo(0);
+        
+        make.top.mas_equalTo(KTOPLAYOUTGUARD + 1);
+        
+        make.height.mas_equalTo(120);
+    }];
+    
+    [self.signaturetv mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.right.mas_equalTo(0);
+        
+        make.top.mas_equalTo(KTOPLAYOUTGUARD + 1);
+        
+        make.height.mas_equalTo(120);
+    }];
+    
+    [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.right.mas_equalTo(0);
+        
+        make.top.equalTo(self.signaturetv.mas_bottom).offset(10);
+        
+        make.height.mas_equalTo(55);
+    }];
+    
+    [self.completeItem mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.mas_equalTo(15);
+        
+        make.right.mas_equalTo(-15);
+        
+        make.height.mas_equalTo(48);
+        
+        make.top.equalTo(self.textField.mas_bottom).offset(10);
+    }];
+    
+    [self.completeItem setBackgroundImage:[UIImage s_transformFromHexColor:@AWMColor] forState:UIControlStateNormal];
+    
+    [self.completeItem setBackgroundImage:[UIImage s_transformFromAlphaHexColor:[NSString stringWithFormat:@"%@80",@AWMColor]] forState:UIControlStateHighlighted];
+    
+    [self.completeItem setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    [self.completeItem setTitleColor:[UIColor s_transformToColorByHexColorStr:[NSString stringWithFormat:@"%@80",@"#ffffff"]] forState:UIControlStateHighlighted];
+    
+    self.completeItem.layer.cornerRadius = 24;
+    
+    self.completeItem.layer.masksToBounds = true;
+    
+#elif AWMNameTwo
     
     [self.whiteView mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -253,47 +306,9 @@
         
         make.height.mas_equalTo(55);
     }];
+#elif AWMNameThree
     
-#elif BBQNameTwo
-    
-    [self.whiteView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.right.mas_equalTo(0);
-        
-        make.top.mas_equalTo(KTOPLAYOUTGUARD + 1);
-        
-        make.height.mas_equalTo(200);
-    }];
-    
-    [self.placeholder mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.right.mas_equalTo(0);
-        
-        make.top.mas_equalTo(KTOPLAYOUTGUARD + 1);
-        
-        make.height.mas_equalTo(200);
-    }];
-    
-    [self.signaturetv mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.right.mas_equalTo(0);
-        
-        make.top.mas_equalTo(KTOPLAYOUTGUARD + 1);
-        
-        make.height.mas_equalTo(200);
-    }];
-    
-    [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.right.mas_equalTo(0);
-        
-        make.top.equalTo(self.signaturetv.mas_bottom).offset(10);
-        
-        make.height.mas_equalTo(55);
-    }];
-#elif BBQNameThree
-    
-    self.topLine.backgroundColor = [UIColor s_transformToColorByHexColorStr:@BBQColor];
+    self.topLine.backgroundColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
     
     [self.topLine mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -340,11 +355,11 @@
         make.height.mas_equalTo(55);
     }];
     
-    [self.completeItem setTitleColor:[UIColor s_transformToColorByHexColorStr: @BBQColor] forState:UIControlStateNormal];
+    [self.completeItem setTitleColor:[UIColor s_transformToColorByHexColorStr: @AWMColor] forState:UIControlStateNormal];
     
-    [self.completeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@80",@BBQColor]] forState:UIControlStateHighlighted];
+    [self.completeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@80",@AWMColor]] forState:UIControlStateHighlighted];
     
-    [self.completeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@BBQColor]] forState:UIControlStateDisabled];
+    [self.completeItem setTitleColor:[UIColor s_transformTo_AlphaColorByHexColorStr:[NSString stringWithFormat:@"%@50",@AWMColor]] forState:UIControlStateDisabled];
     
 #endif
     
@@ -354,38 +369,44 @@
     
     self.title = @"意见与建议";
     
-    [self.completeItem sizeToFit];
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.completeItem];
-    
 }
 
 - (void)configViewModel {
     
-    self.bridge = [BBQFeedBackBridge new];
+    self.bridge = [AWMFeedBackBridge new];
     
     __weak typeof(self) weakSelf = self;
     
     [self.bridge createFeedBack:self feedBackAction:^{
         
-        [weakSelf jxt_showAlertWithTitle:@"您的反馈非常重要,我们会尽快处理您的反馈" message:nil appearanceProcess:^(JXTAlertController * _Nonnull alertMaker) {
+        [weakSelf jxt_showAlertWithTitle:@"您的反馈非常重要,我们会尽快处理您的反馈" message:@"点击确定退出当前界面,点击继续反馈重新编辑" appearanceProcess:^(JXTAlertController * _Nonnull alertMaker) {
             
-            alertMaker.addActionDefaultTitle(@"确定");
+            alertMaker
+            .addActionDefaultTitle(@"继续反馈")
+            .addActionDefaultTitle(@"确定");
         } actionsBlock:^(NSInteger buttonIndex, UIAlertAction * _Nonnull action, JXTAlertController * _Nonnull alertSelf) {
             
-            [weakSelf.navigationController popViewControllerAnimated:true];
+            if ([action.title isEqualToString:@"确定"]) {
+                
+                weakSelf.block(weakSelf);
+            } else if ([action.title isEqualToString:@"继续反馈"]) {
+                
+                weakSelf.textField.text = @"";
+                
+                weakSelf.signaturetv.text = @"";
+            }
         }];
     }];
     
 }
 - (void)configOwnProperties {
     
-#if BBQNameOne
+#if AWMNameOne
     [super configOwnProperties];
     
-#elif BBQNameTwo
+#elif AWMNameTwo
     
-#elif BBQNameThree
+#elif AWMNameThree
     
     [super configOwnProperties];
 #endif

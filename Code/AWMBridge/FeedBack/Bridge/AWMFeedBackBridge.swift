@@ -37,7 +37,7 @@ extension AWMFeedBackBridge {
                 completeItem = complete
             }
             
-            if (completeItem != nil) {
+            if let completeItem = completeItem {
                 
                 let inputs = AWMFeedBackViewModel.WLInput(feedBack: feedBack.rx.text.orEmpty.asDriver(),
                                                           phone: phone.rx.text.orEmpty.asDriver(),
@@ -93,4 +93,5 @@ extension AWMFeedBackBridge {
             }
         }
     }
+    
 }

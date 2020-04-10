@@ -89,7 +89,7 @@
         [_oldpassword awm_maxLength:18];
         
 #if AWMUPDATEVERSION
-        _password.tintColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
+        _oldpassword.tintColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
 #endif
     }
     return _oldpassword;
@@ -146,7 +146,7 @@
         [_againpassword awm_maxLength:18];
         
 #if AWMUPDATEVERSION
-        _password.tintColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
+        _againpassword.tintColor = [UIColor s_transformToColorByHexColorStr:@AWMColor];
 #endif
     }
     return _againpassword;
