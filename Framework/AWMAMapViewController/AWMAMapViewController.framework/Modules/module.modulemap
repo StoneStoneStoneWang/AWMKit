@@ -1,0 +1,6 @@
+framework module AWMAMapViewController {
+  umbrella header "AWMAMapViewController.h"
+
+  export *
+  module * { export * }
+}
