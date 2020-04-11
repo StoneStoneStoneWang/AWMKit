@@ -82,8 +82,6 @@
 
 #define createLoginWithBlock fSpJEPjgC94
 
-#define AWMLoginViewController C3uAR4kxBD
-
 #define AWMRegBlock rrpHlcYJID
 
 #define AWMRegViewController WgGWLcpWuTo
@@ -94,13 +92,9 @@
 
 #define AWMFindPassworBlock f8AiUcWdwc8
 
-#define AWMFindPasswordViewController U1mTSvxWY0C
-
 #define createPasswordWithBlock t54j1BoVjR
 
 #define AWMModifyPasswordBlock i9414KOKTn
-
-#define AWMModifyPasswordViewController eMXzlO1k3u
 
 #define AWMSettingTableViewCell CSicfzKABC5
 
