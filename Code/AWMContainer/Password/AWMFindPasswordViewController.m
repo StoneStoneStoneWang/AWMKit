@@ -24,6 +24,9 @@
 @property (nonatomic ,strong) UIButton *completeItem;
 
 @property (nonatomic ,copy) AWMFindPassworBlock block;
+
+@property (nonatomic ,strong) UIButton *backItem;
+
 #if AWMLoginOne
 
 @property (nonatomic ,strong) UIImageView *logoImgView;
@@ -165,6 +168,14 @@
     }
     return _completeItem;
 }
+- (UIButton *)backItem {
+    
+    if (!_backItem) {
+        
+        _backItem = [UIButton buttonWithType:UIButtonTypeCustom];
+    }
+    return _backItem;
+}
 
 - (void)addOwnSubViews {
     
@@ -303,36 +314,7 @@
 #else
 
 #endif
-- (void)configNaviItem {
-    
-#if AWMLoginOne
-    
-    self.title = @"忘记密码?";
-    
-#elif AWMLoginTwo
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor clearColor]];
-    
-    self.title = @"忘记密码?";
-#elif AWMLoginThree
-    
-    self.title = @"忘记密码?";
-#elif AWMLoginFour
-    
-    UILabel *titleLabel = [UILabel new];
-    
-    titleLabel.font = [UIFont boldSystemFontOfSize:20];
-    
-    titleLabel.textColor = [UIColor whiteColor];
-    
-    titleLabel.text = @"忘记密码?";
-    
-    [titleLabel sizeToFit];
-    
-    self.navigationItem.titleView = titleLabel;
-#else
-    
-#endif
-}
+
 - (void)configOwnSubViews {
     
 #if AWMLoginOne
@@ -849,9 +831,52 @@
     
     [self.bridge createPassword:self passwordAction:^{
         
-        weakSelf.block(weakSelf);
+        weakSelf.block(weakSelf,AWMFindPasswordActionTypeFind);
     }];
+}
+
+- (void)configNaviItem {
     
+    if (self.navigationController.childViewControllers.count == 1) {
+        
+        [self.backItem setImage:[UIImage imageNamed:@AWMLoginBackIcon] forState:UIControlStateNormal];
+        
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backItem];
+        
+        [self.backItem addTarget:self action:@selector(awmBackItemTap) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+#if AWMLoginOne
+    
+    self.title = @"忘记密码?";
+    
+#elif AWMLoginTwo
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor clearColor]];
+    
+    self.title = @"忘记密码?";
+#elif AWMLoginThree
+    
+    self.title = @"忘记密码?";
+#elif AWMLoginFour
+    
+    UILabel *titleLabel = [UILabel new];
+    
+    titleLabel.font = [UIFont boldSystemFontOfSize:20];
+    
+    titleLabel.textColor = [UIColor whiteColor];
+    
+    titleLabel.text = @"忘记密码?";
+    
+    [titleLabel sizeToFit];
+    
+    self.navigationItem.titleView = titleLabel;
+#else
+    
+#endif
+}
+- (void)awmBackItemTap {
+    
+    self.block(self, AWMFindPasswordActionTypeBack);
 }
 
 - (BOOL)canPanResponse {

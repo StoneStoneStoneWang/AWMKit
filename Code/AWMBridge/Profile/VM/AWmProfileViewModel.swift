@@ -39,14 +39,14 @@ import AWMCache
         
         if hasSpace {
             
-            for item in AWMProfileType.types {
+            for item in AWMProfileType.spaceTypes {
                 
                 result += [AWMProfileBean.createProfile(item, title: item.title)]
             }
-            
+
         } else {
             
-            for item in AWMProfileType.spaceTypes {
+            for item in AWMProfileType.types {
                 
                 result += [AWMProfileBean.createProfile(item, title: item.title)]
             }

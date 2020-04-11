@@ -9,7 +9,14 @@
 @import AWMBridge;
 @import AWMTransition;
 NS_ASSUME_NONNULL_BEGIN
-typedef void(^AWMFindPassworBlock)(AWMBaseViewController *from);
+typedef NS_ENUM(NSInteger , AWMFindPasswordActionType) {
+    
+     AWMFindPasswordActionTypeBack,
+    
+     AWMFindPasswordActionTypeFind
+};
+
+typedef void(^AWMFindPassworBlock)(AWMBaseViewController *from ,AWMFindPasswordActionType actionType);
 @interface AWMFindPasswordViewController : AWMTViewController
 
 + (instancetype)createPasswordWithBlock:(AWMFindPassworBlock )block;

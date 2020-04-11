@@ -10,7 +10,15 @@
 @import AWMBridge;
 @import AWMTransition;
 NS_ASSUME_NONNULL_BEGIN
-typedef void(^AWMModifyPasswordBlock)(AWMBaseViewController *vc);
+
+typedef NS_ENUM(NSInteger , AWMModifyPasswordActionType) {
+    
+     AWMModifyPasswordActionTypeBack,
+    
+     AWMModifyPasswordActionTypeModify
+};
+
+typedef void(^AWMModifyPasswordBlock)(AWMBaseViewController *password ,AWMModifyPasswordActionType actionType);
 @interface AWMModifyPasswordViewController : AWMTViewController
 
 + (instancetype)createPasswordWithBlock:(AWMModifyPasswordBlock )block;

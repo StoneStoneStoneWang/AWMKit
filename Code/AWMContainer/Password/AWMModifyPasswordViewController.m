@@ -23,6 +23,9 @@
 @property (nonatomic ,strong) UIButton *completeItem;
 
 @property (nonatomic ,copy) AWMModifyPasswordBlock block;
+
+@property (nonatomic ,strong) UIButton *backItem;
+
 #if AWMLoginOne
 
 @property (nonatomic ,strong) UIImageView *logoImgView;
@@ -181,6 +184,15 @@
     }
     return _completeItem;
 }
+- (UIButton *)backItem {
+    
+    if (!_backItem) {
+        
+        _backItem = [UIButton buttonWithType:UIButtonTypeCustom];
+    }
+    return _backItem;
+}
+
 
 - (void)addOwnSubViews {
     
@@ -319,24 +331,7 @@
 #else
 
 #endif
-- (void)configNaviItem {
-    
-#if AWMLoginOne
-    
-    self.title = @"修改密码";
-    
-#elif AWMLoginTwo
-    
-    self.title = @"修改密码";
-    
-#elif AWMLoginThree
-    
-    self.title = @"修改密码";
-    
-#else
-    
-#endif
-}
+
 - (void)configOwnSubViews {
     
 #if AWMLoginOne
@@ -699,8 +694,39 @@
     
     [self.bridge createPassword:self passwordAction:^{
         
-        weakSelf.block(weakSelf);
+        weakSelf.block(weakSelf ,AWMModifyPasswordActionTypeModify);
     }];
+}
+- (void)configNaviItem {
+    
+    if (self.navigationController.childViewControllers.count == 1) {
+        
+        [self.backItem setImage:[UIImage imageNamed:@AWMLoginBackIcon] forState:UIControlStateNormal];
+        
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backItem];
+        
+        [self.backItem addTarget:self action:@selector(awmBackItemTap) forControlEvents:UIControlEventTouchUpInside];
+    }
+#if AWMLoginOne
+    
+    self.title = @"修改密码";
+    
+#elif AWMLoginTwo
+    
+    self.title = @"修改密码";
+    
+#elif AWMLoginThree
+    
+    self.title = @"修改密码";
+    
+#else
+    
+#endif
+}
+
+- (void)awmBackItemTap {
+    
+    self.block(self, AWMModifyPasswordActionTypeBack);
 }
 
 - (BOOL)canPanResponse {

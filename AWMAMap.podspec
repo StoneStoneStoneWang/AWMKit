@@ -25,7 +25,6 @@ Pod::Spec.new do |spec|
   spec.source = { :git => "https://github.com/StoneStoneStoneWang/AWMKit.git", :tag => "#{spec.version}" }
   
   spec.vendored_frameworks = 'Framework/AWMAMap/AWMAMap.framework'
-  spec.dependency 'AliyunOSSiOS'
   spec.dependency 'AMapLocation-NO-IDFA'
   spec.dependency 'AMap2DMap-NO-IDFA'
   spec.dependency 'AMapSearch-NO-IDFA'
