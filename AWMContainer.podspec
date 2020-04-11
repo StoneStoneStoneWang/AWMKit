@@ -243,8 +243,8 @@ Pod::Spec.new do |spec|
     area.dependency 'JXTAlertManager'
   end
   
-  # 地址 area
-  spec.subspec 'AMapViewController' do |amap|
+  # 地址 地图
+  spec.subspec 'AWMAMapViewController' do |amap|
     amap.vendored_frameworks = 'Framework/AWMAMapViewController/AWMAMapViewController.framework'
     amap.dependency 'AWMTransition'
     amap.dependency 'AWMAMap'
