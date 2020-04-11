@@ -248,6 +248,7 @@ Pod::Spec.new do |spec|
     amap.vendored_frameworks = 'Framework/AWMAMapViewController/AWMAMapViewController.framework'
     amap.dependency 'AWMTransition'
     amap.dependency 'AWMAMap'
+    amap.dependency 'AWMReq'
   end
   
 end
