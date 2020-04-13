@@ -98,7 +98,7 @@
 }
 - (void)setCarouseBean:(AWMCarouselBean *)carouseBean {
     
-    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?x-oss-process=image/resize,w_600,h_200",carouseBean.title]] placeholderImage:[UIImage imageNamed:@AWMLogoIcon] options:SDWebImageRefreshCached];
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?x-oss-process=image/resize,w_600,h_200",carouseBean.icon]] placeholderImage:[UIImage imageNamed:@AWMLogoIcon] options:SDWebImageRefreshCached];
     
     self.titleLabel.text = carouseBean.title;
 

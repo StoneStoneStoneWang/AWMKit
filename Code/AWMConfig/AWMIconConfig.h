@@ -36,7 +36,7 @@
 
 #define AWMSettingIcon "设置"
 
-#define AWMZPhoneNum "+0314-8035334"
+#define AWMZPhoneNum "17193244367"
 
 #define AWMPhoneIcon "手机号"
 
