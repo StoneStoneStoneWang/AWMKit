@@ -190,20 +190,7 @@
     return _completeItem;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-#if AWMUserInfoOne
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@AWMColor]];
-#elif AWMUserInfoTwo
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@AWMColor]];
-#elif AWMUserInfoThree
-    
-    
-    
-#endif
-    
-}
+
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
@@ -222,7 +209,7 @@
     
     self.tableView.mj_footer.hidden = true;
     
-    self.tableView.mj_insetT = -44;
+    self.tableView.mj_insetT = 1;
 }
 
 - (UITableViewCell *)configTableViewCell:(id)data forIndexPath:(NSIndexPath *)ip {

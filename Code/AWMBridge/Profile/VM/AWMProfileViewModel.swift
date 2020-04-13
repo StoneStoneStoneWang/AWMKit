@@ -43,7 +43,7 @@ import AWMCache
                 
                 result += [AWMProfileBean.createProfile(item, title: item.title)]
             }
-
+            
         } else {
             
             for item in AWMProfileType.types {
@@ -85,6 +85,8 @@ public enum AWMProfileType : Int{
     case characters
     
     case feedBack
+    
+    case favor
 }
 
 extension AWMProfileType {
@@ -93,7 +95,7 @@ extension AWMProfileType {
         
         if AWMConfigure.fetchPType() == .flower {
             
-            return [.space,userInfo,.order,.address,.space,.contactUS,.privacy,.about,.space,.feedBack,.setting]
+            return [.space,userInfo,.order,.address,.favor,.space,.contactUS,.privacy,.about,.space,.feedBack,.setting]
         }
         
         return [.space,userInfo,.space,.contactUS,.privacy,.about,.space,.feedBack,.setting]
@@ -104,7 +106,7 @@ extension AWMProfileType {
         
         if AWMConfigure.fetchPType() == .flower {
             
-            return [userInfo,.order,.address,.contactUS,.privacy,.about,.feedBack,.setting]
+            return [userInfo,.order,.address,.favor,.contactUS,.privacy,.about,.feedBack,.setting]
         }
         return [userInfo,.contactUS,.privacy,.about,.feedBack,.setting]
     }
@@ -143,6 +145,8 @@ extension AWMProfileType {
         case .characters: return "角色信息"
             
         case .feedBack: return "意见建议"
+            
+        case .favor: return "我的收藏"
             
         default: return ""
             

@@ -4,7 +4,7 @@
 //
 //  Created by three stone 王 on 2019/8/27.
 //  Copyright © 2019 three stone 王. All rights reserved.
-//  
+//
 
 import Foundation
 import AWMTable
@@ -46,6 +46,8 @@ public enum AWMProfileActionType: Int ,Codable {
     case unLogin
     
     case feedBack
+    
+    case favor
 }
 
 public typealias AWMProfileAction = (_ action: AWMProfileActionType ) -> ()
@@ -138,6 +140,7 @@ extension AWMProfileBridge {
                 case .characters: profileAction(isLogin ? .characters : .unLogin)
                 case .myCircle: profileAction(isLogin ? .myCircle : .unLogin)
                 case .feedBack: profileAction(.feedBack)
+                case .favor: profileAction(isLogin ? .favor : .unLogin)
                 case .contactUS:
                     
                     vc.tableViewSelectData(type, for: ip)

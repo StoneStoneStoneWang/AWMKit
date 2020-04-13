@@ -197,21 +197,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-#if AWMUserInfoOne
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@AWMColor]];
-#elif AWMUserInfoTwo
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor s_transformToColorByHexColorStr:@AWMColor]];
-#elif AWMUserInfoThree
-    
-    
-    
-#endif
-    
-}
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
+#if AWMPROFILEALPHA
     
     [self.navigationController setNavigationBarHidden:false];
+#endif
 }
 - (void)addOwnSubViews {
     [super addOwnSubViews];
@@ -225,7 +214,7 @@
     
     self.tableView.mj_footer.hidden = true;
     
-    self.tableView.mj_insetT = -44;
+    self.tableView.mj_insetT = 1;
 }
 
 - (UITableViewCell *)configTableViewCell:(id)data forIndexPath:(NSIndexPath *)ip {
@@ -361,7 +350,7 @@
 - (void)insertAddress:(AWMAddressBean *)addressBean {
     
     [self.bridge insertAddress:addressBean addressAction:^(enum AWMAddressActionType actionType, NSIndexPath * _Nullable ip, AWMAddressBean * _Nullable address) {
-       
+        
         
     }];
 }

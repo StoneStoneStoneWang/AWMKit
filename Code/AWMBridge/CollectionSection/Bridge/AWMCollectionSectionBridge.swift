@@ -63,6 +63,13 @@ extension AWMCollectionSectionBridge {
         
     }
     
+    @objc public func fetchSingleData(_ ip: IndexPath) -> AWMCollectionItemBean! {
+        
+        guard let dataSource = dataSource else { return nil }
+        
+        return dataSource[ip]
+    }
+    
     @objc public func fetchCollectionDatas() -> [AWMCollectionItemBean] {
         
         guard let viewModel = viewModel else { return [] }

@@ -60,6 +60,8 @@
 
 #define AWMAddressIcon "我的地址"
 
+#define AWMFavorIcon "我的收藏"
+
 #endif
 
 

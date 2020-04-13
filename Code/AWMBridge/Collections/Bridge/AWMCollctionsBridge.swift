@@ -56,16 +56,16 @@ public final class AWMCollectionsBridge: AWMBaseBridge {
 
 extension AWMCollectionsBridge {
     
-    @objc public func createCollections(_ vc: AWMCollectionLoadingViewController ,isMy: Bool ,tag: String ,collectionsAction: @escaping AWMCollectionsAction) {
+    @objc public func createCollections(_ vc: AWMCollectionLoadingViewController ,moreSection: Bool,isMy: Bool ,tag: String ,collectionsAction: @escaping AWMCollectionsAction) {
         
         self.vc = vc
         
         let input = AWMCollectionsViewModel.WLInput(isMy: isMy,
-                                            modelSelect: vc.collectionView.rx.modelSelected(AWMCircleBean.self),
-                                            itemSelect: vc.collectionView.rx.itemSelected,
-                                            headerRefresh: vc.collectionView.mj_header!.rx.awmRefreshing.asDriver(),
-                                            footerRefresh: vc.collectionView.mj_footer!.rx.awmRefreshing.asDriver(),
-                                            tag: tag)
+                                                    modelSelect: vc.collectionView.rx.modelSelected(AWMCircleBean.self),
+                                                    itemSelect: vc.collectionView.rx.itemSelected,
+                                                    headerRefresh: vc.collectionView.mj_header!.rx.awmRefreshing.asDriver(),
+                                                    footerRefresh: vc.collectionView.mj_footer!.rx.awmRefreshing.asDriver(),
+                                                    tag: tag)
         
         viewModel = AWMCollectionsViewModel(input, disposed: disposed)
         
@@ -74,13 +74,24 @@ extension AWMCollectionsBridge {
             decideViewTransition: { _,_,_  in return .reload },
             configureCell: { ds, tv, ip, item in return vc.configCollectionViewCell(item, for: ip) })
         
-        viewModel
-            .output
-            .collectionData
-            .asDriver()
-            .map({ $0.map({ Section(header: $0.encoded, items: [$0]) }) })
-            .drive(vc.collectionView.rx.items(dataSource: dataSource))
-            .disposed(by: disposed)
+        if moreSection {
+            
+            viewModel
+                .output
+                .collectionData
+                .asDriver()
+                .map({ $0.map({ Section(header: $0.encoded, items: [$0]) }) })
+                .drive(vc.collectionView.rx.items(dataSource: dataSource))
+                .disposed(by: disposed)
+        } else {
+            
+            viewModel
+                .output
+                .collectionData
+                .map({ [Section(header: "", items: $0)] })
+                .bind(to: vc.collectionView.rx.items(dataSource: dataSource))
+                .disposed(by: disposed)
+        }
         
         let endHeaderRefreshing = viewModel.output.endHeaderRefreshing
         
@@ -144,7 +155,7 @@ extension AWMCollectionsBridge {
         
         viewModel.output.collectionData.accept(values)
     }
-
+    
     @objc public func fetchObj(_ ip: IndexPath) -> AWMCircleBean? {
         
         guard let dataSource = dataSource else { return nil }
@@ -168,6 +179,25 @@ extension AWMCollectionsBridge {
         return circle.toJSON()
     }
     
+    @objc public func deleteIp(_ ip: IndexPath,moreSection: Bool) {
+        
+        var values = self.viewModel.output.collectionData.value
+        
+        if moreSection {
+            
+            values.remove(at: ip.section)
+        } else {
+            
+            values.remove(at: ip.row)
+        }
+        
+        self.viewModel.output.collectionData.accept(values)
+
+        if values.isEmpty {
+
+            self.vc.collectionEmptyShow()
+        }
+    }
     
     @objc public func addBlack(_ OUsEncoded: String,targetEncoded: String ,content: String ,collectionsAction: @escaping AWMCollectionsAction ) {
         
@@ -238,7 +268,7 @@ extension AWMCollectionsBridge {
                     }
                     
                     AWMHud.showInfo(isFocus ? "取消关注成功" : "关注成功")
-                
+                    
                 case .failed(let msg):
                     
                     AWMHud.showInfo(msg)
@@ -322,46 +352,46 @@ extension AWMCollectionsBridge {
             })
             .disposed(by: disposed)
     }
-   
+    
     @objc public func removeMyCircle(_ encoded: String ,ip: IndexPath,collectionsAction: @escaping AWMCollectionsAction)  {
         
         AWMHud.show(withStatus: "移除内容中...")
-
-        AWMTablesViewModel
+        
+        AWMCollectionsViewModel
             .removeMyCircle(encoded)
-
+            
             .drive(onNext: { [weak self] (result) in
-
+                
                 guard let `self` = self else { return }
                 switch result {
                 case .ok:
-
+                    
                     AWMHud.pop()
-
+                    
                     AWMHud.showInfo("移除当前内容成功")
-
+                    
                     var value = self.viewModel.output.collectionData.value
-
+                    
                     let circle = value[ip.row]
                     
                     value.remove(at: ip.row)
-
+                    
                     self.viewModel.output.collectionData.accept(value)
-
+                    
                     if value.isEmpty {
-
+                        
                         self.vc.collectionEmptyShow()
                     }
-
+                    
                     collectionsAction(.remove, circle, ip)
                 case .failed:
-
+                    
                     AWMHud.pop()
-
+                    
                     AWMHud.showInfo("移除当前内容失败")
-
+                    
                 default: break
-
+                    
                 }
             })
             .disposed(by: self.disposed)
