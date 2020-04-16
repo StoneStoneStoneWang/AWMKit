@@ -674,4 +674,27 @@ Pod::Spec.new do |spec|
       bridge.dependency 'AWMCocoa/Refresh'
     end
   end
+  spec.subspec 'Message' do |message|
+    
+    message.subspec 'VM' do |vm|
+      
+      vm.source_files = "Code/AWMBridge/Message/VM/*.{swift}"
+      vm.dependency 'RxCocoa'
+      vm.dependency 'WLBaseViewModel'
+      vm.dependency 'AWMApi'
+      vm.dependency 'AWMRReq'
+      vm.dependency 'WLBaseResult'
+      vm.dependency 'AWMBean/Message'
+      
+    end
+    
+    message.subspec 'Bridge' do |bridge|
+      bridge.source_files = "Code/AWMBridge/Message/Bridge/*.{swift}"
+      bridge.dependency 'AWMBridge/Message/VM'
+      bridge.dependency 'AWMCollection'
+      bridge.dependency 'AWMBridge/Base'
+      bridge.dependency 'AWMCocoa/ASM'
+      bridge.dependency 'AWMCocoa/Refresh'
+    end
+  end
 end
